@@ -1,0 +1,15 @@
+**/build
+**/.gradle/*
+*.tmproj
+*.log
+*.DS_Store
+lib/*
+fw/*
+.gradletasknamecache
+.idea
+*.iml
+*.ipr
+*.iws
+node_modules
+/.project
+.gradle/
