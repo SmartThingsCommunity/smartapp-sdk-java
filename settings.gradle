@@ -8,11 +8,6 @@
  * in the user guide at https://docs.gradle.org/4.3/userguide/multi_project_builds.html
  */
 
-/*
-// To declare projects as part of a multi-project build use the 'include' method
-include 'shared'
-include 'api'
-include 'services:webservice'
-*/
-include 'smartapp-java'
-rootProject.name = 'smartapp'
+include 'smartapp-core'
+include 'smartapp-guice'
+rootProject.name = 'smartapp-java'
