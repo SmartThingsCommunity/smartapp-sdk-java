@@ -1,0 +1,36 @@
+image: smartthings-docker-build.jfrog.io/releng/build-common:latest
+
+stages:
+  - mr_check
+  - master_build
+
+mr_check:
+  stage: mr_check
+  tags:
+  - streleng
+  script:
+    - ./gradlew clean build check -PsmartThingsUserName=$ARTIFACTORY_USERNAME -PsmartThingsPassword=$ARTIFACTORY_PASSWORD
+  artifacts:
+    when: on_failure
+    paths:
+    - ${CI_PROJECT_DIR}/smartapp-core/build/reports/tests/
+    - ${CI_PROJECT_DIR}/smartapp-guice/build/reports/tests/
+  except:
+    - master@iot/smartapp-java
+    - release@iot/smartapp-java
+
+master_build:
+  stage: master_build
+  tags:
+  - streleng
+  script:
+    - ./gradlew clean build check -PsmartThingsUserName=$ARTIFACTORY_USERNAME -PsmartThingsPassword=$ARTIFACTORY_PASSWORD
+    - ./gradlew publish -PsmartThingsUserName=$ARTIFACTORY_USERNAME -PsmartThingsPassword=$ARTIFACTORY_PASSWORD
+  artifacts:
+    paths:
+    - ${CI_PROJECT_DIR}/smartapp-core/build/reports/tests/
+    - ${CI_PROJECT_DIR}/smartapp-core/build/libs/*.jar
+    - ${CI_PROJECT_DIR}/smartapp-guice/build/reports/tests/
+    - ${CI_PROJECT_DIR}/smartapp-guice/build/libs/*.jar
+  only:
+    - master@iot/smartapp-java
