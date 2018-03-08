@@ -1,5 +1,6 @@
 apply plugin: 'groovy'
 apply from: rootProject.file('gradle/convention.gradle')
+apply from: rootProject.file('gradle/publish-jar.gradle')
 
 dependencies {
     compile "smartthings:smartapps.v1-models:${librarianVersion}"

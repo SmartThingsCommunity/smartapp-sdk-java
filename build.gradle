@@ -4,7 +4,7 @@ if (!JavaVersion.current().java8Compatible) {
 
 subprojects {
     group 'smartthings.smartapp'
-    version '0.1'
+    version '0.0.1-SNAPSHOT'
 
     repositories {
         mavenLocal()
