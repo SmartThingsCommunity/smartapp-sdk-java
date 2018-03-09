@@ -28,7 +28,7 @@ class SmartAppSpec extends Specification {
                                 // test event
                                 true
                             },
-                        { event ->
+                            { event ->
                                 // do something
                             }
                         )

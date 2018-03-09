@@ -33,7 +33,7 @@ A templating extension for Lazybones that bootstraps out a basic Dropwizard Smar
                 })                
                 .configuration({ req ->
                     ConfigurationResponseData data = ...// build config
-                     Response.ok(data) 
+                    Response.ok(data) 
                 })
                 .event(EventHandler.of { eventSpec ->
                     eventSpec
