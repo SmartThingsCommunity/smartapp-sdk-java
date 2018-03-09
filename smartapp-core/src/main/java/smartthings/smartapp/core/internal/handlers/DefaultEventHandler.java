@@ -87,7 +87,7 @@ public class DefaultEventHandler implements EventHandler {
         }
 
         @Override
-        public EventSpec whenMode(String modeId, Action<Event> action) {
+        public EventSpec onMode(String modeId, Action<Event> action) {
             if (modeId == null || modeId.isEmpty()) {
                 throw new IllegalArgumentException("Mode ID must not be null or empty.");
             }
@@ -105,7 +105,7 @@ public class DefaultEventHandler implements EventHandler {
         }
 
         @Override
-        public EventSpec whenSchedule(String scheduleName, Action<Event> action) {
+        public EventSpec onSchedule(String scheduleName, Action<Event> action) {
             if (scheduleName == null || scheduleName.isEmpty()) {
                 throw new IllegalArgumentException("Schedule name must not be null or empty.");
             }
@@ -123,7 +123,7 @@ public class DefaultEventHandler implements EventHandler {
         }
 
         @Override
-        public EventSpec whenSubscription(String subscriptionName, Action<Event> action) {
+        public EventSpec onSubscription(String subscriptionName, Action<Event> action) {
             if (subscriptionName == null || subscriptionName.isEmpty()) {
                 throw new IllegalArgumentException("Subscription name must not be null or empty.");
             }
@@ -141,7 +141,7 @@ public class DefaultEventHandler implements EventHandler {
         }
 
         @Override
-        public EventSpec when(Predicate<Event> predicate, Action<Event> action) {
+        public EventSpec onEvent(Predicate<Event> predicate, Action<Event> action) {
             this.eventHandlers.add(new PredicateSingleEventHandler(predicate, action));
             return this;
         }
