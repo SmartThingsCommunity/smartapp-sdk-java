@@ -39,10 +39,7 @@ A templating extension for Lazybones that bootstraps out a basic Dropwizard Smar
                     eventSpec
                         .onSubscription("switch", { event ->
                            // do something
-                        })
-                       .onSubscription("motion", { event ->
-                           // do something
-                        })                        
+                        })                       
                         .onSchedule("nightly", { event ->
                            // do something
                         })
