@@ -6,10 +6,10 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public interface EventSpec {
-    EventSpec whenMode(String modeId, Action<Event> action);
-    EventSpec whenSchedule(String scheduleName, Action<Event> action);
-    EventSpec whenSubscription(String subscriptionName, Action<Event> action);
-    EventSpec when(Predicate<Event> predicate, Action<Event> action);
+    EventSpec onMode(String modeId, Action<Event> action);
+    EventSpec onSchedule(String scheduleName, Action<Event> action);
+    EventSpec onSubscription(String subscriptionName, Action<Event> action);
+    EventSpec onEvent(Predicate<Event> predicate, Action<Event> action);
     EventSpec failOnError(Predicate<Throwable> failOnError);
     EventSpec onError(BiFunction<ExecutionRequest, Throwable, ExecutionResponse> onError);
     EventSpec onSuccess(Function<ExecutionRequest, ExecutionResponse> onSuccess);

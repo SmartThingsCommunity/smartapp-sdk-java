@@ -16,7 +16,25 @@ class SmartAppSpec extends Specification {
                 .update({ req -> Response.ok() })
                 .configuration({ req -> Response.ok() })
                 .event(EventHandler.of { eventSpec ->
-                    // use defaults
+                    eventSpec
+                        .onSubscription('switch', { event ->
+                            // do something
+                        })
+                        .onSchedule('nightly', { event ->
+                            // do something
+                        })
+                        .onEvent(
+                            { event ->
+                                // test event
+                                true
+                            },
+                        { event ->
+                                // do something
+                            }
+                        )
+                        .onSuccess({ request ->
+                            Response.ok(new EventResponseData())
+                        })
                 })
         }
 
