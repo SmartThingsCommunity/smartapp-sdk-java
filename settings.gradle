@@ -10,4 +10,4 @@
 
 include 'smartapp-core'
 include 'smartapp-guice'
-rootProject.name = 'smartapp-java'
+rootProject.name = 'smartthings-sdk'

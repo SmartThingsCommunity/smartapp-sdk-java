@@ -1,4 +1,4 @@
-# smartapp-java
+# smartthings-sdk
 
 A set of Java libraries for building SmartApps.
 ## Modules
@@ -8,7 +8,7 @@ Core SmartApp framework. Provides abilities for defining a SmartApp that could b
 ### smartapp-guice
 An extension library that provides support for building a SmartApp with Guice dependency injection.
 
-### smartthings-sdk (not yet implemented)
+### smartthings-client (not yet implemented)
 An API library that provides useful utilities for working with the Subscription / Schedules / Device APIs
 
 ### smartapp-dropwizard-auth (not yet implemented)
