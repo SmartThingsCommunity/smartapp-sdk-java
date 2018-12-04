@@ -13,3 +13,4 @@ fw/*
 node_modules
 /.project
 .gradle/
+**/out

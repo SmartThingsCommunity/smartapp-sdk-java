@@ -16,8 +16,8 @@ mr_check:
     - ${CI_PROJECT_DIR}/smartapp-core/build/reports/tests/
     - ${CI_PROJECT_DIR}/smartapp-guice/build/reports/tests/
   except:
-    - master@iot/smartapp-java
-    - release@iot/smartapp-java
+  - master@iot/smartthings-sdk-java
+  - release@iot/smartthings-sdk-java
 
 master_build:
   stage: master_build
@@ -33,4 +33,4 @@ master_build:
     - ${CI_PROJECT_DIR}/smartapp-guice/build/reports/tests/
     - ${CI_PROJECT_DIR}/smartapp-guice/build/libs/*.jar
   only:
-    - master@iot/smartapp-java
+  - master@iot/smartthings-sdk-java
