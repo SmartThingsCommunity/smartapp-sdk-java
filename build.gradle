@@ -3,7 +3,7 @@ if (!JavaVersion.current().java8Compatible) {
 }
 
 subprojects {
-    group 'smartthings.smartapp'
+    group 'smartthings.sdk'
     version '0.0.1-SNAPSHOT'
 
     repositories {
