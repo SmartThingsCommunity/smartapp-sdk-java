@@ -4,7 +4,7 @@ if (!JavaVersion.current().java8Compatible) {
 
 subprojects {
     group 'smartthings.sdk'
-    version '0.0.1-SNAPSHOT'
+    version = rootProject.file('version.txt').text.trim()
 
     repositories {
         mavenLocal()
