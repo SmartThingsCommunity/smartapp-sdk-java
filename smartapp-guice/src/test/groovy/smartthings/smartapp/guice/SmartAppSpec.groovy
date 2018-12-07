@@ -2,15 +2,15 @@ package smartthings.smartapp.guice
 
 import com.google.inject.AbstractModule
 import com.google.inject.Provides
-import smartthings.smartapp.core.Response
-import smartthings.smartapp.core.SmartApp
-import smartthings.smartapp.core.extensions.ConfigurationHandler
-import smartthings.smartapp.core.extensions.EventHandler
-import smartthings.smartapp.core.extensions.InstallHandler
-import smartthings.smartapp.core.extensions.OAuthCallbackHandler
-import smartthings.smartapp.core.extensions.PingHandler
-import smartthings.smartapp.core.extensions.UninstallHandler
-import smartthings.smartapp.core.extensions.UpdateHandler
+import smartthings.sdk.smartapp.core.Response
+import smartthings.sdk.smartapp.core.SmartApp
+import smartthings.sdk.smartapp.core.extensions.ConfigurationHandler
+import smartthings.sdk.smartapp.core.extensions.EventHandler
+import smartthings.sdk.smartapp.core.extensions.InstallHandler
+import smartthings.sdk.smartapp.core.extensions.OAuthCallbackHandler
+import smartthings.sdk.smartapp.core.extensions.PingHandler
+import smartthings.sdk.smartapp.core.extensions.UninstallHandler
+import smartthings.sdk.smartapp.core.extensions.UpdateHandler
 import v1.smartapps.*
 import spock.lang.Specification
 

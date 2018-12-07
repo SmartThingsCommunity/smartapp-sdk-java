@@ -41,6 +41,42 @@ check_guice:
     - release@iot/pi/smartthings-sdk-java
     - tags
 
+check_client:
+    stage: mr_check
+    tags:
+    - streleng
+    script:
+    - ./gradlew smartthings-client:clean smartthings-client:check smartthings-client:jacocoTestReport -PsmartThingsUserName=$ARTIFACTORY_USERNAME -PsmartThingsPassword=$ARTIFACTORY_PASSWORD
+    # TODO: re-enable when there is actual code to generate results
+    #    - cat $CI_PROJECT_DIR/smartthings-client/build/reports/jacoco/test/html/index.html | grep -o -P "Total.*?([0-9]{1,3})%"
+    #    artifacts:
+    #        when: on_failure
+    #        paths:
+    #        - ${CI_PROJECT_DIR}/smartthings-client/build/coverage/
+    #        - ${CI_PROJECT_DIR}/smartthings-client/build/test-results/
+    #        - ${CI_PROJECT_DIR}/smartthings-client/build/reports/
+    except:
+    - master@iot/pi/smartthings-sdk-java
+    - release@iot/pi/smartthings-sdk-java
+    - tags
+
+check_examples_kotlin:
+    stage: mr_check
+    tags:
+    - streleng
+    script:
+    - ./gradlew :examples:kotlin-smartapp:clean :examples:kotlin-smartapp:build :examples:kotlin-smartapp:test :examples:kotlin-smartapp:jacocoTestReport -PsmartThingsUserName=$ARTIFACTORY_USERNAME -PsmartThingsPassword=$ARTIFACTORY_PASSWORD
+    - cat $CI_PROJECT_DIR/examples/kotlin-smartapp/build/reports/jacoco/test/html/index.html | grep -o -P "Total.*?([0-9]{1,3})%"
+    artifacts:
+        when: on_failure
+        paths:
+        - ${CI_PROJECT_DIR}/examples/kotlin-smartapp/build/test-results/
+        - ${CI_PROJECT_DIR}/examples/kotlin-smartapp/build/reports/
+    except:
+    - master@iot/pi/smartthings-sdk-java
+    - release@iot/pi/smartthings-sdk-java
+    - tags
+
 master_build_core:
     stage: master_build
     tags:
@@ -78,6 +114,41 @@ master_build_guice:
         paths:
         - ${CI_PROJECT_DIR}/smartapp-guice/build/reports/tests/
         - ${CI_PROJECT_DIR}/smartapp-guice/build/libs/*.jar
+    only:
+    - master@iot/pi/smartthings-sdk-java
+
+master_build_client:
+    stage: master_build
+    tags:
+    - streleng
+    script:
+    # tests
+    - ./gradlew smartthings-client:clean smartthings-client:build smartthings-client:check smartthings-client:jacocoTestReport -PsmartThingsUserName=$ARTIFACTORY_USERNAME -PsmartThingsPassword=$ARTIFACTORY_PASSWORD
+    - cat $CI_PROJECT_DIR/smartthings-client/build/reports/jacoco/test/html/index.html | grep -o -P "Total.*?([0-9]{1,3})%"
+
+    # package & publish
+    - ~/build-common/gitlab/update_version.py --branch=release
+    - ./gradlew smartapp-guice:publish -PsmartThingsUserName=$ARTIFACTORY_USERNAME -PsmartThingsPassword=$ARTIFACTORY_PASSWORD
+    artifacts:
+        when: always
+        paths:
+        - ${CI_PROJECT_DIR}/smartapp-guice/build/reports/tests/
+        - ${CI_PROJECT_DIR}/smartapp-guice/build/libs/*.jar
+    only:
+    - master@iot/pi/smartthings-sdk-java
+
+master_build_examples_kotlin:
+    stage: master_build
+    tags:
+    - streleng
+    script:
+    # tests
+    - ./gradlew :examples:kotlin-smartapp:clean :examples:kotlin-smartapp:build :examples:kotlin-smartapp:test :examples:kotlin-smartapp:jacocoTestReport -PsmartThingsUserName=$ARTIFACTORY_USERNAME -PsmartThingsPassword=$ARTIFACTORY_PASSWORD
+    - cat $CI_PROJECT_DIR/smartthings-client/build/reports/jacoco/test/html/index.html | grep -o -P "Total.*?([0-9]{1,3})%"
+    artifacts:
+        when: always
+        paths:
+        - ${CI_PROJECT_DIR}/smartapp-guice/build/reports/tests/
     only:
     - master@iot/pi/smartthings-sdk-java
 

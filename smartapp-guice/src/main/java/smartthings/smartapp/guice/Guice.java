@@ -4,7 +4,7 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.Stage;
 import com.google.inject.internal.InternalInjectorCreator;
-import smartthings.smartapp.core.SmartAppDefinition;
+import smartthings.sdk.smartapp.core.SmartAppDefinition;
 import smartthings.smartapp.guice.internal.DefaultBindingsSpec;
 import smartthings.smartapp.guice.internal.GuiceSmartAppDefinition;
 import java.util.ArrayList;
