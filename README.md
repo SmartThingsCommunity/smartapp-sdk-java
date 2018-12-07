@@ -1,23 +1,68 @@
 # smartthings-sdk ![SmartThings](/docs/smartthings-logo.png) ![Java](/docs/java-logo.png)
 
 A set of Java libraries for building SmartApps.
+
 ## Modules
 ### [smartapp-core](/smartapp-core) ([Documentation](/smartapp-core/README.md)) [![pipeline status](/../badges/master/pipeline.svg?job=master_build_core)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=master_build_core)](/../commits/master)
 Core SmartApp framework. Provides abilities for defining a SmartApp that could be used in many environments - AWS Lambda / Dropwizard / Ratpack / etc
 
-### [smartapp-guice](/smartapp-guice) (Documentation) [![pipeline status](/../badges/master/pipeline.svg?job=master_build_guice)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=master_build_guice)](/../commits/master)
-An extension library that provides support for building a SmartApp with Guice dependency injection.
-
-### smartapp-dropwizard-auth (coming soon)
-An extension library that provides mechanisms for verifying SmartApp http signatures in a Dropwizard project.
-
-### smartapp-lazybones (coming soon)
-A templating extension for Lazybones that bootstraps out a basic Dropwizard SmartApp project.
-
-### smartthings-client (coming soon)
+### [smartthings-client](/smartthings-client) (Documentation) [![pipeline status](/../badges/master/pipeline.svg?job=master_build_client)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=master_build_client)](/../commits/master)
 An API library that provides useful utilities for working with the Subscription / Schedules / Device APIs
 
-## SmartApp Example
+### Extension Libraries
+
+#### [smartapp-guice](/smartapp-guice) (Documentation) [![pipeline status](/../badges/master/pipeline.svg?job=master_build_guice)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=master_build_guice)](/../commits/master)
+An extension library that provides support for building a SmartApp with Guice dependency injection.
+
+#### smartapp-dropwizard-auth (coming soon)
+An extension library that provides mechanisms for verifying SmartApp http signatures in a Dropwizard project.
+
+#### smartapp-lazybones (coming soon)
+A templating extension for Lazybones that bootstraps out a basic Dropwizard SmartApp project.
+
+## Examples
+
+### [kotlin-smartapp](examples/kotlin-smartapp) ([Documentation](examples/kotlin-smartapp/README.md)) ![kotlin-logo](docs/kotlin-logo.png) ![ktor-logo](docs/ktor-logo.png) [![pipeline status](/../badges/master/pipeline.svg?job=check_examples_kotlin)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=check_examples_kotlin)](/../commits/master)
+This Kotlin example implements the Java `smartapp-core` library with a simple [Ktor](https://ktor.io/) server. 
+
+### Getting Started
+
+Take a quick look at how SmartApps are declared in various languages.
+
+<details>
+<summary>Kotlin (click to toggle)</summary>
+
+```kotlin
+package app
+
+val smartApp: SmartApp = SmartApp.of { spec ->
+    spec
+        .configuration(Configuration())
+        .install {
+            Response.ok(InstallResponseData())
+        }
+        .update {
+            Response.ok(UpdateResponseData())
+        }
+        .event {
+            Response.ok(EventResponseData())
+        }
+        .uninstall {
+            Response.ok(UninstallResponseData())
+        }
+}
+
+fun Application.main() {
+    install(Routing) {
+        post("/smartapp") {
+            call.respond(smartApp.execute(call.receive()))
+        }
+    }
+}
+
+```
+
+</details>
 
 <details>
 <summary>Groovy (click to toggle)</summary>

@@ -2,9 +2,10 @@ if (!JavaVersion.current().java8Compatible) {
     throw new IllegalStateException("Must be built with Java 8 or higher")
 }
 
-subprojects {
+allprojects {
     group 'smartthings.sdk'
     version = rootProject.file('version.txt').text.trim()
+    apply from: rootProject.file('gradle/dependencies.gradle')
 
     repositories {
         mavenLocal()

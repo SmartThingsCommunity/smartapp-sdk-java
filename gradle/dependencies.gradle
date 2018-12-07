@@ -1,0 +1,56 @@
+ext.versions = [
+    'slf4jVersion'    : '1.7.25',
+    'librarianVersion': '0.1.355',
+    'retrofitVersion' : '2.5.0',
+    'kotlin_version'  : '1.3.11',
+    'ktor_version'    : '1.0.1',
+    'mockk_version'   : '1.8.13.kotlin13'
+]
+
+ext.deps = [
+    'logging' : [
+        'slf4j'        : "org.slf4j:slf4j-api:${versions.slf4jVersion}",
+        'okhttpLogging': "com.squareup.okhttp3:logging-interceptor:3.10.0"
+    ],
+    'di'      : [
+        'guice': 'com.google.inject:guice:4.1.0'
+    ],
+    'aws'     : [
+        'lambdaJavaCore' : 'com.amazonaws:aws-lambda-java-core:1.1.0',
+        'lambdaJavaLog4j': 'com.amazonaws:aws-lambda-java-log4j:1.0.0'
+    ],
+    'test'    : [
+        'spockCore' : 'org.spockframework:spock-core:1.0-groovy-2.4',
+        'cglibNodep': 'cglib:cglib-nodep:2.2.2',
+        'objenesis' : 'org.objenesis:objenesis:1.2',
+        'kotlin'    : [
+            'ktorServerTestHost': "io.ktor:ktor-server-test-host:${versions.ktor_version}",
+            'mockk'             : "io.mockk:mockk:${versions.mockk_version}"
+        ]
+    ],
+    'core'    : [
+        'smartappsModels': "smartthings:smartapps.v1-models:${versions.librarianVersion}",
+    ],
+    'client'  : [
+        'api'            : "smartthings:api.smartthings.com.v1:${versions.librarianVersion}",
+        'retrofitRxJava' : "com.squareup.retrofit2:adapter-rxjava:2.4.0",
+        'retrofitJackson': "com.squareup.retrofit2:converter-jackson:${versions.retrofitVersion}"
+    ],
+    'kotlin'  : [
+        'gradlePlugin'   : "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin_version}",
+        'stdlib'         : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin_version}",
+        'ktorServerNetty': "io.ktor:ktor-server-netty:${versions.ktor_version}",
+        'ktorJackson'    : "io.ktor:ktor-jackson:${versions.ktor_version}",
+        'logback'        : "ch.qos.logback:logback-classic:1.2.3"
+    ],
+    'projects': [
+        'smartappcore'     : project(':smartapp-core'),
+        'smartthingsclient': project(':smartthings-client')
+    ]
+]
+//
+//configurations.all {
+//    resolutionStrategy {
+//        force deps.kotlin.stdlib.jdk
+//    }
+//}
