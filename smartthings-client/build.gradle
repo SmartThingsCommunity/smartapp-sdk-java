@@ -1,0 +1,16 @@
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply from: file('../gradle/convention.gradle')
+apply from: file('../gradle/publish-jar.gradle')
+apply from: rootProject.file('gradle/dependencies.gradle')
+
+dependencies {
+    implementation deps.client.api
+    implementation deps.client.retrofitRxJava
+    implementation deps.client.retrofitJackson
+    implementation deps.logging.okhttpLogging
+
+    testImplementation deps.test.spockCore
+    testRuntime deps.test.cglibNodep
+    testRuntime deps.test.objenesis
+}

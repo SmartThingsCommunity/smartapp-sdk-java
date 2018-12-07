@@ -5,9 +5,10 @@ import com.google.inject.Injector;
 import com.google.inject.Key;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import smartthings.smartapp.core.PredicateHandler;
-import smartthings.smartapp.core.SmartAppDefinition;
-import smartthings.smartapp.core.extensions.*;
+import smartthings.sdk.smartapp.core.PredicateHandler;
+import smartthings.sdk.smartapp.core.SmartAppDefinition;
+import smartthings.sdk.smartapp.core.extensions.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
