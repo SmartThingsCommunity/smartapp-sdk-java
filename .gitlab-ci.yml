@@ -92,7 +92,7 @@ master_build_core:
     artifacts:
         when: always
         paths:
-        - ${CI_PROJECT_DIR}/smartapp-core/build/reports/tests/
+        - ${CI_PROJECT_DIR}/smartapp-core/build/reports/
         - ${CI_PROJECT_DIR}/smartapp-core/build/libs/*.jar
     only:
     - master@iot/pi/smartthings-sdk-java
@@ -112,7 +112,7 @@ master_build_guice:
     artifacts:
         when: always
         paths:
-        - ${CI_PROJECT_DIR}/smartapp-guice/build/reports/tests/
+        - ${CI_PROJECT_DIR}/smartapp-guice/build/reports/
         - ${CI_PROJECT_DIR}/smartapp-guice/build/libs/*.jar
     only:
     - master@iot/pi/smartthings-sdk-java
@@ -145,11 +145,12 @@ master_build_examples_kotlin:
     script:
     # tests
     - ./gradlew :examples:kotlin-smartapp:clean :examples:kotlin-smartapp:build :examples:kotlin-smartapp:test :examples:kotlin-smartapp:jacocoTestReport -PsmartThingsUserName=$ARTIFACTORY_USERNAME -PsmartThingsPassword=$ARTIFACTORY_PASSWORD
-    - cat $CI_PROJECT_DIR/smartthings-client/build/reports/jacoco/test/html/index.html | grep -o -P "Total.*?([0-9]{1,3})%"
+    - cat $CI_PROJECT_DIR/examples/kotlin-smartapp/build/reports/jacoco/test/html/index.html | grep -o -P "Total.*?([0-9]{1,3})%"
     artifacts:
         when: always
         paths:
-        - ${CI_PROJECT_DIR}/smartapp-guice/build/reports/tests/
+        - ${CI_PROJECT_DIR}/examples/kotlin-smartapp/build/reports/
+        - ${CI_PROJECT_DIR}/examples/kotlin-smartapp/build/libs/*.jar
     only:
     - master@iot/pi/smartthings-sdk-java
 
@@ -167,6 +168,8 @@ release_build:
     artifacts:
         when: always
         paths:
+        - ${CI_PROJECT_DIR}/smartapp-core/build/libs/*.jar
         - ${CI_PROJECT_DIR}/smartapp-guice/build/libs/*.jar
+        - ${CI_PROJECT_DIR}/smartthings-client/build/libs/*.jar
     only:
     - release@iot/pi/smartthings-sdk-java
