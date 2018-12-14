@@ -1,7 +1,7 @@
-package smartthings.smartapp.guice.internal;
+package smartthings.sdk.smartapp.guice.internal;
 
 import com.google.inject.Module;
-import smartthings.smartapp.guice.BindingsSpec;
+import smartthings.sdk.smartapp.guice.BindingsSpec;
 
 import java.util.List;
 

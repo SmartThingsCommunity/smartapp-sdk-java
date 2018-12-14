@@ -1,31 +1,40 @@
 # smartthings-sdk ![SmartThings](/docs/smartthings-logo.png) ![Java](/docs/java-logo.png)
 
-A set of Java libraries for building SmartApps.
+A set of JVM libraries for building SmartApps.
 
-## Modules
-### [smartapp-core](/smartapp-core) ([Documentation](/smartapp-core/README.md)) [![pipeline status](/../badges/master/pipeline.svg?job=master_build_core)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=master_build_core)](/../commits/master)
+## What is a SmartApp?
+SmartApps are an example of a [SmartThings Automation](https://smartthings.developer.samsung.com/develop/getting-started/automation.html). Automations allow users to control the SmartThings ecosystem without manual intervention. Creating a SmartApp allows you to control and get status notifications from SmartThings devices using the [SmartThings REST API](https://smartthings.developer.samsung.com/develop/api-ref/st-api.html).
+
+![automation smartapp](https://smartthings.developer.samsung.com/develop/getting-started/img/automation_smartapp.png)
+
+To learn more about what a SmartApp is and how you can create interesting automations, please visit the [developer portal documentation](https://smartthings.developer.samsung.com/develop/guides/smartapps/basics.html).
+
+
+## What's in this SDK? 
+### Modules
+#### [smartapp-core](/smartapp-core) ([Documentation](/smartapp-core/README.md)) [![pipeline status](/../badges/master/pipeline.svg?job=master_build_core)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=master_build_core)](/../commits/master)
 Core SmartApp framework. Provides abilities for defining a SmartApp that could be used in many environments - AWS Lambda / Dropwizard / Ratpack / etc
 
-### [smartthings-client](/smartthings-client) (Documentation) [![pipeline status](/../badges/master/pipeline.svg?job=master_build_client)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=master_build_client)](/../commits/master)
+#### [smartthings-client](/smartthings-client) (Documentation) [![pipeline status](/../badges/master/pipeline.svg?job=master_build_client)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=master_build_client)](/../commits/master)
 An API library that provides useful utilities for working with the Subscription / Schedules / Device APIs
 
-### Extension Libraries
+#### Extension Libraries
 
-#### [smartapp-guice](/smartapp-guice) (Documentation) [![pipeline status](/../badges/master/pipeline.svg?job=master_build_guice)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=master_build_guice)](/../commits/master)
+##### [smartapp-guice](/smartapp-guice) (Documentation) [![pipeline status](/../badges/master/pipeline.svg?job=master_build_guice)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=master_build_guice)](/../commits/master)
 An extension library that provides support for building a SmartApp with Guice dependency injection.
 
-#### smartapp-dropwizard-auth (coming soon)
+##### smartapp-dropwizard-auth (coming soon)
 An extension library that provides mechanisms for verifying SmartApp http signatures in a Dropwizard project.
 
-#### smartapp-lazybones (coming soon)
+##### smartapp-lazybones (coming soon)
 A templating extension for Lazybones that bootstraps out a basic Dropwizard SmartApp project.
 
-## Examples
+### Examples
 
-### [kotlin-smartapp](examples/kotlin-smartapp) ([Documentation](examples/kotlin-smartapp/README.md)) ![kotlin-logo](docs/kotlin-logo.png) ![ktor-logo](docs/ktor-logo.png) [![pipeline status](/../badges/master/pipeline.svg?job=check_examples_kotlin)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=check_examples_kotlin)](/../commits/master)
+#### [kotlin-smartapp](examples/kotlin-smartapp) ([Documentation](examples/kotlin-smartapp/README.md)) ![kotlin-logo](docs/kotlin-logo.png) ![ktor-logo](docs/ktor-logo.png) [![pipeline status](/../badges/master/pipeline.svg?job=check_examples_kotlin)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=check_examples_kotlin)](/../commits/master)
 This Kotlin example implements the Java `smartapp-core` library with a simple [Ktor](https://ktor.io/) server. 
 
-### Getting Started
+#### Getting Started
 
 Take a quick look at how SmartApps are declared in various languages.
 
@@ -145,7 +154,7 @@ fun Application.main() {
 
 </details>
 
-# To Run / Build
+## To Run / Build
 ```
 ./gradlew clean build
 ```

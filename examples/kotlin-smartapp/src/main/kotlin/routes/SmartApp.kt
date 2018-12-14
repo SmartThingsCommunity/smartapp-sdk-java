@@ -8,8 +8,16 @@ import io.ktor.routing.Route
 import io.ktor.routing.post
 import smartthings.sdk.smartapp.core.Response
 import smartthings.sdk.smartapp.core.SmartApp
-import v1.smartapps.*
+import smartthings.sdk.smartapp.core.models.*
 
+/**
+ * The declaration of the SmartApp handlers.
+ *
+ * See the documentation on what a SmartApp is, what its
+ * responsibilities are, and what you can do with them.
+ *
+ * @see <a href="https://smartthings.developer.samsung.com/develop/guides/smartapps/basics.html">SmartApp Basics</a>
+ */
 val smartApp: SmartApp = SmartApp.of { spec ->
     spec
         .configuration(Configuration())
@@ -34,10 +42,24 @@ val smartApp: SmartApp = SmartApp.of { spec ->
 /**
  * Register the method handlers for /smartapp
  */
-fun Route.smartappExecution() {
+fun Route.smartAppExecution() {
     // Uses the location feature to register a get route for '/smartapp'.
     post {
-        // Execute the SmartApp lifecycle handlers
+        /**
+         * Execute the SmartApp lifecycle handlers
+         *   Method A) Using variables - Kotlin cannot infer the body's deserialization type
+         *     val body: ExecutionRequest = call.receive()
+         *     val execution = smartApp.execute(body)
+         *     call.respond(execution)
+         */
+
+
+        /**
+         * Execute the SmartApp lifecycle handlers
+         *   Method B) inline function calls
+         *     Kotlin can automatically infer the types required,
+         *     making this code much more succinct.
+         */
         call.respond(smartApp.execute(call.receive()))
     }
 }

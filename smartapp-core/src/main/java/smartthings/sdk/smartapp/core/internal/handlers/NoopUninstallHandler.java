@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import smartthings.sdk.smartapp.core.Response;
 import smartthings.sdk.smartapp.core.extensions.UninstallHandler;
-import v1.smartapps.*;
+import smartthings.sdk.smartapp.core.models.*;
 
 public class NoopUninstallHandler implements UninstallHandler {
 
