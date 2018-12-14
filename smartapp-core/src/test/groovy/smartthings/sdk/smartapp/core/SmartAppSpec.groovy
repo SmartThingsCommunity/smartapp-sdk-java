@@ -1,7 +1,7 @@
 package smartthings.sdk.smartapp.core
 
 import smartthings.sdk.smartapp.core.extensions.EventHandler
-import v1.smartapps.*
+import smartthings.sdk.smartapp.core.models.*
 import spock.lang.Specification
 import spock.lang.Unroll
 

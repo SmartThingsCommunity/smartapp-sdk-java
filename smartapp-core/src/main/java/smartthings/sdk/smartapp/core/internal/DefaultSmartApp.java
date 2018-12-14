@@ -6,9 +6,7 @@ import org.slf4j.LoggerFactory;
 import smartthings.sdk.smartapp.core.*;
 import smartthings.sdk.smartapp.core.internal.handlers.DefaultPingHandler;
 import smartthings.sdk.smartapp.core.internal.handlers.NoopUninstallHandler;
-import v1.smartapps.AppLifecycle;
-import v1.smartapps.ExecutionRequest;
-import v1.smartapps.ExecutionResponse;
+import smartthings.sdk.smartapp.core.models.*;
 
 import java.util.ArrayList;
 import java.util.Collections;

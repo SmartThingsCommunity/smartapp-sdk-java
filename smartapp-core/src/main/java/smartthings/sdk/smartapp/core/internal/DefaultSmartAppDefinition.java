@@ -5,7 +5,7 @@ import smartthings.sdk.smartapp.core.PredicateHandler;
 import smartthings.sdk.smartapp.core.SmartAppDefinition;
 import smartthings.sdk.smartapp.core.SmartAppDefinitionSpec;
 import smartthings.sdk.smartapp.core.extensions.*;
-import v1.smartapps.ExecutionRequest;
+import smartthings.sdk.smartapp.core.models.*;
 
 import java.util.ArrayList;
 import java.util.List;

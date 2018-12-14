@@ -1,6 +1,8 @@
 package smartthings.sdk.smartapp.core;
 
-import v1.smartapps.*;
+
+import smartthings.sdk.smartapp.core.models.*;
+
 import java.util.function.Predicate;
 
 public final class PredicateHandler {
