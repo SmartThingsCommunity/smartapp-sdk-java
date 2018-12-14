@@ -1,7 +1,7 @@
 package smartthings.sdk.smartapp.core;
 
 import smartthings.sdk.smartapp.core.extensions.*;
-import v1.smartapps.ExecutionRequest;
+import smartthings.sdk.smartapp.core.models.*;
 
 import java.util.function.Predicate;
 

@@ -15,7 +15,21 @@ This library aims to make developing your own JVM-based SmartApps easy, intuitiv
 
 ### Installation
 
-Coming soon
+More coming soon
+
+#### Code generation
+
+By default, the necessary models are generated with **swagger-codegen v2** based on the public specification. If you'd like, you can overwrite the existing `resources/smartapps-v1.yml`.
+ 
+##### Migration to Swagger V3
+ 
+Swagger V3 uses Open API Spec 3.0 and supports [Handlebars.java](https://jknack.github.io/handlebars.java/) as a templating engine. This is a significant departure from Swagger V2, which uses the [Mustache](https://mustache.github.io/) templating engine.
+
+See more information on the [Swagger V3 codegen.](https://github.com/swagger-api/swagger-codegen-generators#overview)
+
+See more information on how to use existing Mustache templates with Handlebars:
+[Reusing {{ Mustache }} templates with inclusion or inheritance](https://jknack.github.io/handlebars.java/reuse.html)
+
 
 ### Usage
 

@@ -1,4 +1,4 @@
-package smartthings.smartapp.guice.internal;
+package smartthings.sdk.smartapp.guice.internal;
 
 import com.google.inject.ConfigurationException;
 import com.google.inject.Injector;

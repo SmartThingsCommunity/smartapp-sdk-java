@@ -1,4 +1,4 @@
-package smartthings.smartapp.guice;
+package smartthings.sdk.smartapp.guice;
 
 import com.google.inject.Module;
 

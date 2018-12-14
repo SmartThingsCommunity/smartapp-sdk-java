@@ -1,6 +1,6 @@
 package smartthings.sdk.smartapp.core;
 
-import v1.smartapps.*;
+import smartthings.sdk.smartapp.core.models.*;
 
 public final class Response {
     public static ExecutionResponse ok() {
