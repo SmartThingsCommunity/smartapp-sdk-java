@@ -15,8 +15,7 @@ class AppTest {
     @Test
     fun testGetIndex() = testApp {
         handleRequest(HttpMethod.Get, "/").apply {
-            assertEquals(200, response.status()?.value)
-            assertTrue(response.content!!.contains("You should not be here"))
+            assertEquals(403, response.status()?.value)
         }
     }
 

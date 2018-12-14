@@ -1,0 +1,5 @@
+<FindBugsFilter>
+    <Match>
+        <Package name="~smartthings\.sdk\.smartapp\.core\.models.*"/>
+    </Match>
+</FindBugsFilter>

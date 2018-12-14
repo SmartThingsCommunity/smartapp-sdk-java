@@ -1,4 +1,4 @@
-package smartthings.smartapp.guice
+package smartthings.sdk.smartapp.guice
 
 import com.google.inject.AbstractModule
 import com.google.inject.Provides
@@ -11,7 +11,7 @@ import smartthings.sdk.smartapp.core.extensions.OAuthCallbackHandler
 import smartthings.sdk.smartapp.core.extensions.PingHandler
 import smartthings.sdk.smartapp.core.extensions.UninstallHandler
 import smartthings.sdk.smartapp.core.extensions.UpdateHandler
-import v1.smartapps.*
+import smartthings.sdk.smartapp.core.models.*
 import spock.lang.Specification
 
 class SmartAppSpec extends Specification {

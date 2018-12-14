@@ -7,7 +7,7 @@ import smartthings.sdk.smartapp.core.Action;
 import smartthings.sdk.smartapp.core.EventSpec;
 import smartthings.sdk.smartapp.core.Response;
 import smartthings.sdk.smartapp.core.extensions.EventHandler;
-import v1.smartapps.*;
+import smartthings.sdk.smartapp.core.models.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

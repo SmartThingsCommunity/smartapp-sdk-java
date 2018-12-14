@@ -1,7 +1,7 @@
 package smartthings.sdk.smartapp.core.internal.handlers;
 
 import smartthings.sdk.smartapp.core.Action;
-import v1.smartapps.*;
+import smartthings.sdk.smartapp.core.models.*;
 import java.util.function.Predicate;
 
 public final class PredicateSingleEventHandler {

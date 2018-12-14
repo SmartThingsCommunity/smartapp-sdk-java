@@ -12,5 +12,5 @@ rootProject.name = 'smartthings-sdk'
 include 'smartapp-core'
 include 'smartapp-guice'
 include 'smartthings-client'
-include 'examples'
 include 'examples:kotlin-smartapp'
+
