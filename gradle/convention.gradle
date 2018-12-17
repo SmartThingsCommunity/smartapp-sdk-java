@@ -26,7 +26,16 @@ pmd {
     reportsDir = file("$project.buildDir/coverage/pmd")
 }
 
+tasks.withType(Javadoc) {
+    options.encoding = 'UTF-8'
+}
+
 tasks.withType(FindBugs) {
+    // If available, set exclude filters to avoid analyzing generated classes
+    def excludes = file("${project.getProjectDir()}/gradle/findbugs/excludeFilter.xml")
+    if (excludes.exists()) {
+        excludeFilter = excludes
+    }
     reports {
         xml.enabled = false
         html.enabled = true
