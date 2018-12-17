@@ -79,10 +79,6 @@ task downloadSpecYml {
 // the source to the non-generated directories
 checkstyleMain.source = "${project.getProjectDir()}/src/main/java"
 
-// Set exclude filters to avoid analyzing generated classes
-tasks.withType(FindBugs) {
-    excludeFilter = file("${project.getProjectDir()}/gradle/findbugs/excludeFilter.xml")
-}
 
 // Prior to generating classes, download the latest public spec if necessary
 generateSwaggerCode.dependsOn downloadSpecYml
