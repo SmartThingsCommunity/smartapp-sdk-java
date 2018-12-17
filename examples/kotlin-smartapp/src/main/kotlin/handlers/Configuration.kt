@@ -10,13 +10,14 @@ private val hideTipText = SectionSetting().apply {
     type = SettingType.PARAGRAPH
     name = "You can also hide/collapse the section by default with isHidden=true"
 }
+
 private val doneText = SectionSetting().apply {
     type = SettingType.PARAGRAPH
     name = "You are done!"
     description = "Description text"
 }
 
-private enum class Pages(val pageName: String) {
+private enum class Pages(val pageId: String) {
     INTRO("intro"), FINISH("finish")
 }
 
@@ -64,9 +65,9 @@ class Configuration : ConfigurationHandler {
             // https://smartthings.developer.samsung.com/develop/guides/smartapps/configuration.html
             ConfigurationPhase.PAGE -> {
                 when (request.configurationData.pageId) {
-                    Pages.INTRO.pageName -> {
+                    Pages.INTRO.pageId -> {
                         response.page = Page()
-                            .pageId(Pages.INTRO.pageName)
+                            .pageId(Pages.INTRO.pageId)
                             .nextPageId("finish")
                             .name("This is the first configuration page")
                             .addSectionsItem(Section()
@@ -81,9 +82,9 @@ class Configuration : ConfigurationHandler {
                                 })
                             )
                     }
-                    Pages.FINISH.pageName -> {
+                    Pages.FINISH.pageId -> {
                         response.page = Page()
-                            .pageId(Pages.FINISH.pageName)
+                            .pageId(Pages.FINISH.pageId)
                             .previousPageId("intro")
                             .complete(true)
                             .name("This is the last configuration page")
