@@ -13,4 +13,5 @@ include 'smartapp-core'
 include 'smartapp-guice'
 include 'smartthings-client'
 include 'examples:kotlin-smartapp'
+include 'examples:java-ratpack-guice-smartapp'
 

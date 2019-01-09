@@ -1,0 +1,45 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath deps.ratpack.gradlePlugin
+    }
+}
+
+plugins {
+    id 'jacoco'
+    id 'java'
+    id 'application'
+}
+
+apply plugin: "io.ratpack.ratpack-java"
+apply plugin: "idea"
+
+group = "examples"
+sourceCompatibility = '1.8'
+
+test {
+    jacoco {
+        destinationFile = file("${buildDir}/jacoco/test.exec")
+    }
+}
+jacocoTestReport {
+    reports {
+        xml.enabled true
+    }
+}
+test.finalizedBy(jacocoTestReport)
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation deps.projects.smartappcore
+    implementation deps.projects.smartthingsclient
+    implementation deps.projects.smartappguice
+    implementation deps.logging.logback
+    implementation deps.di.guice
+    compile ratpack.dependency('guice')
+}
