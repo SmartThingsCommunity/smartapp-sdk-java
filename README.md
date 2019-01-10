@@ -10,7 +10,7 @@ SmartApps are an example of a [SmartThings Automation](https://smartthings.devel
 To learn more about what a SmartApp is and how you can create interesting automations, please visit the [developer portal documentation](https://smartthings.developer.samsung.com/develop/guides/smartapps/basics.html).
 
 
-## What's in this SDK? 
+## What's in this SDK?
 ### Modules
 #### [smartapp-core](/smartapp-core) ([Documentation](/smartapp-core/README.md)) [![pipeline status](/../badges/master/pipeline.svg?job=master_build_core)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=master_build_core)](/../commits/master)
 Core SmartApp framework. Provides abilities for defining a SmartApp that could be used in many environments - AWS Lambda / Dropwizard / Ratpack / etc
@@ -32,7 +32,10 @@ A templating extension for Lazybones that bootstraps out a basic Dropwizard Smar
 ### Examples
 
 #### [kotlin-smartapp](examples/kotlin-smartapp) ([Documentation](examples/kotlin-smartapp/README.md)) ![kotlin-logo](docs/kotlin-logo.png) ![ktor-logo](docs/ktor-logo.png) [![pipeline status](/../badges/master/pipeline.svg?job=check_examples_kotlin)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=check_examples_kotlin)](/../commits/master)
-This Kotlin example implements the Java `smartapp-core` library with a simple [Ktor](https://ktor.io/) server. 
+This Kotlin example implements the Java `smartapp-core` library with a simple [Ktor](https://ktor.io/) server.
+
+#### [java-ratpack-guice-smartapp](examples/java-ratpack-guice-smartapp) ([Documentation](examples/java-ratpack-guice-smartapp/README.md)) ![java-logo](docs/java-logo.png) ![ratpack-logo](docs/ratpack-logo.png) [![pipeline status](/../badges/master/pipeline.svg?job=check_examples_javaratpack)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=check_examples_javaratpack)](/../commits/master)
+This Java example implements the Java `smartapp-core` library with a Ratpack server and uses Guice for dependency managment.
 
 #### Getting Started
 
@@ -79,36 +82,36 @@ fun Application.main() {
 ```groovy
     SmartApp smartApp = SmartApp.of { spec ->
         spec
-            .install({ req -> 
+            .install({ req ->
                 // create subscriptions
-                Response.ok() 
+                Response.ok()
             })
-            .update({ req -> 
+            .update({ req ->
                 // delete subscriptions
                 // create subscriptions
-                Response.ok() 
-            })                
+                Response.ok()
+            })
             .configuration({ req ->
                 ConfigurationResponseData data = ...// build config
-                Response.ok(data) 
+                Response.ok(data)
             })
             .event(EventHandler.of { eventSpec ->
                 eventSpec
                     .onSubscription("switch", { event ->
                        // do something
-                    })                       
+                    })
                     .onSchedule("nightly", { event ->
                        // do something
                     })
                     .onEvent(
                         { event ->
                             // test event
-                            true                                  
+                            true
                         },
                         { event ->
                             // do something
                         }
-                    )    
+                    )
             })
     }
 ```
