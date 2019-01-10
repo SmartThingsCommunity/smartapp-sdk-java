@@ -48,7 +48,7 @@ dependencies {
     implementation deps.kotlin.stdlib
     implementation deps.kotlin.ktorServerNetty
     implementation deps.kotlin.ktorJackson
-    implementation deps.kotlin.logback
+    implementation deps.logging.logback
     testImplementation deps.test.kotlin.ktorServerTestHost
     testImplementation deps.test.kotlin.mockk
 }
