@@ -31,10 +31,10 @@ A templating extension for Lazybones that bootstraps out a basic Dropwizard Smar
 
 ### Examples
 
-#### [kotlin-smartapp](examples/kotlin-smartapp) ([Documentation](examples/kotlin-smartapp/README.md)) ![kotlin-logo](docs/kotlin-logo.png) ![ktor-logo](docs/ktor-logo.png) [![pipeline status](/../badges/master/pipeline.svg?job=check_examples_kotlin)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=check_examples_kotlin)](/../commits/master)
+#### [kotlin-smartapp](examples/kotlin-smartapp) ([Documentation](examples/kotlin-smartapp/README.md)) ![kotlin-logo](docs/kotlin-logo.png) ![ktor-logo](docs/ktor-logo.png) [![pipeline status](/../badges/master/pipeline.svg?job=master_build_examples_kotlin)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=master_build_examples_kotlin)](/../commits/master)
 This Kotlin example implements the Java `smartapp-core` library with a simple [Ktor](https://ktor.io/) server.
 
-#### [java-ratpack-guice-smartapp](examples/java-ratpack-guice-smartapp) ([Documentation](examples/java-ratpack-guice-smartapp/README.md)) ![java-logo](docs/java-logo.png) ![ratpack-logo](docs/ratpack-logo.png) [![pipeline status](/../badges/master/pipeline.svg?job=check_examples_javaratpack)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=check_examples_javaratpack)](/../commits/master)
+#### [java-ratpack-guice-smartapp](examples/java-ratpack-guice-smartapp) ([Documentation](examples/java-ratpack-guice-smartapp/README.md)) ![java-logo](docs/java-logo.png) ![ratpack-logo](docs/ratpack-logo.png) [![pipeline status](/../badges/master/pipeline.svg?job=master_build_examples_java_ratpack_guice)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=master_build_examples_java_ratpack_guice)](/../commits/master)
 This Java example implements the Java `smartapp-core` library with a Ratpack server and uses Guice for dependency managment.
 
 #### Getting Started
