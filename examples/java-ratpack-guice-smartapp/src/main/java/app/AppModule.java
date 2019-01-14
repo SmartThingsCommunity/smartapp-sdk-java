@@ -67,7 +67,7 @@ public class AppModule extends AbstractModule {
     public UninstallHandler uninstallHandler() {
         return executionRequest -> {
             LOG.debug("UNINSTALL: executionRequest = " + executionRequest);
-            return Response.ok();
+            return Response.ok(new UninstallResponseData());
         };
     }
 }

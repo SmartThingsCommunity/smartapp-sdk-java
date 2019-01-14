@@ -24,18 +24,13 @@ import java.util.List;
 public class AppConfigurationHandler implements ConfigurationHandler {
     private static final Logger LOG = LoggerFactory.getLogger(AppConfigurationHandler.class);
 
-    private static final SectionSetting hideTipText;
-    private static final SectionSetting doneText;
-    static {
-        hideTipText = new SectionSetting();
-        hideTipText.setType(SettingType.PARAGRAPH);
-        hideTipText.setName("You can also hide/collapse the section by default with isHidden=true");
-
-        doneText = new SectionSetting();
-        doneText.setType(SettingType.PARAGRAPH);
-        doneText.setName("You are done!");
-        doneText.setDescription("Description text");
-    }
+    private static final SectionSetting doneText = new SectionSetting()
+        .type(SettingType.PARAGRAPH)
+        .name("You are done!")
+        .description("Description text");
+    private static final SectionSetting hideTipText = new SectionSetting()
+        .type(SettingType.PARAGRAPH)
+        .name("You can also hide/collapse the section by default with isHidden=true");
 
     private enum PageType {
         INTRO {
@@ -75,7 +70,7 @@ public class AppConfigurationHandler implements ConfigurationHandler {
                 section.setHideable(true);
                 section.setHidden(false);
                 List<SectionSetting> settings = new ArrayList<>();
-                settings.add(doneText);
+                settings.add(hideTipText);
                 section.setSettings(settings);
                 page.addSectionsItem(section);
                 List<SectionSetting> doneTextSettings = new ArrayList<>();
@@ -109,34 +104,36 @@ public class AppConfigurationHandler implements ConfigurationHandler {
             return Response.notFound();
         }
 
-        switch (configData.getPhase()) {
-            case INITIALIZE:
-                // The first phase is INITIALIZE, where we define the
-                // basics of your app configuration.
-                return buildInitializeResponse();
-            case PAGE:
-                // The subsequent phase is PAGE, and you will need to handle
-                // the requested pageId, returning the appropriate response
-                // object.
-                // For more information on how pages are structured and what
-                // settings are available, please see the documentation:
-                // https://smartthings.developer.samsung.com/develop/guides/smartapps/configuration.html
-                if (configData.getPageId() == null) {
-                    LOG.error("missing pageId in configurationData");
-                    return Response.notFound();
-                } else {
-                    try {
-                        PageType pageType = PageType.fromPageId(configData.getPageId());
-                        return pageType.buildResponse();
-                    } catch (IllegalArgumentException exception) {
-                        LOG.error("invalid pageId " + configData.getPageId() + "in configurationData");
-                        return Response.notFound();
-                    }
-                }
-            default:
-                LOG.error("missing phase in configurationData");
-                return Response.notFound();
+        ConfigurationPhase phase = configData.getPhase();
+
+        if (phase == ConfigurationPhase.INITIALIZE) {
+            // The first phase is INITIALIZE, where we define the
+            // basics of your app configuration.
+            return buildInitializeResponse();
         }
+
+        if (phase == ConfigurationPhase.PAGE) {
+            // The subsequent phase is PAGE, and you will need to handle
+            // the requested pageId, returning the appropriate response
+            // object.
+            // For more information on how pages are structured and what
+            // settings are available, please see the documentation:
+            // https://smartthings.developer.samsung.com/develop/guides/smartapps/configuration.html
+            if (configData.getPageId() == null) {
+                LOG.error("missing pageId in configurationData");
+                return Response.notFound();
+            }
+            try {
+                PageType pageType = PageType.fromPageId(configData.getPageId());
+                return pageType.buildResponse();
+            } catch (IllegalArgumentException exception) {
+                LOG.error("invalid pageId " + configData.getPageId() + "in configurationData");
+                return Response.notFound();
+            }
+        }
+
+        LOG.error("missing phase in configurationData");
+        return Response.notFound();
     }
 
     private ExecutionResponse buildInitializeResponse() {
