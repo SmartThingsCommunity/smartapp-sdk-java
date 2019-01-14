@@ -77,6 +77,23 @@ check_examples_kotlin:
     - release@iot/pi/smartthings-sdk-java
     - tags
 
+check_examples_java_ratpack_guice:
+    stage: mr_check
+    tags:
+        - streleng
+    script:
+        - ./gradlew :examples:java-ratpack-guice-smartapp:clean :examples:java-ratpack-guice-smartapp:jacocoTestReport -PsmartThingsUserName=$ARTIFACTORY_USERNAME -PsmartThingsPassword=$ARTIFACTORY_PASSWORD
+        - cat $CI_PROJECT_DIR/examples/java-ratpack-guice-smartapp/build/reports/jacoco/test/html/index.html | grep -o -P "Total.*?([0-9]{1,3})%"
+    artifacts:
+        when: on_failure
+        paths:
+            - ${CI_PROJECT_DIR}/examples/java-ratpack-guice-smartapp/build/test-results/
+            - ${CI_PROJECT_DIR}/examples/java-ratpack-guice-smartapp/build/reports/
+    except:
+        - master@iot/pi/smartthings-sdk-java
+        - release@iot/pi/smartthings-sdk-java
+        - tags
+
 master_build_core:
     stage: master_build
     tags:

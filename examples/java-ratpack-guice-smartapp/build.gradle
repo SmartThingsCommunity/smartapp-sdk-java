@@ -10,11 +10,12 @@ buildscript {
 plugins {
     id 'jacoco'
     id 'java'
+    id 'groovy'
     id 'application'
+    id 'idea'
 }
 
-apply plugin: "io.ratpack.ratpack-java"
-apply plugin: "idea"
+apply plugin: 'io.ratpack.ratpack-java'
 
 group = "examples"
 sourceCompatibility = '1.8'
@@ -42,4 +43,9 @@ dependencies {
     implementation deps.logging.logback
     implementation deps.di.guice
     compile ratpack.dependency('guice')
+
+    testCompile deps.groovy.all
+    testCompile deps.test.spockCore
 }
+
+jacocoTestReport.dependsOn(test)
