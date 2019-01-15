@@ -46,6 +46,7 @@ dependencies {
     implementation deps.projects.smartappcore
     implementation deps.projects.smartthingsclient
     implementation deps.kotlin.stdlib
+    implementation deps.kotlin.ktorClientOkhttp
     implementation deps.kotlin.ktorServerNetty
     implementation deps.kotlin.ktorJackson
     implementation deps.logging.logback
