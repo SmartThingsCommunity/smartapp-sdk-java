@@ -146,7 +146,7 @@ master_build_client:
     #
     #    # package & publish
     #    - ~/build-common/gitlab/update_version.py --branch=release
-    #    - ./gradlew smartapp-guice:publish -PsmartThingsUserName=$ARTIFACTORY_USERNAME -PsmartThingsPassword=$ARTIFACTORY_PASSWORD
+    #    - ./gradlew smartthings-client:publish -PsmartThingsUserName=$ARTIFACTORY_USERNAME -PsmartThingsPassword=$ARTIFACTORY_PASSWORD
     #    artifacts:
     #        when: always
     #        paths:

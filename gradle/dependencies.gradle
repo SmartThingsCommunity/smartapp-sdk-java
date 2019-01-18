@@ -18,7 +18,8 @@ ext.versions = [
     'groovy'   : '2.4.16',
     'ktor'     : '1.0.1',
     'mockk'    : '1.8.13.kotlin13',
-    'ratpack'  : '1.6.0'
+    'ratpack'  : '1.6.0',
+    'feign'    : '9.4.0'
 ]
 
 ext.deps = [
@@ -60,6 +61,14 @@ ext.deps = [
             'mockk'             : "io.mockk:mockk:${versions.mockk}"
         ]
     ],
+    'codegen'  : [
+        'feignCore'    : "io.github.openfeign:feign-core:${versions.feign}",
+        'feignJackson' : "io.github.openfeign:feign-jackson:${versions.feign}",
+        'feignLogging' : "io.github.openfeign:feign-slf4j:${versions.feign}",
+        'feignForm'    : 'io.github.openfeign.form:feign-form:2.1.0',
+        'jacksonJsr310': 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.8.9',
+        'oltuOauth2'   : 'org.apache.oltu.oauth2:org.apache.oltu.oauth2.client:1.0.1'
+    ],
     'core'     : [
         'smartappsModels': "smartthings:smartapps.v1-models:${versions.librarian}",
     ],
@@ -69,11 +78,13 @@ ext.deps = [
         'retrofitJackson': "com.squareup.retrofit2:converter-jackson:${versions.retrofit}"
     ],
     'kotlin'   : [
-        'gradlePlugin'   : "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}",
-        'jvmPlugin'      : "org.jetbrains.kotlin.jvm",
-        'stdlib'         : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}",
-        'ktorServerNetty': "io.ktor:ktor-server-netty:${versions.ktor}",
-        'ktorJackson'    : "io.ktor:ktor-jackson:${versions.ktor}"
+        'gradlePlugin'    : "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}",
+        'jvmPlugin'       : "org.jetbrains.kotlin.jvm",
+        'stdlib'          : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}",
+        'ktorServerNetty' : "io.ktor:ktor-server-netty:${versions.ktor}",
+        'ktorJackson'     : "io.ktor:ktor-jackson:${versions.ktor}",
+        'ktorClientOkhttp': "io.ktor:ktor-client-okhttp:${versions.ktor}",
+        'logback'         : "ch.qos.logback:logback-classic:1.2.3"
     ],
     'groovy'   : [
         'all' : "org.codehaus.groovy:groovy-all:${versions.groovy}"

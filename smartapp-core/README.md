@@ -15,7 +15,7 @@ This library aims to make developing your own JVM-based SmartApps easy, intuitiv
 
 ### Installation
 
-More coming soon
+More information on this topic is coming when the first release is published to a repository.
 
 #### Code generation
 
