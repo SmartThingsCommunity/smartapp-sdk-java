@@ -19,6 +19,7 @@ apply plugin: 'io.ratpack.ratpack-java'
 
 group = "examples"
 sourceCompatibility = '1.8'
+mainClassName = 'app.App'
 
 test {
     jacoco {
