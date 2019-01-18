@@ -7,9 +7,9 @@ import com.google.inject.Module;
 import ratpack.config.internal.DefaultConfigDataBuilder;
 import ratpack.http.Status;
 import ratpack.server.RatpackServer;
-import smartthings.sdk.smartapp.core.SmartApp;
-import smartthings.sdk.smartapp.core.models.ExecutionRequest;
-import smartthings.sdk.smartapp.guice.Guice;
+import com.smartthings.sdk.smartapp.core.SmartApp;
+import com.smartthings.sdk.smartapp.core.models.ExecutionRequest;
+import com.smartthings.sdk.smartapp.guice.Guice;
 
 import static ratpack.jackson.Jackson.json;
 

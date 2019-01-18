@@ -1,7 +1,7 @@
 package app.handlers
 
 import app.handlers.AppConfigurationHandler
-import smartthings.sdk.smartapp.core.models.*
+import com.smartthings.sdk.smartapp.core.models.*
 import spock.lang.Specification
 
 

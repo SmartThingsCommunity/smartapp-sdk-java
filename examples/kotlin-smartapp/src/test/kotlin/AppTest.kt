@@ -5,7 +5,6 @@ import io.ktor.server.testing.handleRequest
 import io.ktor.server.testing.withTestApplication
 import org.junit.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class AppTest {
 

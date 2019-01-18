@@ -1,10 +1,10 @@
 package app.handlers
 
-import smartthings.sdk.smartapp.core.Response
-import smartthings.sdk.smartapp.core.models.AppLifecycle
-import smartthings.sdk.smartapp.core.models.EventResponseData
-import smartthings.sdk.smartapp.core.models.ExecutionRequest
-import smartthings.sdk.smartapp.core.models.ExecutionResponse
+import com.smartthings.sdk.smartapp.core.Response
+import com.smartthings.sdk.smartapp.core.models.AppLifecycle
+import com.smartthings.sdk.smartapp.core.models.EventResponseData
+import com.smartthings.sdk.smartapp.core.models.ExecutionRequest
+import com.smartthings.sdk.smartapp.core.models.ExecutionResponse
 import spock.lang.Specification
 
 

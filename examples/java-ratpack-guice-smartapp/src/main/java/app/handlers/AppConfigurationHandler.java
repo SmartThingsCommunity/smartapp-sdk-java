@@ -3,9 +3,9 @@ package app.handlers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import smartthings.sdk.smartapp.core.Response;
-import smartthings.sdk.smartapp.core.extensions.ConfigurationHandler;
-import smartthings.sdk.smartapp.core.models.*;
+import com.smartthings.sdk.smartapp.core.Response;
+import com.smartthings.sdk.smartapp.core.extensions.ConfigurationHandler;
+import com.smartthings.sdk.smartapp.core.models.*;
 
 import java.util.ArrayList;
 import java.util.List;

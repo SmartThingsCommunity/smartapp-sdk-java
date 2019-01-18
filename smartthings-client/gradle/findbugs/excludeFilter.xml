@@ -1,5 +1,5 @@
 <FindBugsFilter>
     <Match>
-        <Package name="~smartthings\.sdk\.client.*"/>
+        <Package name="~com\.smartthings\.sdk\.client.*"/>
     </Match>
 </FindBugsFilter>
