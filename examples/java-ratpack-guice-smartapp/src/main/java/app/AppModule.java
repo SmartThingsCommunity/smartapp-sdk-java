@@ -8,10 +8,10 @@ import com.google.inject.Scopes;
 import com.google.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import smartthings.sdk.smartapp.core.Response;
-import smartthings.sdk.smartapp.core.extensions.*;
-import smartthings.sdk.smartapp.core.internal.handlers.DefaultPingHandler;
-import smartthings.sdk.smartapp.core.models.*;
+import com.smartthings.sdk.smartapp.core.Response;
+import com.smartthings.sdk.smartapp.core.extensions.*;
+import com.smartthings.sdk.smartapp.core.internal.handlers.DefaultPingHandler;
+import com.smartthings.sdk.smartapp.core.models.*;
 
 
 public class AppModule extends AbstractModule {

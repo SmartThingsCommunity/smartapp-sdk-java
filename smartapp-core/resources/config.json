@@ -1,5 +1,5 @@
 {
-    "modelPackage": "smartthings.sdk.smartapp.core.models",
+    "modelPackage": "com.smartthings.sdk.smartapp.core.models",
     "library": "jersey2",
     "typeMappings": {
         "UUID": "java.lang.String"
