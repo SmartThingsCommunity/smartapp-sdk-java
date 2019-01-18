@@ -1,6 +1,6 @@
 {
-    "modelPackage": "smartthings.sdk.client.models",
-    "apiPackage": "smartthings.sdk.client.methods",
+    "modelPackage": "com.smartthings.sdk.client.models",
+    "apiPackage": "com.smartthings.sdk.client.methods",
     "library": "feign",
     "java8": true,
     "dateLibrary": "java8",

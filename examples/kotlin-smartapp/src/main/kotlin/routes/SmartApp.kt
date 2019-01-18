@@ -7,13 +7,13 @@ import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.Route
 import io.ktor.routing.post
-import smartthings.sdk.client.ApiClient
-import smartthings.sdk.client.methods.DevicesApi
-import smartthings.sdk.smartapp.core.Response
-import smartthings.sdk.smartapp.core.SmartApp
-import smartthings.sdk.smartapp.core.models.EventResponseData
-import smartthings.sdk.smartapp.core.models.InstallResponseData
-import smartthings.sdk.smartapp.core.models.UninstallResponseData
+import com.smartthings.sdk.client.ApiClient
+import com.smartthings.sdk.client.methods.DevicesApi
+import com.smartthings.sdk.smartapp.core.Response
+import com.smartthings.sdk.smartapp.core.SmartApp
+import com.smartthings.sdk.smartapp.core.models.EventResponseData
+import com.smartthings.sdk.smartapp.core.models.InstallResponseData
+import com.smartthings.sdk.smartapp.core.models.UninstallResponseData
 
 val api = ApiClient()
 
