@@ -1,14 +1,21 @@
 package app.routes
 
 import app.handlers.Configuration
+import app.handlers.Update
 import io.ktor.application.call
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.Route
 import io.ktor.routing.post
+import smartthings.sdk.client.ApiClient
+import smartthings.sdk.client.methods.DevicesApi
 import smartthings.sdk.smartapp.core.Response
 import smartthings.sdk.smartapp.core.SmartApp
-import smartthings.sdk.smartapp.core.models.*
+import smartthings.sdk.smartapp.core.models.EventResponseData
+import smartthings.sdk.smartapp.core.models.InstallResponseData
+import smartthings.sdk.smartapp.core.models.UninstallResponseData
+
+val api = ApiClient()
 
 /**
  * The declaration of the SmartApp handlers.
@@ -22,15 +29,18 @@ val smartApp: SmartApp = SmartApp.of { spec ->
     spec
         .configuration(Configuration())
         .install {
-            // TODO: subscribe on installation
+            val devicesApi = api.buildClient(DevicesApi::class.java)
+            val data = it.installData
+            val devices = devicesApi.getDevices(data.authToken, mapOf("capabilities" to listOf("switch")))
+            println(devices)
+
             Response.ok(InstallResponseData())
         }
-        .update {
-            // TODO: Clear and re-subscribe on reconfiguration
-            Response.ok(UpdateResponseData())
-        }
+        .update(Update(api))
         .event {
-            // TODO: do something with the events for subscribed devices
+            val data = it.eventData
+            println(data)
+
             Response.ok(EventResponseData())
         }
         .uninstall {

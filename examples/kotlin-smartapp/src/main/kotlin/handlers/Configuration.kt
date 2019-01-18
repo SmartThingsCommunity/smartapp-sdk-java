@@ -72,6 +72,7 @@ class Configuration : ConfigurationHandler {
                             .name("This is the first configuration page")
                             .addSectionsItem(Section()
                                 .addSettingsItem(DeviceSetting().apply {
+                                    id = "selectedSwitches"
                                     name = "Select a device"
                                     description = "Tap to select"
                                     type = SettingType.DEVICE
