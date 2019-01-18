@@ -2,19 +2,19 @@ package app
 
 import com.google.inject.Guice
 import com.google.inject.Injector
-import smartthings.sdk.smartapp.core.Response
-import smartthings.sdk.smartapp.core.extensions.InstallHandler
-import smartthings.sdk.smartapp.core.extensions.PingHandler
-import smartthings.sdk.smartapp.core.extensions.UninstallHandler
-import smartthings.sdk.smartapp.core.extensions.UpdateHandler
-import smartthings.sdk.smartapp.core.models.AppLifecycle
-import smartthings.sdk.smartapp.core.models.ExecutionRequest
-import smartthings.sdk.smartapp.core.models.ExecutionResponse
-import smartthings.sdk.smartapp.core.models.InstallResponseData
-import smartthings.sdk.smartapp.core.models.PingData
-import smartthings.sdk.smartapp.core.models.PingResponseData
-import smartthings.sdk.smartapp.core.models.UninstallResponseData
-import smartthings.sdk.smartapp.core.models.UpdateResponseData
+import com.smartthings.sdk.smartapp.core.Response
+import com.smartthings.sdk.smartapp.core.extensions.InstallHandler
+import com.smartthings.sdk.smartapp.core.extensions.PingHandler
+import com.smartthings.sdk.smartapp.core.extensions.UninstallHandler
+import com.smartthings.sdk.smartapp.core.extensions.UpdateHandler
+import com.smartthings.sdk.smartapp.core.models.AppLifecycle
+import com.smartthings.sdk.smartapp.core.models.ExecutionRequest
+import com.smartthings.sdk.smartapp.core.models.ExecutionResponse
+import com.smartthings.sdk.smartapp.core.models.InstallResponseData
+import com.smartthings.sdk.smartapp.core.models.PingData
+import com.smartthings.sdk.smartapp.core.models.PingResponseData
+import com.smartthings.sdk.smartapp.core.models.UninstallResponseData
+import com.smartthings.sdk.smartapp.core.models.UpdateResponseData
 import spock.lang.Specification
 
 

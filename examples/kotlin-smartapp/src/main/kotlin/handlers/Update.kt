@@ -1,16 +1,16 @@
 package app.handlers
 
-import smartthings.sdk.client.ApiClient
-import smartthings.sdk.client.methods.SubscriptionsApi
-import smartthings.sdk.client.models.DeviceSubscriptionDetail
-import smartthings.sdk.client.models.SubscriptionRequest
-import smartthings.sdk.client.models.SubscriptionSource
-import smartthings.sdk.smartapp.core.Response
-import smartthings.sdk.smartapp.core.extensions.UpdateHandler
-import smartthings.sdk.smartapp.core.models.ConfigEntry
-import smartthings.sdk.smartapp.core.models.ExecutionRequest
-import smartthings.sdk.smartapp.core.models.ExecutionResponse
-import smartthings.sdk.smartapp.core.models.UpdateResponseData
+import com.smartthings.sdk.client.ApiClient
+import com.smartthings.sdk.client.methods.SubscriptionsApi
+import com.smartthings.sdk.client.models.DeviceSubscriptionDetail
+import com.smartthings.sdk.client.models.SubscriptionRequest
+import com.smartthings.sdk.client.models.SubscriptionSource
+import com.smartthings.sdk.smartapp.core.Response
+import com.smartthings.sdk.smartapp.core.extensions.UpdateHandler
+import com.smartthings.sdk.smartapp.core.models.ConfigEntry
+import com.smartthings.sdk.smartapp.core.models.ExecutionRequest
+import com.smartthings.sdk.smartapp.core.models.ExecutionResponse
+import com.smartthings.sdk.smartapp.core.models.UpdateResponseData
 
 class Update(var api: ApiClient) : UpdateHandler {
 

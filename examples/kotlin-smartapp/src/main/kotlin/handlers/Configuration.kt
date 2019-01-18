@@ -1,8 +1,8 @@
 package app.handlers
 
-import smartthings.sdk.smartapp.core.Response
-import smartthings.sdk.smartapp.core.extensions.ConfigurationHandler
-import smartthings.sdk.smartapp.core.models.*
+import com.smartthings.sdk.smartapp.core.Response
+import com.smartthings.sdk.smartapp.core.extensions.ConfigurationHandler
+import com.smartthings.sdk.smartapp.core.models.*
 
 // Create SectionSetting blocks for user later
 // With "apply", we can create and configure the SectionSetting() in one statement
