@@ -3,7 +3,7 @@ if (!JavaVersion.current().java8Compatible) {
 }
 
 allprojects {
-    group 'smartthings.sdk'
+    group 'com.smartthings.sdk'
     version = rootProject.file('version.txt').text.trim()
     apply from: rootProject.file('gradle/dependencies.gradle')
 
