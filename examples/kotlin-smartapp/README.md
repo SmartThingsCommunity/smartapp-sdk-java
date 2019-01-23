@@ -20,10 +20,10 @@ This sample demonstrates a simple [Kotlin](https://kotlinlang.org/)-based server
 
 From the root project directory:
 
-./gradlew examples:kotlin-smartapp:compileJava
+`./gradlew examples:kotlin-smartapp:compileJava`
 
 ## Running
 
 From the root project directory:
 
-./gradlew examples:kotlin-smartapp:run
+`./gradlew examples:kotlin-smartapp:run`
