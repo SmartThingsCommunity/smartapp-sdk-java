@@ -64,6 +64,7 @@ class AppConfigurationHandlerSpec extends Specification {
                 .nextPageId('finish')
             .sections([new Section()
                 .settings([new DeviceSetting()
+                    .id("selectedSwitches")
                     .name('Select a device')
                     .description('Tap to select')
                     .type(SettingType.DEVICE)
