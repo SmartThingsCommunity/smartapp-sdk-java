@@ -1,8 +1,7 @@
-# java-ratpack-guice-smartapp
+# java-springboot-smartapp
 
 This sample demonstrates a simple [Java](https://www.oracle.com/java/) server using
-[Ratpack](https://ratpack.io) as a web server and [Google Guice](https://github.com/google/guice))
-for dependency injection.
+[Spring Boot](https://spring.io).
 
 ## Requirements
 
@@ -17,12 +16,14 @@ for dependency injection.
 * Samsung account
 * App created on the [developer workspace](https://devworkspace.developer.samsung.com/smartthingsconsole/iotweb/site/index.html)
 
+## Building
+
 From the root project directory:
 
-`./gradlew examples:java-ratpack-guice-smartapp:compileJava`
+`./gradlew examples:java-springboot-smartapp:compileJava`
 
 ## Running
 
 From the root project directory:
 
-`./gradlew examples:java-ratpack-guice-smartapp:run`
+`./gradlew examples:java-springboot-smartapp:bootRun`
