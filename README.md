@@ -12,7 +12,7 @@ To learn more about what a SmartApp is and how you can create interesting automa
 
 ## What's in this SDK?
 ### Modules
-#### [smartapp-core](/smartapp-core) ([Documentation](/smartapp-core/README.md)) [![pipeline status](/../badges/master/pipeline.svg?job=master_build_core)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=master_build_core)](/../commits/master)
+#### [smartapp-core](/smartapp-core) ([Documentation](smartapp-core/README.md)) [![pipeline status](/../badges/master/pipeline.svg?job=master_build_core)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=master_build_core)](/../commits/master)
 Core SmartApp framework. Provides abilities for defining a SmartApp that could be used in many environments - AWS Lambda / Dropwizard / Ratpack / etc
 
 #### [smartthings-client](/smartthings-client) (Documentation) [![pipeline status](/../badges/master/pipeline.svg?job=master_build_client)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=master_build_client)](/../commits/master)
@@ -22,6 +22,9 @@ An API library that provides useful utilities for working with the Subscription 
 
 ##### [smartapp-guice](/smartapp-guice) (Documentation) [![pipeline status](/../badges/master/pipeline.svg?job=master_build_guice)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=master_build_guice)](/../commits/master)
 An extension library that provides support for building a SmartApp with Guice dependency injection.
+
+##### [smartapp-spring](/smartapp-spring) ([Documentation](smartapp-spring/README.md)) [![pipeline status](/../badges/master/pipeline.svg?job=master_build_spring)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=master_build_spring)](/../commits/master)
+An extension library that provides support for building a SmartApp with Spring dependency injection.
 
 ##### smartapp-dropwizard-auth (coming soon)
 An extension library that provides mechanisms for verifying SmartApp http signatures in a Dropwizard project.

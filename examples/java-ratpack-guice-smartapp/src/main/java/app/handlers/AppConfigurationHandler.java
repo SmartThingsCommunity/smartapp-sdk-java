@@ -45,6 +45,7 @@ public class AppConfigurationHandler implements ConfigurationHandler {
                 page.setNextPageId(FINISH.pageId);
                 page.setName("This is the first configuration page");
                 DeviceSetting deviceSetting = new DeviceSetting();
+                deviceSetting.setId("selectedSwitches");
                 deviceSetting.setName("Select a device");
                 deviceSetting.setDescription("Tap to select");
                 deviceSetting.setType(SettingType.DEVICE);
