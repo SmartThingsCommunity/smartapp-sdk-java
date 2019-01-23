@@ -40,6 +40,9 @@ This Kotlin example implements the Java `smartapp-core` library with a simple [K
 #### [java-ratpack-guice-smartapp](examples/java-ratpack-guice-smartapp) ([Documentation](examples/java-ratpack-guice-smartapp/README.md)) ![java-logo](docs/java-logo.png) ![ratpack-logo](docs/ratpack-logo.png) [![pipeline status](/../badges/master/pipeline.svg?job=master_build_examples_java_ratpack_guice)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=master_build_examples_java_ratpack_guice)](/../commits/master)
 This Java example implements the Java `smartapp-core` library with a Ratpack server and uses Guice for dependency managment.
 
+#### [java-spring-smartapp](examples/java-spring-smartapp) ([Documentation](examples/java-spring-smartapp/README.md)) ![java-logo](docs/java-logo.png) ![spring-logo](docs/spring-logo.png) [![pipeline status](/../badges/master/pipeline.svg?job=master_build_examples_java_spring)](/../pipelines) [![coverage report](/../badges/master/coverage.svg?job=master_build_examples_java_spring)](/../commits/master)
+This Java example implements the Java `smartapp-core` library using Spring Boot.
+
 #### Getting Started
 
 Take a quick look at how SmartApps are declared in various languages.
