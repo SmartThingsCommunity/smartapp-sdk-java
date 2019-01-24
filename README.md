@@ -1,9 +1,13 @@
-# smartthings-sdk ![SmartThings](/docs/smartthings-logo.png) ![Java](/docs/java-logo.png)
+# SmartThings SmartApp SDK Java ![SmartThings](/docs/smartthings-logo.png) ![Java](/docs/java-logo.png)
 
-A set of JVM libraries for building SmartApps.
+A set of JVM libraries for building **webhook** and **AWS Lambda** SmartApps, and interacting with the public SmartThings REST API.
 
 ## What is a SmartApp?
 SmartApps are an example of a [SmartThings Automation](https://smartthings.developer.samsung.com/develop/getting-started/automation.html). Automations allow users to control the SmartThings ecosystem without manual intervention. Creating a SmartApp allows you to control and get status notifications from SmartThings devices using the [SmartThings REST API](https://smartthings.developer.samsung.com/develop/api-ref/st-api.html).
+
+**Webhook** SmartApps are any publicly-accessible web server that will receive a POST request payload. 
+
+**AWS Lambda** SmartApps are hosted in the Amazon Web Services cloud and are invoked by **ARN** instead of a public-DNS address.
 
 ![automation smartapp](https://smartthings.developer.samsung.com/develop/getting-started/img/automation_smartapp.png)
 
