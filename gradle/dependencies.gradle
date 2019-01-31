@@ -71,11 +71,7 @@ ext.deps = [
         'jacksonJsr310': 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.8.9',
         'oltuOauth2'   : 'org.apache.oltu.oauth2:org.apache.oltu.oauth2.client:1.0.1'
     ],
-    'core'     : [
-        'smartappsModels': "smartthings:smartapps.v1-models:${versions.librarian}",
-    ],
     'client'   : [
-        'api'            : "smartthings:api.smartthings.com.v1:${versions.librarian}",
         'retrofitRxJava' : "com.squareup.retrofit2:adapter-rxjava:2.4.0",
         'retrofitJackson': "com.squareup.retrofit2:converter-jackson:${versions.retrofit}"
     ],

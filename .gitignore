@@ -11,6 +11,10 @@ fw/*
 *.ipr
 *.iws
 node_modules
-/.project
+.project
+.settings
+.classpath
+/.vscode
 .gradle/
 **/out
+bin

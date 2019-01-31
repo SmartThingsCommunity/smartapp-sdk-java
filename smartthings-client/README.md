@@ -2,33 +2,57 @@
 
 Interact with the SmartThings public REST API with this _Java & Android-compatible_ client library.
 
-## Overview
+## Prerequisites
+
+* Java 1.8+
+* SmartThings developer account
+
+## Adding the library to your build
+
+Include the `smartthings-client` Maven dependency:
+
+```xml
+<dependency>
+    <groupId>com.smartthings.sdk</groupId>
+    <artifactId>smartthings-client</artifactId>
+    <version>0.0.1</version>
+</dependency>
+```
+
+If you're using Gradle:
+
+```gradle
+dependencies {
+    compile 'com.smartthings.sdk:smartthings-client:0.0.1'
+}
+```
+
+If you do not use Maven or Gradle, jars can be downloaded from the
+[central Maven repository](https://search.maven.org/search?q=g:com.smartthings.sdk%20a:smartthings-client).
+
+## Getting Started
+
+### Overview
 
 > NOTE: this project is in early stages of development and is feature-incomplete
 
-This library aims to make interacting with the SmartThings API easy and intuitive by providing: 
+This library aims to make interacting with the SmartThings API easy and intuitive by providing:
 * request/response models
 * convenience methods
 * handling authorization tokens
 
 If you have feature requests, suggestions, comments, or questions, please feel free to open an issue and start a discussion!
 
-### Technologies used
+Technologies used
 
 * Code generation v2 by Swagger
 * Feign by Netflix OSS (API methods)
-* Jackson by FastXML (models) 
+* Jackson by FastXML (models)
 
-## Developers
-
-### Requirements
-
-* Java 1.8+
-* SmartThings developer account
-
-#### Android usage
+### Android Notes
 
 This client library can be used in Android with SDK 25+
+
 * `compileSdkVersion 25`
 * `buildToolsVersion '25.0.2'`
 * `minSdkVersion 14`
@@ -36,46 +60,33 @@ This client library can be used in Android with SDK 25+
 * `sourceCompatibility 1.8`
 * `targetCompatibility 1.8`
 
-### Installation
+### Basic Examples
 
-More information on this topic is coming when the first release is published to a repository.
+#### Finding Switches
 
-#### Code generation
-
-By default, the necessary models are generated with **swagger-codegen v2** based on the public specification. If you'd like, you can overwrite the existing `resources/st-api.yml`.
-
-### Usage
-
-#### Basics
-
-_Figure A_
-1. Create an instance of the ApiClient. 
-2. Build a client for Devices.
-3. List all devices with the capability of Switch.
-
-_Figure B_
-1. Create an instance of the ApiClient. 
-2. Build a client for Subscriptions.
-3. Iterate over all devices authorized by the SmartApp to create event subscriptions.
-
-For more information on the SmartThings API reference (request/response expectations) please [view the API reference documentation](https://smartthings.developer.samsung.com/docs/api-ref/st-api.html).  
-
-_Fig. A_ List all Switch devices 
 ```kotlin
 // Build API client
 val api = ApiClient()
+
+// Build a client for Devices
 val devicesApi = api.buildClient(DevicesApi::class.java)
+
+// Get and list all devices with the capability of Switch
 val data = it.installData
 val devices = devicesApi.getDevices(data.authToken, mapOf("capabilities" to listOf("switch")))
 println(devices)
 ```
 
-_Fig. B_ Subscribe to an event for all devices authorized for a SmartApp 
+#### Subscriptions
+
+For more information on the SmartThings API reference (request/response expectations) please [view the API reference documentation](https://smartthings.developer.samsung.com/docs/api-ref/st-api.html).
+
 ```kotlin
 // In the context of a SmartApp LIFECYCLE event (INSTALL or UPDATE)
 
 // Build API client
 val api = ApiClient()
+// Build a client for Subscriptions
 val subscriptionsApi = api.buildClient(SubscriptionsApi::class.java)
 val auth = "Bearer ${this.authToken}"
 
@@ -87,23 +98,41 @@ subscriptionsApi.deleteAllSubscriptions(this.installedApp.installedAppId, auth, 
 val devices = this.installedApp.config["selectedSwitches"]
 devices?.forEach { switchesConfig ->
     if (switchesConfig.valueType == ConfigEntry.ValueTypeEnum.DEVICE) {
-        val deviceId = switchesConfig.deviceConfig.deviceId
-        val componentId = switchesConfig.deviceConfig.componentId
         val subscriptionRequest = SubscriptionRequest().apply {
             sourceType = SubscriptionSource.DEVICE
             device = DeviceSubscriptionDetail().apply {
-                this.deviceId = deviceId
-                this.componentId = componentId
-                this.capability = "switch"
-                this.attribute = "switch"
-                this.isStateChangeOnly = true
-                this.value = "*"
+                deviceId = switchesConfig.deviceConfig.deviceId
+                componentId = switchesConfig.deviceConfig.componentId
+                capability = "switch"
+                attribute = "switch"
+                stateChangeOnly = true
+                value = "*"
             }
         }
-        
+
         // Create subscription for the device
         val subscription = subscriptionsApi.saveSubscription(this.installedApp.installedAppId, null, subscriptionRequest)
         println("Creating subscription for ${subscription.id}")
     }
 }
 ```
+
+## More about SmartThings
+
+If you are not familiar with SmartThings, we have
+[extensive on-line documentation](https://smartthings.developer.samsung.com/develop/index.html).
+
+To create and manage your services and devices on SmartThings, create an account in the
+[developer workspace](https://devworkspace.developer.samsung.com/).
+
+The [SmartThings Community](https://community.smartthings.com/c/developers/) is a good place share and
+ask questions.
+
+There is also a [SmartThings reddit community](https://www.reddit.com/r/SmartThings/) where you
+can read and share information.
+
+## License and Copyright
+
+Licensed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+
+Copyright 2019 SmartThings, Inc.

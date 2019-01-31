@@ -18,6 +18,7 @@ apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'org.ysb33r.vfs'
 apply plugin: 'org.hidetake.swagger.generator'
+apply plugin: 'eclipse'
 apply from: rootProject.file('gradle/convention.gradle')
 apply from: rootProject.file('gradle/publish-jar.gradle')
 apply from: rootProject.file('gradle/dependencies.gradle')

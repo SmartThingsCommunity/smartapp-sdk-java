@@ -1,11 +1,11 @@
-# smartapp-spring
+# smartapp-guice
 
-This is a simple library to make declaring Smart App lifecycle handlers as Spring components easy.
+This is a simple library to make declaring Smart App lifecycle handlers as Google Guice components easy.
 
 ## Prerequisites
 
 * Java 1.8+
-* Spring 4+
+* Google Guice 4.2+
 * [smartapp-core](../smartapp-core)
 * SmartThings developer account
 
@@ -16,7 +16,7 @@ Include the `smartapp-core` Maven dependency:
 ```xml
 <dependency>
     <groupId>com.smartthings.sdk</groupId>
-    <artifactId>smartapp-spring</artifactId>
+    <artifactId>smartapp-guice</artifactId>
     <version>0.0.1</version>
 </dependency>
 ```
@@ -25,24 +25,24 @@ If you're using Gradle:
 
 ```gradle
 dependencies {
-    compile 'com.smartthings.sdk:smartapp-spring:0.0.1'
+    compile 'com.smartthings.sdk:smartapp-guice:0.0.1'
 }
 ```
 
 If you do not use Maven or Gradle, jars can be downloaded from the
-[central Maven repository](https://search.maven.org/search?q=g:com.smartthings.sdk%20a:smartapp-spring).
+[central Maven repository](https://search.maven.org/search?q=g:com.smartthings.sdk%20a:smartapp-guice).
 
 ## Getting Started
 
 This simple library adds to smartapp-core by giving you the ability to create a `SmartAppDefinition`
-using handlers defined as components. To do this, you simply call `SpringSmartAppDefinition.of`
-and give it your `ApplicationContext`.
+using handlers defined as Guice beans. To do this, you can use `Guice.smartapp` to build an instance
+of `SmartAppDefinition` using your Guice module.
 
 ```java
-SmartAppDefinition smartAppDefinition = SpringSmartAppDefinition.of(applicationContext);
+SmartAppDefinition smartAppDefinition = Guice.smartapp(bindings -> bindings.module(appModule));
 ```
 
-For a complete example, see [Java Spring Boot example SmartApp](/examples/java-springboot-smartapp).
+For a complete example, see the [Java Ratpack Guice example SmartApp](/examples/java-ratpack-guice-smartapp).
 
 ## More about SmartThings
 
