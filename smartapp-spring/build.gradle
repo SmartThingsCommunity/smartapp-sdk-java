@@ -1,5 +1,6 @@
 plugins {
     id 'groovy'
+    id 'eclipse'
 }
 
 apply from: rootProject.file('gradle/convention.gradle')

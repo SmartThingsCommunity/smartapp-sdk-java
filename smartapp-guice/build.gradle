@@ -1,4 +1,5 @@
 apply plugin: 'groovy'
+apply plugin: 'eclipse'
 apply from: rootProject.file('gradle/convention.gradle')
 apply from: rootProject.file('gradle/publish-jar.gradle')
 

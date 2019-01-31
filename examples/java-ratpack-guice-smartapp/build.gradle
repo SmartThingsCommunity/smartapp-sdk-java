@@ -13,6 +13,7 @@ plugins {
     id 'groovy'
     id 'application'
     id 'idea'
+    id 'eclipse'
 }
 
 apply plugin: 'io.ratpack.ratpack-java'
