@@ -10,22 +10,13 @@ allprojects {
     repositories {
         mavenLocal()
         jcenter()
-        maven {
-            credentials {
-                username smartThingsUserName
-                password smartThingsPassword
-            }
-            url "https://smartthings.jfrog.io/smartthings/libs-release-local"
-        }
-        maven {
-            credentials {
-                username smartThingsUserName
-                password smartThingsPassword
-            }
-            url "https://smartthings.jfrog.io/smartthings/libs-snapshot-local"
-        }
-        maven {
-            url "http://dl.bintray.com/smartthingsoss/maven"
+    }
+
+    task downloadDependencies() {
+        description 'Download all dependencies to the Gradle cache'
+        doLast {
+            configurations.findAll { it.canBeResolved }.files
         }
     }
+
 }

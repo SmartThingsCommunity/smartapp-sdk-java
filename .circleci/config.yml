@@ -1,0 +1,216 @@
+version: 2.1
+
+references:
+    workspace_root: &workspace_root
+                        /tmp/workspace
+    attach_workspace: &attach_workspace
+        attach_workspace:
+            at: *workspace_root
+    restore_source: &restore_source
+        restore_cache: # hopefully restore cache of git repository to save time as the project grows
+            name: Restoring git repository
+            keys:
+                - source-v1-{{ .Branch }}-{{ .Revision }}
+                - source-v1-{{ .Branch }}-
+                # omit source-v1 because tags will not be able to checkout
+    restore_gradle_wrapper: &restore_gradle_wrapper
+        restore_cache:
+            name: Restoring gradle wrapper
+            keys:
+                - gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+    restore_gradle_cache: &restore_gradle_cache
+        restore_cache:
+            name: Restoring gradle cache
+            keys:
+                - gradle-cache-{{ checksum "build.gradle" }}
+                - gradle-cache- # fallback, if checksum fails
+    restore_gradle_build_cache: &restore_gradle_build_cache
+        restore_cache:
+            name: Restoring gradle build cache
+            keys:
+                - gradle-build-caches-{{ .Revision }}
+                - gradle-build-caches- # fallback, if checksum fails
+
+
+executors:
+    dobbie:
+        docker:
+            - image: circleci/openjdk:8-jdk
+        working_directory: ~/SmartThingsCommunity/smartapp-sdk-java
+        environment:
+            JVM_OPTS: -Xmx4096M
+            TERM:     dumb
+
+jobs:
+    'Checkout':
+        executor: dobbie
+        steps:
+            - checkout
+            - save_cache: # save the checked out repository branch/revision
+                  key: source-v1-{{ .Branch }}-{{ .Revision }}
+                  paths:
+                      - ".git"
+            - save_cache:
+                  key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+                  paths:
+                      - ~/SmartThingsCommunity/smartapp-sdk-java
+
+    'Dependencies':
+        executor: dobbie
+        steps:
+            - *restore_source
+            - checkout
+            - *restore_gradle_wrapper
+            - *restore_gradle_cache
+            - *restore_gradle_build_cache
+            - run:
+                  name:    Downloading Dependencies
+                  command: ./gradlew --max-workers 2 downloadDependencies
+            - save_cache:
+                  name: Caching gradle wrapper
+                  paths:
+                      - ~/.gradle/wrapper/
+                  key:  gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+            - save_cache:
+                  name: Caching gradle cache
+                  paths:
+                      - ~/.gradle/caches
+                  key:  gradle-cache-{{ checksum "build.gradle" }}
+
+    'Build':
+        executor: dobbie
+        steps:
+            - *attach_workspace
+            - checkout
+            - *restore_source
+            - *restore_gradle_wrapper
+            - *restore_gradle_cache
+            - *restore_gradle_build_cache
+            - run:
+                  name:    Gradle Build
+                  command: ./gradlew build --no-daemon --parallel --max-workers=2
+            - run:
+                  name:    Collecting gradle build caches
+                  command: |
+                           mkdir -p ~/gradle-build-caches
+                           [ -d ~/.gradle/caches ] &&
+                           [ -n "$(ls -Ad ~/.gradle/caches/build-cache-* 2>/dev/null)" ] &&
+                           mv ~/.gradle/caches/build-cache-* ~/gradle-build-caches || true
+                  when:    always
+            - save_cache:
+                  paths:
+                      - ~/gradle-build-caches
+                  key:      gradle-build-caches-{{ .Revision }}
+                  when:     always
+            # TODO: figure out how to use a glob to match all libs instead of doing these separately
+            - store_artifacts:
+                  name:        Uploading smartapp-core artifacts
+                  path:        smartapp-core/build/libs/
+                  destination: /libs/smartapp-core/
+            - store_artifacts:
+                  name:        Uploading smartapp-guice artifacts
+                  path:        smartapp-guice/build/libs/
+                  destination: /libs/smartapp-guice/
+            - store_artifacts:
+                  name:        Uploading smartapp-spring artifacts
+                  path:        smartapp-spring/build/libs/
+                  destination: /libs/smartapp-spring/
+            - store_artifacts:
+                  name:        Uploading smartthings-client artifacts
+                  path:        smartthings-client/build/libs/
+                  destination: /libs/smartthings-client/
+            - store_test_results:
+                  name:        Uploading smartapp-core test report
+                  path:        smartapp-core/build/test-results/*.xml
+
+    'PR check':
+        executor: dobbie
+        steps:
+            - *attach_workspace
+            - checkout
+            - *restore_source
+            - *restore_gradle_wrapper
+            - *restore_gradle_cache
+            - *restore_gradle_build_cache
+            - run:
+                  name:    Perform lint, style, & bug check
+                  command: ./gradlew check -PciBuild=true --parallel --max-workers=2
+
+    'Publish':
+        executor: dobbie
+        steps:
+            - *attach_workspace
+            - checkout
+            - *restore_source
+            - *restore_gradle_wrapper
+            - *restore_gradle_cache
+            - *restore_gradle_build_cache
+            - run:
+                  name:    Publish jars (#TODO)
+                  command: "echo TODO: PUBLISH JARS HERE"
+
+    'Test':
+        executor: dobbie
+        steps:
+            - *attach_workspace
+            - checkout
+            - *restore_source
+            - *restore_gradle_wrapper
+            - *restore_gradle_cache
+            - *restore_gradle_build_cache
+            - run:
+                  name:    Perform all unit tests
+                  command: ./gradlew test -PciBuild=true --parallel --max-workers=2
+            - run:
+                  name:    Generate JaCoCo report
+                  command: ./gradlew -PciBuild=true jacocoTestReport
+            - run:
+                  name:    Upload coverage report to CodeCov
+                  command: bash <(curl -s https://codecov.io/bash)
+
+workflows:
+    'Build':
+        jobs:
+            - 'Checkout':
+                  filters:
+                      tags:
+                          only: /.*/ # ensure this job does not block publishing via tag
+            - 'Dependencies':
+                  requires:
+                      - 'Checkout'
+                  filters:
+                      tags:
+                          only: /.*/ # ensure this job does not block publishing via tag
+            - 'PR check':
+                  requires:
+                      - 'Dependencies'
+                  filters:
+                      tags:
+                          ignore: /.*/ # ignore for all tags
+                      branches:
+                          #                          only: /^(?!pull\/).*$/ # only from canonical repository
+                          only: /^pull\/.*$/ # only from forks
+            - 'Build':
+                  requires:
+                      - 'Dependencies'
+                  filters:
+                      tags:
+                          only: /.*/ # ensure this job does not block publishing via tag
+                      branches:
+                          #                          only: /^pull\/.*$/ # only from forks
+                          only: /^(?!pull\/).*$/ # only from canonical repository
+            - 'Test':
+                  requires:
+                      - 'Build'
+                  filters:
+                      branches:
+                          #                          only: /^pull\/.*$/ # only from forks
+                          only: /^(?!pull\/).*$/ # only from canonical repository
+            - 'Publish':
+                  requires:
+                      - 'Build'
+                  filters:
+                      tags:
+                          only: /^v.*/ # allow publish tag matches this regexp
+                      branches:
+                          ignore: /.*/ # ignore all branch builds

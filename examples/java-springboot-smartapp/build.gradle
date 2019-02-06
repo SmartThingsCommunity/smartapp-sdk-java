@@ -21,6 +21,7 @@ apply plugin: 'io.spring.dependency-management'
 
 group = "examples"
 sourceCompatibility = '1.8'
+mainClassName = 'app'
 
 test {
     jacoco {
@@ -30,6 +31,7 @@ test {
 jacocoTestReport {
     reports {
         xml.enabled true
+        html.enabled false
     }
 }
 test.finalizedBy(jacocoTestReport)
