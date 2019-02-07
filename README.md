@@ -1,6 +1,8 @@
-# SmartThings SmartApp SDK Java ![SmartThings](docs/smartthings-logo.png) ![Java](docs/java-logo.png)
+# SmartThings SmartApp SDK Java (Preview) ![SmartThings](docs/smartthings-logo.png) ![Java](docs/java-logo.png)
 
 [![CircleCI](https://circleci.com/gh/SmartThingsCommunity/smartapp-sdk-java/tree/master.svg?style=svg&circle-token=21da1691c64a0b734e55ada5d591b477347a2936)](https://circleci.com/gh/SmartThingsCommunity/smartapp-sdk-java/tree/master) [![codecov](https://codecov.io/gh/SmartThingsCommunity/smartapp-sdk-java/branch/master/graph/badge.svg?token=Zy5sgPRzLd)](https://codecov.io/gh/SmartThingsCommunity/smartapp-sdk-java)
+
+> **Welcome!**  This SDK is currently in _**preview**_ and is not recommended for use in production applications at this time. We welcome your bug reports, feature requests, and contributions.
 
 This SDK includes a set of JVM libraries for building **webhook** and **AWS Lambda** SmartApps, and interacting with
 the public SmartThings REST API.
