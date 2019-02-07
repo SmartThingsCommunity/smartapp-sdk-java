@@ -45,5 +45,6 @@ tasks.withType(FindBugs) {
 jacocoTestReport {
     reports {
         xml.enabled true
+        html.enabled false
     }
 }

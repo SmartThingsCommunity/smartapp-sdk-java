@@ -30,6 +30,7 @@ test {
 jacocoTestReport {
     reports {
         xml.enabled true
+        html.enabled false
     }
 }
 test.finalizedBy(jacocoTestReport)
