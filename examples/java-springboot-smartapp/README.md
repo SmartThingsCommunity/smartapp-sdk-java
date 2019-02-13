@@ -36,6 +36,11 @@ settings:
 
 Once created, self-publish the automation for testing and you will be ready to test it.
 
+### Configure Public Key
+
+Copy the public key created in the previous step into a file called `smartthings_rsa.pub` in `src/main/resources`
+and restart your server (see [Build and Run](#build-and-run) above).
+
 ### Install SmartApp
 
 First, be sure to enable
