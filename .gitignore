@@ -18,3 +18,4 @@ node_modules
 .gradle/
 **/out
 bin
+examples/java-springboot-smartapp/src/main/resources/smartthings_rsa.pub

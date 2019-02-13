@@ -11,7 +11,6 @@ plugins {
     id 'jacoco'
     id 'java'
     id 'groovy'
-    id 'application'
     id 'idea'
     id 'eclipse'
 }
@@ -21,7 +20,6 @@ apply plugin: 'io.spring.dependency-management'
 
 group = "examples"
 sourceCompatibility = '1.8'
-mainClassName = 'app'
 
 test {
     jacoco {
@@ -44,7 +42,7 @@ dependencies {
     implementation deps.projects.smartappspring
     implementation deps.projects.smartthingsclient
     implementation deps.logging.logback
-    compile 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 
     testCompile deps.groovy.all
     testCompile deps.test.spockCore

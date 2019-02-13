@@ -11,6 +11,11 @@ dependencies {
     compile deps.projects.smartappcore
     compile deps.spring.context
     testCompile deps.test.spockCore
+    compile deps.bouncycastle.bcpkix
+    compile deps.httpsig.api
+    compile deps.httpsig.sshJce
+    compile deps.httpsig.sshBc
+    compileOnly deps.spring.servletApi
 }
 
 jacocoTestReport.dependsOn(test)
