@@ -1,6 +1,7 @@
 # SmartThings SmartApp SDK Java (Preview) ![SmartThings](docs/smartthings-logo.png) ![Java](docs/java-logo.png)
 
 <p align="center">
+<a href="https://search.maven.org/search?q=g:%22com.smartthings.sdk%22"><img src="https://img.shields.io/maven-central/v/com.smartthings.sdk/smartapp-core.svg?label=Maven%20Central" /></a>
 <a href="https://circleci.com/gh/SmartThingsCommunity/smartapp-sdk-java/tree/master"><img src="https://circleci.com/gh/SmartThingsCommunity/smartapp-sdk-java/tree/master.svg?style=svg&circle-token=21da1691c64a0b734e55ada5d591b477347a2936" /></a>
 <a href="https://codecov.io/gh/SmartThingsCommunity/smartapp-sdk-java"><img src="https://codecov.io/gh/SmartThingsCommunity/smartapp-sdk-java/branch/master/graph/badge.svg?token=Zy5sgPRzLd"></a>
 <a href="https://snyk.io/test/github/SmartThingsCommunity/smartapp-sdk-java"><img src="https://snyk.io/test/github/SmartThingsCommunity/smartapp-sdk-java/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/SmartThingsCommunity/smartapp-sdk-java" style="max-width:100%;"></a>
@@ -26,26 +27,70 @@ Several artifacts are published to the Maven central repository under the `com.s
   * `smartapp-spring` - Extension library for use with Spring Dependency Injection
 * `smartthings-client` - Library for working with SmartThings APIs
 
-Include any artifacts you need. Here is a Maven example for the core library:
+Import the library dependencies as needed:
+
+<details>
+    <summary>Apache Maven</summary>
 
 ```xml
 <dependency>
-    <groupId>com.smartthings.sdk</groupId>
-    <artifactId>smartapp-core</artifactId>
-    <version>0.0.1</version>
+  <groupId>com.smartthings.sdk</groupId>
+  <artifactId>smartapp-core</artifactId>
+  <version>0.0.1-PREVIEW</version>
+  <type>pom</type>
 </dependency>
 ```
 
-And here is a Gradle example:
+</details>
 
-```gradle
-dependencies {
-    compile 'com.smartthings.sdk:smartapp-core:0.0.1'
-}
+<details>
+    <summary>Gradle Groovy DSL</summary>
+
+```groovy
+implementation 'com.smartthings.sdk:smartapp-core:0.0.1-PREVIEW'
+```
+    
+</details>
+
+<details>
+    <summary>Gradle Kotlin DSL</summary>
+    
+```kotlin
+compile("com.smartthings.sdk:smartapp-core:0.0.1-PREVIEW")
 ```
 
-If you do not use Maven or Gradle, jars can be downloaded from the
-[central Maven repository](https://search.maven.org/search?q=g:com.smarrthings.sdk).
+</details>
+
+<details>
+    <summary>Scala SBT</summary>
+    
+```scala
+libraryDependencies += "com.smartthings.sdk" % "smartapp-core" % "0.0.1-PREVIEW"
+```
+
+</details>
+
+<details>
+    <summary>Apache Ivy</summary>
+    
+```xml
+<dependency org="com.smartthings.sdk" name="smartapp-core" rev="0.0.1-PREVIEW" />
+```
+
+</details>
+
+<details>
+    <summary>Groovy Grapes</summary>
+    
+```groovy
+@Grapes(
+  @Grab(group='com.smartthings.sdk', module='smartapp-core', version='0.0.1-PREVIEW')
+)
+```
+
+</details><br>
+
+If you prefer, the artifacts can be downloaded directly from [Maven Central](https://search.maven.org/search?q=g:com.smarrthings.sdk).
 
 ## Getting Started
 
