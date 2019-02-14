@@ -4,6 +4,7 @@
 <a href="https://circleci.com/gh/SmartThingsCommunity/smartapp-sdk-java/tree/master"><img src="https://circleci.com/gh/SmartThingsCommunity/smartapp-sdk-java/tree/master.svg?style=svg&circle-token=21da1691c64a0b734e55ada5d591b477347a2936" /></a>
 <a href="https://codecov.io/gh/SmartThingsCommunity/smartapp-sdk-java"><img src="https://codecov.io/gh/SmartThingsCommunity/smartapp-sdk-java/branch/master/graph/badge.svg?token=Zy5sgPRzLd"></a>
 <a href="https://snyk.io/test/github/SmartThingsCommunity/smartapp-sdk-java"><img src="https://snyk.io/test/github/SmartThingsCommunity/smartapp-sdk-java/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/SmartThingsCommunity/smartapp-sdk-java" style="max-width:100%;"></a>
+    <a href="https://smartthingsdev.slack.com/messages/CG8D8PS6B"><img src="https://badgen.net/badge//smartthingsdev?icon=slack" /></a>
 </p>
 
 > **Welcome!**  This SDK is currently in _**preview**_ and is not recommended for use in production applications at this time. We welcome your bug reports, feature requests, and contributions.
