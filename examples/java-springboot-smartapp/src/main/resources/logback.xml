@@ -5,14 +5,10 @@
         </encoder>
     </appender>
 
-    <root level="trace">
+    <root level="INFO">
         <appender-ref ref="STDOUT"/>
     </root>
 
-    <logger name="javax.management" level="INFO"/>
-    <logger name="org.hibernate" level="INFO"/>
-    <logger name="org.springframework" level="INFO"/>
-    <logger name="org.apache.catalina" level="INFO"/>
-    <logger name="org.apache.coyote" level="INFO"/>
-    <logger name="org.apache.tomcat" level="INFO"/>
+    <logger name="com.smartthings.sdk" level="TRACE"/>
+    <logger name="app" level="TRACE"/>
 </configuration>

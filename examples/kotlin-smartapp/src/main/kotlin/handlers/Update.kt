@@ -12,7 +12,7 @@ import com.smartthings.sdk.smartapp.core.models.ExecutionRequest
 import com.smartthings.sdk.smartapp.core.models.ExecutionResponse
 import com.smartthings.sdk.smartapp.core.models.UpdateResponseData
 
-class Update(var api: ApiClient) : UpdateHandler {
+class Update(val api: ApiClient) : UpdateHandler {
 
     override fun handle(request: ExecutionRequest?): ExecutionResponse {
         // If not null, execute and return ExecutionResponse()

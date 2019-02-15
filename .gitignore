@@ -18,3 +18,4 @@ node_modules
 .gradle/
 **/out
 bin
+smartthings_rsa.pub

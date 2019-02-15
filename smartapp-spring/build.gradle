@@ -10,7 +10,14 @@ apply from: rootProject.file('gradle/publish-jar.gradle')
 dependencies {
     compile deps.projects.smartappcore
     compile deps.spring.context
+    compile deps.bouncycastle.bcpkix
+    compile deps.httpsig.api
+    compile deps.httpsig.sshJce
+    compile deps.httpsig.sshBc
+    compileOnly deps.spring.servletApi
+
     testCompile deps.test.spockCore
+    testCompile deps.spring.servletApi
 }
 
 jacocoTestReport.dependsOn(test)
