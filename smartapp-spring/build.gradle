@@ -16,8 +16,8 @@ dependencies {
     compile deps.httpsig.sshBc
     compileOnly deps.spring.servletApi
 
-    testCompile deps.test.spockCore
-    testCompile deps.spring.servletApi
+    testImplementation deps.test.spockCore
+    testImplementation deps.spring.servletApi
 }
 
 jacocoTestReport.dependsOn(test)

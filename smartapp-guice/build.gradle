@@ -4,11 +4,11 @@ apply from: rootProject.file('gradle/convention.gradle')
 apply from: rootProject.file('gradle/publish-jar.gradle')
 
 dependencies {
-    compile deps.projects.smartappcore
-    compile deps.di.guice
-    testCompile deps.aws.lambdaJavaCore
-    testCompile deps.aws.lambdaJavaLog4j
-    testCompile deps.test.spockCore
+    implementation deps.projects.smartappcore
+    implementation deps.di.guice
+    testImplementation deps.aws.lambdaJavaCore
+    testImplementation deps.aws.lambdaJavaLog4j
+    testImplementation deps.test.spockCore
     testRuntime deps.test.cglibNodep
     testRuntime deps.test.objenesis
 }

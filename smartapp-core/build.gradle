@@ -30,7 +30,7 @@ dependencies {
     compile deps.swagger.v2.annotations
     compile deps.logging.slf4j
     compile deps.serialize.jackson.databind
-    testCompile deps.test.spockCore
+    testImplementation deps.test.spockCore
     testRuntime deps.test.cglibNodep
     testRuntime deps.test.objenesis
 }

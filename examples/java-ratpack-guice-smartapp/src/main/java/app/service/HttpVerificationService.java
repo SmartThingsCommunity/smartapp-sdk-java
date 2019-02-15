@@ -1,6 +1,9 @@
-package com.smartthings.sdk.smartapp.spring;
+package app.service;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.security.KeyFactory;
 import java.security.KeyPair;
@@ -10,11 +13,8 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPublicKeySpec;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import org.bouncycastle.crypto.params.RSAKeyParameters;
@@ -22,8 +22,6 @@ import org.bouncycastle.crypto.util.PublicKeyFactory;
 import org.bouncycastle.openssl.PEMParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.Resource;
-import org.springframework.util.FileCopyUtils;
 
 import net.adamcin.httpsig.api.Authorization;
 import net.adamcin.httpsig.api.Challenge;
@@ -35,6 +33,8 @@ import net.adamcin.httpsig.api.Verifier;
 import net.adamcin.httpsig.ssh.jce.KeyFormat;
 import net.adamcin.httpsig.ssh.jce.SSHKey;
 import net.adamcin.httpsig.ssh.jce.UserFingerprintKeyId;
+import ratpack.http.Headers;
+import ratpack.http.Request;
 
 
 /**
@@ -48,25 +48,20 @@ public class HttpVerificationService {
 
     private final String publicKey;
 
-    public HttpVerificationService(Resource publicKeyResource) {
-        if (!publicKeyResource.exists()) {
+    public HttpVerificationService() {
+        InputStream in = this.getClass().getResourceAsStream("/smartthings_rsa.pub");
+        if (in == null) {
             // This is not an error until we are past the PING step.
-            LOG.info("No public key yet; will only accept PING lifecycle requests." +
-                    " Create Automation in Developer workspace to continue.");
+            LOG.info("no public key yet; will only accept PING lifecycle requests");
             publicKey = null;
             return;
         }
 
-        try {
-            LOG.debug("Using public key file: " + publicKeyResource.getFilename());
-            publicKey = new String(FileCopyUtils.copyToByteArray(publicKeyResource.getInputStream()), "UTF-8");
-        } catch (IOException ioException) {
-            LOG.error("Could not read public key file", ioException);
-            throw new RuntimeException("Could not read public key file", ioException);
-        }
+        LOG.debug("Looking for public key file: smartthings_rsa.pub");
+        publicKey = new BufferedReader(new InputStreamReader(in)).lines().collect(Collectors.joining("\n"));
     }
 
-    public boolean verify(HttpServletRequest request) {
+    public boolean verify(Request request) {
         if (publicKey == null) {
             LOG.error("Public key file not set up properly. Please see README (Configure Public Key) for"
                     + " directions and don't forget to restart this server.");
@@ -79,14 +74,15 @@ public class HttpVerificationService {
         return verified;
     }
 
-    private boolean verifyRequest(HttpServletRequest request) {
+    private boolean verifyRequest(Request request) {
         KeyPair pair = getRSAKeyPair();
         DefaultKeychain keychain = new DefaultKeychain();
         KeyId keyId = new UserFingerprintKeyId("SmartThings");
         keychain.add(new SSHKey(KeyFormat.SSH_RSA, pair));
         Verifier verifier = new DefaultVerifier(keychain, keyId);
+        Headers headers = request.getHeaders();
 
-        Authorization authorization = Authorization.parse(request.getHeader("Authorization"));
+        Authorization authorization = Authorization.parse(headers.get("Authorization"));
 
         if (authorization == null) {
             LOG.error("Request contains no authorization header");
@@ -94,21 +90,21 @@ public class HttpVerificationService {
         }
 
         Challenge challenge = new Challenge("<preemptive>", authorization.getHeaders(),
-            Collections.unmodifiableList(Arrays.asList(authorization.getAlgorithm())));
+                Collections.unmodifiableList(Arrays.asList(authorization.getAlgorithm())));
 
         Set<String> signedHeaders = authorization.getHeaders().stream()
-            .map(String::toLowerCase)
-            .collect(Collectors.toSet());
+                .map(String::toLowerCase)
+                .collect(Collectors.toSet());
 
-        LOG.debug("requestURI: " + request.getRequestURI());
+        LOG.debug("path: " + request.getPath());
+        LOG.debug("requestURI: " + request.getUri());
 
         RequestContent.Builder content = new RequestContent.Builder()
-            .setRequestTarget(request.getMethod(), request.getRequestURI());
+            .setRequestTarget(request.getMethod().getName(), request.getUri());
 
-        List<String> headers = Collections.list(request.getHeaderNames());
-        headers.stream()
+        headers.getNames().stream()
             .filter(header -> signedHeaders.contains(header.toLowerCase()))
-            .forEach(header -> content.addHeader(header, request.getHeader(header)));
+            .forEach(header -> content.addHeader(header, headers.get(header)));
 
         return verifier.verify(challenge, content.build(), authorization);
     }
