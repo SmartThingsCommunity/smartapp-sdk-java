@@ -45,10 +45,14 @@ dependencies {
     implementation deps.projects.smartappguice
     implementation deps.logging.logback
     implementation deps.di.guice
-    compile ratpack.dependency('guice')
+    implementation ratpack.dependency('guice')
+    implementation deps.bouncycastle.bcpkix
+    implementation deps.httpsig.api
+    implementation deps.httpsig.sshJce
+    implementation deps.httpsig.sshBc
 
-    testCompile deps.groovy.all
-    testCompile deps.test.spockCore
+    testImplementation deps.groovy.all
+    testImplementation deps.test.spockCore
 }
 
 jacocoTestReport.dependsOn(test)

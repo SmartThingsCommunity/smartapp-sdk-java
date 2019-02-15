@@ -44,8 +44,8 @@ dependencies {
     implementation deps.logging.logback
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
-    testCompile deps.groovy.all
-    testCompile deps.test.spockCore
+    testImplementation deps.groovy.all
+    testImplementation deps.test.spockCore
 }
 
 jacocoTestReport.dependsOn(test)
