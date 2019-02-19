@@ -1,8 +1,11 @@
 package app.routes
 
 import app.handlers.Configuration
+import app.handlers.Install
 import app.handlers.Update
+import app.service.HttpVerificationService
 import io.ktor.application.call
+import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.Route
@@ -11,11 +14,14 @@ import com.smartthings.sdk.client.ApiClient
 import com.smartthings.sdk.client.methods.DevicesApi
 import com.smartthings.sdk.smartapp.core.Response
 import com.smartthings.sdk.smartapp.core.SmartApp
+import com.smartthings.sdk.smartapp.core.models.AppLifecycle
+import com.smartthings.sdk.smartapp.core.models.ExecutionRequest
 import com.smartthings.sdk.smartapp.core.models.EventResponseData
 import com.smartthings.sdk.smartapp.core.models.InstallResponseData
 import com.smartthings.sdk.smartapp.core.models.UninstallResponseData
 
 val api = ApiClient()
+val httpVerificationService = HttpVerificationService()
 
 /**
  * The declaration of the SmartApp handlers.
@@ -28,14 +34,7 @@ val api = ApiClient()
 val smartApp: SmartApp = SmartApp.of { spec ->
     spec
         .configuration(Configuration())
-        .install {
-            val devicesApi = api.buildClient(DevicesApi::class.java)
-            val data = it.installData
-            val devices = devicesApi.getDevices(data.authToken, mapOf("capabilities" to listOf("switch")))
-            println(devices)
-
-            Response.ok(InstallResponseData())
-        }
+        .install(Install(api))
         .update(Update(api))
         .event {
             val data = it.eventData
@@ -70,6 +69,11 @@ fun Route.smartAppExecution() {
          *     Kotlin can automatically infer the types required,
          *     making this code much more succinct.
          */
-        call.respond(smartApp.execute(call.receive()))
+        val executionRequest: ExecutionRequest = call.receive()
+        if (executionRequest.lifecycle == AppLifecycle.PING || httpVerificationService.verify(call.request)) {
+            call.respond(smartApp.execute(executionRequest))
+        } else {
+            call.respond(HttpStatusCode.Unauthorized, "unable to verify request")
+        }
     }
 }

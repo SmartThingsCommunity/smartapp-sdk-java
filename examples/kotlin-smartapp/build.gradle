@@ -52,6 +52,11 @@ dependencies {
     implementation deps.kotlin.ktorServerNetty
     implementation deps.kotlin.ktorJackson
     implementation deps.logging.logback
+    implementation deps.bouncycastle.bcpkix
+    implementation deps.httpsig.api
+    implementation deps.httpsig.sshJce
+    implementation deps.httpsig.sshBc
+
     testImplementation deps.test.kotlin.ktorServerTestHost
     testImplementation deps.test.kotlin.mockk
 }

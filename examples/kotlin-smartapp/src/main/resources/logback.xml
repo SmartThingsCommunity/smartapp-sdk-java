@@ -5,10 +5,10 @@
         </encoder>
     </appender>
 
-    <root level="trace">
+    <root level="info">
         <appender-ref ref="STDOUT"/>
     </root>
 
-    <logger name="org.eclipse.jetty" level="INFO"/>
-    <logger name="io.netty" level="INFO"/>
+    <logger name="com.smartthings.sdk" level="TRACE"/>
+    <logger name="app" level="TRACE"/>
 </configuration>
