@@ -18,5 +18,8 @@ allprojects {
             configurations.findAll { it.canBeResolved }.files
         }
     }
+}
 
+configure(subprojects.findAll {it.name != 'examples'}) {
+    apply from: rootProject.file('gradle/publish-jar.gradle')
 }
