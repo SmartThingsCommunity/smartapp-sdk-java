@@ -1,4 +1,4 @@
-package app.service;
+package com.smartthings.sdk.smartapp.core.extensions;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,6 +13,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPublicKeySpec;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -33,8 +34,6 @@ import net.adamcin.httpsig.api.Verifier;
 import net.adamcin.httpsig.ssh.jce.KeyFormat;
 import net.adamcin.httpsig.ssh.jce.SSHKey;
 import net.adamcin.httpsig.ssh.jce.UserFingerprintKeyId;
-import ratpack.http.Headers;
-import ratpack.http.Request;
 
 
 /**
@@ -49,7 +48,11 @@ public class HttpVerificationService {
     private final String publicKey;
 
     public HttpVerificationService() {
-        InputStream in = this.getClass().getResourceAsStream("/smartthings_rsa.pub");
+        this("/smartthings_rsa.pub");
+    }
+
+    public HttpVerificationService(String publicKeyPath) {
+        InputStream in = this.getClass().getResourceAsStream(publicKeyPath);
         if (in == null) {
             // This is not an error until we are past the PING step.
             LOG.info("no public key yet; will only accept PING lifecycle requests");
@@ -61,28 +64,32 @@ public class HttpVerificationService {
         publicKey = new BufferedReader(new InputStreamReader(in)).lines().collect(Collectors.joining("\n"));
     }
 
-    public boolean verify(Request request) {
+    public boolean verify(String method, String uri, Map<String, String> headers) {
         if (publicKey == null) {
             LOG.error("Public key file not set up properly. Please see README (Configure Public Key) for"
                     + " directions and don't forget to restart this server.");
             return false;
         }
-        boolean verified = verifyRequest(request);
+        boolean verified = verifyRequest(method, uri, headers);
         if (!verified) {
             LOG.error("Request not verified!");
         }
         return verified;
     }
 
-    private boolean verifyRequest(Request request) {
+    private boolean verifyRequest(String method, String uri, Map<String, String> headers) {
         KeyPair pair = getRSAKeyPair();
         DefaultKeychain keychain = new DefaultKeychain();
         KeyId keyId = new UserFingerprintKeyId("SmartThings");
         keychain.add(new SSHKey(KeyFormat.SSH_RSA, pair));
         Verifier verifier = new DefaultVerifier(keychain, keyId);
-        Headers headers = request.getHeaders();
 
-        Authorization authorization = Authorization.parse(headers.get("Authorization"));
+        String authorizationHeader = headers.get("Authorization");
+        if (authorizationHeader == null) {
+            // Spring lower-cases header names
+            authorizationHeader = headers.get("authorization");
+        }
+        Authorization authorization = Authorization.parse(authorizationHeader);
 
         if (authorization == null) {
             LOG.error("Request contains no authorization header");
@@ -90,21 +97,20 @@ public class HttpVerificationService {
         }
 
         Challenge challenge = new Challenge("<preemptive>", authorization.getHeaders(),
-                Collections.unmodifiableList(Arrays.asList(authorization.getAlgorithm())));
+            Collections.unmodifiableList(Arrays.asList(authorization.getAlgorithm())));
 
         Set<String> signedHeaders = authorization.getHeaders().stream()
-                .map(String::toLowerCase)
-                .collect(Collectors.toSet());
+            .map(String::toLowerCase)
+            .collect(Collectors.toSet());
 
-        LOG.debug("path: " + request.getPath());
-        LOG.debug("requestURI: " + request.getUri());
+        LOG.debug("requestURI: " + uri);
 
         RequestContent.Builder content = new RequestContent.Builder()
-            .setRequestTarget(request.getMethod().getName(), request.getUri());
+            .setRequestTarget(method, uri);
 
-        headers.getNames().stream()
-            .filter(header -> signedHeaders.contains(header.toLowerCase()))
-            .forEach(header -> content.addHeader(header, headers.get(header)));
+        headers.keySet().stream()
+            .filter(headerName -> signedHeaders.contains(headerName.toLowerCase()))
+            .forEach(headerName -> content.addHeader(headerName, headers.get(headerName)));
 
         return verifier.verify(challenge, content.build(), authorization);
     }

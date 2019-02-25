@@ -2,14 +2,12 @@ package app;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.Resource;
-
 import com.smartthings.sdk.smartapp.core.Response;
 import com.smartthings.sdk.smartapp.core.SmartAppDefinition;
+import com.smartthings.sdk.smartapp.core.extensions.HttpVerificationService;
 import com.smartthings.sdk.smartapp.core.extensions.InstallHandler;
 import com.smartthings.sdk.smartapp.core.extensions.PingHandler;
 import com.smartthings.sdk.smartapp.core.extensions.UninstallHandler;
@@ -20,7 +18,6 @@ import com.smartthings.sdk.smartapp.core.models.ExecutionResponse;
 import com.smartthings.sdk.smartapp.core.models.InstallResponseData;
 import com.smartthings.sdk.smartapp.core.models.UninstallResponseData;
 import com.smartthings.sdk.smartapp.core.models.UpdateResponseData;
-import com.smartthings.sdk.smartapp.spring.HttpVerificationService;
 import com.smartthings.sdk.smartapp.spring.SpringSmartAppDefinition;
 
 
@@ -72,8 +69,8 @@ public class AppConfiguration {
     }
 
     @Bean
-    public HttpVerificationService httpVerificationService(@Value("classpath:smartthings_rsa.pub") Resource publicKeyResource) {
-        return new HttpVerificationService(publicKeyResource);
+    public HttpVerificationService httpVerificationService() {
+        return new HttpVerificationService();
     }
 
     @Bean

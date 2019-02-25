@@ -8,10 +8,6 @@ apply from: rootProject.file('gradle/convention.gradle')
 dependencies {
     compile deps.projects.smartappcore
     compile deps.spring.context
-    compile deps.bouncycastle.bcpkix
-    compile deps.httpsig.api
-    compile deps.httpsig.sshJce
-    compile deps.httpsig.sshBc
     compileOnly deps.spring.servletApi
 
     testImplementation deps.test.spockCore
