@@ -46,10 +46,6 @@ dependencies {
     implementation deps.logging.logback
     implementation deps.di.guice
     implementation ratpack.dependency('guice')
-    implementation deps.bouncycastle.bcpkix
-    implementation deps.httpsig.api
-    implementation deps.httpsig.sshJce
-    implementation deps.httpsig.sshBc
 
     testImplementation deps.groovy.all
     testImplementation deps.test.spockCore

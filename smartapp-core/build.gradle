@@ -29,6 +29,10 @@ dependencies {
     compile deps.swagger.v2.annotations
     compile deps.logging.slf4j
     compile deps.serialize.jackson.databind
+    compile deps.bouncycastle.bcpkix
+    compile deps.httpsig.api
+    compile deps.httpsig.sshJce
+    compile deps.httpsig.sshBc
     testImplementation deps.test.spockCore
     testRuntime deps.test.cglibNodep
     testRuntime deps.test.objenesis
