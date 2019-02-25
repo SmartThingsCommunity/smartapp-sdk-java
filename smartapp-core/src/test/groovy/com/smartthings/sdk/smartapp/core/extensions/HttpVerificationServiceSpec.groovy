@@ -7,21 +7,21 @@ class HttpVerificationServiceSpec extends Specification {
     void "verify returns false when file does not exist"() {
         when:
         HttpVerificationService tester = new HttpVerificationService("resource that does not exist")
-        boolean result = tester.verify(null)
+        boolean result = tester.verify("POST", "https://example.com/some-uri", null)
 
         then:
         result == false
     }
 
-    void "fails verification with exception with bad input file"() {
+    void "fails verification with bad input file"() {
         given:
         Map<String, String> headers = new HashMap<>();
 
         when:
         HttpVerificationService tester = new HttpVerificationService("/bad_rsa.pub")
-        tester.verify("POST", "uri", headers)
+        boolean result = tester.verify("POST", "uri", headers)
 
         then:
-        thrown RuntimeException
+        result == false
     }
 }

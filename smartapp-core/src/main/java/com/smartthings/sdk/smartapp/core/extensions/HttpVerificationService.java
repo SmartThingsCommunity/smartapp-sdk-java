@@ -52,7 +52,7 @@ public class HttpVerificationService {
     }
 
     public HttpVerificationService(String publicKeyPath) {
-        InputStream in = this.getClass().getResourceAsStream(publicKeyPath);
+        InputStream in = HttpVerificationService.class.getResourceAsStream(publicKeyPath);
         if (in == null) {
             // This is not an error until we are past the PING step.
             LOG.info("no public key yet; will only accept PING lifecycle requests");
@@ -61,7 +61,12 @@ public class HttpVerificationService {
         }
 
         LOG.debug("Looking for public key file: smartthings_rsa.pub");
-        publicKey = new BufferedReader(new InputStreamReader(in)).lines().collect(Collectors.joining("\n"));
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"))) {
+            publicKey = reader.lines().collect(Collectors.joining("\n"));
+        } catch (IOException ioException) {
+            LOG.error("failed to read " + publicKeyPath + " file");
+            throw new RuntimeException("failed to read " + publicKeyPath + " file", ioException);
+        }
     }
 
     public boolean verify(String method, String uri, Map<String, String> headers) {
