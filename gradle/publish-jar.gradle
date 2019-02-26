@@ -2,6 +2,7 @@ if (!project.hasProperty('sonatypeUsername') || !project.hasProperty('sonatypePa
     return
 }
 
+apply plugin: "java"
 apply plugin: "maven-publish"
 apply plugin: "signing"
 
@@ -96,7 +97,7 @@ def customizePom(pom) {
             resolveStrategy = Closure.DELEGATE_FIRST
 
             description 'SmartApp and Client SDK'
-            name 'Schema.org Java'
+            name 'SmartApp SDK'
             url 'https://github.com/SmartThingsCommunity/smartapp-sdk-java'
             organization {
                 name 'com.smartthings.sdk'

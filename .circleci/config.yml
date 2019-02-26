@@ -1,13 +1,38 @@
 version: 2.1
 
+# [major].[minor].[build]-[prerelease]+[buildmetadata]
 semVerRegExp: &semVerRegExp
-                /(?<=^[Vv]|^)(?:(?<major>(?:0|[1-9](?:(?:0|[1-9])+)*))[.](?<minor>(?:0|[1-9](?:(?:0|[1-9])+)*))[.](?<patch>(?:0|[1-9](?:(?:0|[1-9])+)*))(?:-(?<prerelease>(?:(?:(?:[A-Za-z]|-)(?:(?:(?:0|[1-9])|(?:[A-Za-z]|-))+)?|(?:(?:(?:0|[1-9])|(?:[A-Za-z]|-))+)(?:[A-Za-z]|-)(?:(?:(?:0|[1-9])|(?:[A-Za-z]|-))+)?)|(?:0|[1-9](?:(?:0|[1-9])+)*))(?:[.](?:(?:(?:[A-Za-z]|-)(?:(?:(?:0|[1-9])|(?:[A-Za-z]|-))+)?|(?:(?:(?:0|[1-9])|(?:[A-Za-z]|-))+)(?:[A-Za-z]|-)(?:(?:(?:0|[1-9])|(?:[A-Za-z]|-))+)?)|(?:0|[1-9](?:(?:0|[1-9])+)*)))*))?(?:[+](?<build>(?:(?:(?:[A-Za-z]|-)(?:(?:(?:0|[1-9])|(?:[A-Za-z]|-))+)?|(?:(?:(?:0|[1-9])|(?:[A-Za-z]|-))+)(?:[A-Za-z]|-)(?:(?:(?:0|[1-9])|(?:[A-Za-z]|-))+)?)|(?:(?:0|[1-9])+))(?:[.](?:(?:(?:[A-Za-z]|-)(?:(?:(?:0|[1-9])|(?:[A-Za-z]|-))+)?|(?:(?:(?:0|[1-9])|(?:[A-Za-z]|-))+)(?:[A-Za-z]|-)(?:(?:(?:0|[1-9])|(?:[A-Za-z]|-))+)?)|(?:(?:0|[1-9])+)))*))?)$/
+                /^(\d|[1-9]\d*)\.(\d|[1-9]\d*)\.(\d|[1-9]\d*)(-(0|[1-9A-Za-z-][0-9A-Za-z-]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(\.(0|[1-9A-Za-z-][0-9A-Za-z-]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*)?(\+[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?$/
+
+defaults: &defaults
+    working_directory: ~/SmartThingsCommunity/smartapp-sdk-java
+
 references:
+    install_print_tree_alpine: &print_tree_alpine
+            run:
+                name: Print directory tree
+                command: |
+                    echo $PWD
+                    apk update
+                    apk add tree
+                    tree -a
+    install_print_tree: &print_tree
+            run:
+                name: Print directory tree
+                command: |
+                    echo $PWD
+                    sudo apt-get update
+                    sudo apt-get install tree
+                    tree -a
     workspace_root: &workspace_root
-                        /tmp/workspace
+                        ~/SmartThingsCommunity/smartapp-sdk-java
     attach_workspace: &attach_workspace
         attach_workspace:
             at: *workspace_root
+    persist_to_workspace: &persist_to_workspace
+        persist_to_workspace:
+            root: *workspace_root
+            paths: .
     restore_source: &restore_source
         restore_cache: # hopefully restore cache of git repository to save time as the project grows
             name: Restoring git repository
@@ -103,23 +128,14 @@ jobs:
                       - ~/gradle-build-caches
                   key:      gradle-build-caches-{{ .Revision }}
                   when:     always
-            # TODO: figure out how to use a glob to match all libs instead of doing these separately
+            - run:
+                name: Save artifacts to workspace
+                command: mkdir -p artifacts && cp */build/libs/* artifacts
+            - *persist_to_workspace
             - store_artifacts:
-                  name:        Uploading smartapp-core artifacts
-                  path:        smartapp-core/build/libs/
-                  destination: /libs/smartapp-core/
-            - store_artifacts:
-                  name:        Uploading smartapp-guice artifacts
-                  path:        smartapp-guice/build/libs/
-                  destination: /libs/smartapp-guice/
-            - store_artifacts:
-                  name:        Uploading smartapp-spring artifacts
-                  path:        smartapp-spring/build/libs/
-                  destination: /libs/smartapp-spring/
-            - store_artifacts:
-                  name:        Uploading smartthings-client artifacts
-                  path:        smartthings-client/build/libs/
-                  destination: /libs/smartthings-client/
+                  name:        Uploading artifacts
+                  path:        artifacts
+                  destination: .
             - store_test_results:
                   name:        Uploading smartapp-core test report
                   path:        smartapp-core/build/test-results/*.xml
@@ -137,19 +153,27 @@ jobs:
                   name:    Perform lint, style, & bug check
                   command: ./gradlew check -PciBuild=true --parallel --max-workers=2
 
-    'Publish to MavenCentral':
+    'MavenCentral':
         executor: dobbie
         steps:
             - *attach_workspace
-            - checkout
-            - *restore_source
             - *restore_gradle_wrapper
             - *restore_gradle_cache
             - *restore_gradle_build_cache
             - run:
                 name: Import signing key
                 command: |
+                    # decode private key from armored ASCII representation
                     echo $GPG_PRIV_B64 | base64 --decode > key.asc
+                    # import private key to keyring
+                    gpg --pinentry-mode loopback \
+                        --passphrase "$SIGNING_PASSWORD" \
+                        --allow-secret-key-import \
+                        --import key.asc
+                    # export keyring file to current working directory as secring.gpg
+                    gpg --pinentry-mode loopback \
+                        --passphrase "$SIGNING_PASSWORD" \
+                        --export-secret-keys > secring.gpg
             - run:
                 name: Generate Maven credentials
                 command: |
@@ -157,22 +181,43 @@ jobs:
                      sonatypePassword=$SONATYPE_PASSWORD
                      signing.keyId=$SIGNING_KEY_ID
                      signing.password=$SIGNING_PASSWORD
-                     signing.secretKeyRingFile=./key.asc" >> gradle.properties
+                     signing.secretKeyRingFile=/home/circleci/SmartThingsCommunity/smartapp-sdk-java/secring.gpg" >> gradle.properties
+            - *print_tree
             - run:
                   name:    Publish to Maven Central
-                  command: ./gradlew clean publishMavenJavaPublicationToMavenRepository
+                  command: |
+                    ./gradlew clean \
+                        smartapp-core:publishMavenJavaPublicationToMavenRepository \
+                        smartapp-guice:publishMavenJavaPublicationToMavenRepository \
+                        smartapp-spring:publishMavenJavaPublicationToMavenRepository \
+                        smartthings-client:publishMavenJavaPublicationToMavenRepository
 
-    'Publish GitHub Release':
+    'GitHub Release':
+        <<: *defaults # not using the shared executor, so, set defaults
         docker:
-            - image: cibuilds/github:0.12
+            - image: circleci/node
         steps:
-            - attach_workspace:
-                at: ./libs
+            - *attach_workspace
+            - *restore_source
+            - *restore_gradle_wrapper
+            - *restore_gradle_cache
+            - *restore_gradle_build_cache
+            - *print_tree
             - run:
-                name: 'Publish release on GitHub'
+                name: Update npm
+                command: 'sudo npm install -g npm@latest'
+            - run:
+                name: Install Github Release Notes
+                command: sudo npm install -g github-release-notes
+            - run:
+                name: Publish release on GitHub
                 command: |
-                    VERSION=$(head -1 version.txt)
-                    ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts/
+                    gren release \
+                            --draft \
+                            --prerelease \
+                            --override \
+                            --data-source=issues \
+                            --token=$GITHUB_TOKEN
 
     'Test':
         executor: dobbie
@@ -219,16 +264,18 @@ workflows:
                       - 'Dependencies'
                   filters:
                       tags:
-                          only: /.*/ # ensure this job does not block publishing via tag
+                          only: /.*/ # do not prevent build on tags
                       branches:
                           only: /^(?!pull\/).*$/ # only from canonical repository
             - 'Test':
                   requires:
                       - 'Build'
                   filters:
+                      tags:
+                          ignore: /.*/ # do not test on tags
                       branches:
                           only: /^(?!pull\/).*$/ # only from canonical repository
-            - 'Publish to MavenCentral':
+            - 'MavenCentral':
                   context: pi
                   requires:
                       - 'Build'
@@ -237,7 +284,8 @@ workflows:
                           only: *semVerRegExp # allow publish tag matches any semVer
                       branches:
                           ignore: /.*/ # ignore all branch builds
-            - 'Publish GitHub Release':
+            - 'GitHub Release':
+                  context: pi
                   requires:
                       - 'Build'
                   filters:
@@ -245,3 +293,5 @@ workflows:
                           only: *semVerRegExp # allow publish tag matches any semVer
                       branches:
                           ignore: /.*/ # ignore all branch builds
+
+
