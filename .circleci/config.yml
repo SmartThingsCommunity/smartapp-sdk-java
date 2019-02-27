@@ -243,6 +243,8 @@ workflows:
         jobs:
             - 'Checkout':
                   filters:
+                      branches:
+                          only: /.*/ # unblocking branch builds
                       tags:
                           only: /.*/ # ensure this job does not block publishing via tag
             - 'Dependencies':
@@ -293,5 +295,3 @@ workflows:
                           only: *semVerRegExp # allow publish tag matches any semVer
                       branches:
                           ignore: /.*/ # ignore all branch builds
-
-
