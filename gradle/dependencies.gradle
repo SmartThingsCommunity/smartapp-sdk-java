@@ -62,8 +62,9 @@ ext.deps = [
         'sshBc' : "net.adamcin.httpsig:httpsig-ssh-bc:${versions.httpsig}"
     ],
     'aws'      : [
-        'lambdaJavaCore' : 'com.amazonaws:aws-lambda-java-core:1.1.0',
-        'lambdaJavaLog4j': 'com.amazonaws:aws-lambda-java-log4j:1.0.0'
+        'lambdaJavaCore' : 'com.amazonaws:aws-lambda-java-core:1.2.0',
+        'lambdaJavaLog4j': 'com.amazonaws:aws-lambda-java-log4j2:1.1.0',
+        'lambdaLogging'  : 'io.symphonia:lambda-logging:1.0.3'
     ],
     'test'     : [
         'spockCore' : 'org.spockframework:spock-core:1.2-groovy-2.4',
