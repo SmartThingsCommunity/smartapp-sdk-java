@@ -28,7 +28,6 @@ import com.smartthings.sdk.smartapp.core.models.UpdateResponseData;
 /**
  * Implementations of both InstallHandler and UpdateHandler. These two handlers share
  * so much in common, we just implement them together here.
- *
  */
 public class AppUpdateInstallHandler {
     private abstract static class UpdateInstallHandler {
