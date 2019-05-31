@@ -60,7 +60,7 @@ public class HttpVerificationService {
             return;
         }
 
-        LOG.debug("Looking for public key file: smartthings_rsa.pub");
+        LOG.debug("Looking for public key file: " + publicKeyPath);
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"))) {
             publicKey = reader.lines().collect(Collectors.joining("\n"));
         } catch (IOException ioException) {
