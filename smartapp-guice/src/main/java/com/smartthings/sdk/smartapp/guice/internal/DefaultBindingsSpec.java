@@ -19,6 +19,7 @@ public class DefaultBindingsSpec implements BindingsSpec {
         return this;
     }
 
+    @Override
     public BindingsSpec module(Class<? extends Module> moduleClass) {
         return module(createModule(moduleClass));
     }

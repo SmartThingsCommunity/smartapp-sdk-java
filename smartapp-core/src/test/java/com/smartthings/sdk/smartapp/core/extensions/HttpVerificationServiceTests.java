@@ -1,10 +1,5 @@
 package com.smartthings.sdk.smartapp.core.extensions;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import static org.junit.Assert.*;
 
 import java.io.BufferedReader;
@@ -97,7 +92,7 @@ public class HttpVerificationServiceTests {
 
     private PublicKey getPublicKey() throws Exception {
         SubjectPublicKeyInfo info;
-        try (InputStream is = this.getClass().getResourceAsStream("/good_public.pem");
+        try (InputStream is = HttpVerificationServiceTests.class.getResourceAsStream("/good_public.pem");
              PEMParser parser = new PEMParser(new BufferedReader(new InputStreamReader(is, "UTF-8")))) {
             Object object = parser.readObject();
             if (object instanceof SubjectPublicKeyInfo) {
@@ -134,7 +129,7 @@ public class HttpVerificationServiceTests {
         return KeyFactory.getInstance("RSA").generatePrivate(spec);
     }
 
-    private KeyPair getRSAKeyPair(String publicKeyStr, String privateKeyStr) throws Exception {
+    private KeyPair getRSAKeyPair(String privateKeyStr) throws Exception {
         PublicKey publicKey = getPublicKey();
         PrivateKey privateKey = null;
         if (privateKeyStr != null) {
@@ -143,10 +138,10 @@ public class HttpVerificationServiceTests {
         return new KeyPair(publicKey, privateKey);
     }
 
-    private Authorization getAuthorization(String publicKey, String privateKey, RequestContent content)
+    private Authorization getAuthorization(String privateKey, RequestContent content)
             throws Exception {
         DefaultKeychain keychain = new DefaultKeychain();
-        KeyPair pair = getRSAKeyPair(publicKey, privateKey);
+        KeyPair pair = getRSAKeyPair(privateKey);
         Challenge challenge = new Challenge(
                 "<preemptive>",
                 ImmutableList.of("(request-target)", "date", "digest"),
@@ -171,7 +166,6 @@ public class HttpVerificationServiceTests {
 
     private PseudoRequest signPsuedoRequest(PseudoRequest request) {
         String privateKey = readKeyStringFromResource("/good_private.pem");
-        String publicKey = readKeyStringFromResource("/good_public.pem");
 
         String existingAuthHeader = request.headers.get("Authorization");
         try {
@@ -182,11 +176,12 @@ public class HttpVerificationServiceTests {
                     break;
                 default:
                     message = request.jsonBody;
+                    break;
             }
 
             String digest = getDigest(message);
             RequestContent requestContent = getRequestContent(request.method, getPath(new URL(request.uri)), digest);
-            Authorization authorization = getAuthorization(publicKey, privateKey, requestContent);
+            Authorization authorization = getAuthorization(privateKey, requestContent);
 
             StringBuilder resultingAuthHeader = new StringBuilder();
             if (existingAuthHeader != null) {

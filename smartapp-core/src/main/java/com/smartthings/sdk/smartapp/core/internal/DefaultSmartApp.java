@@ -51,8 +51,8 @@ public class DefaultSmartApp implements SmartApp {
             }
 
             return maybeHandler.get().handle(request);
-        } catch (Throwable t) {
-            LOG.error("Unexpected error in request handler", t);
+        } catch (Exception e) {
+            LOG.error("Unexpected error in request handler", e);
             return Response.status(500);
         }
     }
