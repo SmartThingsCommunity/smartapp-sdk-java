@@ -1,4 +1,15 @@
-apply plugin: 'findbugs'
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:2.0.0"
+  }
+}
+
+apply plugin: 'com.github.spotbugs'
 apply plugin: "pmd"
 apply plugin: "checkstyle"
 apply plugin: "jacoco"
@@ -6,14 +17,14 @@ apply plugin: "jacoco"
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
-findbugs {
-    toolVersion = "3.0.1"
+spotbugs {
+    toolVersion = "3.1.12"
     ignoreFailures = false
     effort = "max"
     reportLevel = "low"
-    excludeFilter = file("$rootProject.projectDir/gradle/findbugs/excludeFilter.xml")
+    excludeFilter = file("$rootProject.projectDir/gradle/spotbugs/excludeFilter.xml")
     sourceSets = [sourceSets.main]
-    reportsDir = file("$project.buildDir/coverage/findbugs")
+    reportsDir = file("$project.buildDir/coverage/spotbugs")
 }
 
 checkstyle {
@@ -23,6 +34,8 @@ checkstyle {
 
 pmd {
     ignoreFailures = false
+    ruleSets = []
+    ruleSetFiles = files("$rootProject.projectDir/gradle/pmd/stRuleSet.xml")
     reportsDir = file("$project.buildDir/coverage/pmd")
 }
 
@@ -30,9 +43,9 @@ tasks.withType(Javadoc) {
     options.encoding = 'UTF-8'
 }
 
-tasks.withType(FindBugs) {
+tasks.withType(com.github.spotbugs.SpotBugsTask) {
     // If available, set exclude filters to avoid analyzing generated classes
-    def excludes = file("${project.getProjectDir()}/gradle/findbugs/excludeFilter.xml")
+    def excludes = file("${project.getProjectDir()}/gradle/spotbugs/excludeFilter.xml")
     if (excludes.exists()) {
         excludeFilter = excludes
     }

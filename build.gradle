@@ -1,3 +1,14 @@
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:2.0.0"
+  }
+}
+
 if (!JavaVersion.current().java8Compatible) {
     throw new IllegalStateException("Must be built with Java 8 or higher")
 }
@@ -22,4 +33,10 @@ allprojects {
 
 configure(subprojects.findAll {it.name != 'examples'}) {
     apply from: rootProject.file('gradle/publish-jar.gradle')
+}
+
+task preCommit(type: GradleBuild) {
+    // Not including spotbugsTest here because some Spock tests generate
+    // SpotBugs errors that aren't currently ignored.
+    tasks = ['check', 'test', 'jacocoTestReport', 'spotbugsMain']
 }

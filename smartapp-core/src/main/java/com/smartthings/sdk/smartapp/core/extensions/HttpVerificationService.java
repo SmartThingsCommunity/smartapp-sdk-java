@@ -13,6 +13,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPublicKeySpec;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -43,7 +44,7 @@ import net.adamcin.httpsig.ssh.jce.UserFingerprintKeyId;
  * The public key that is generated when registering a smartapp; is used to verify the request.
  */
 public class HttpVerificationService {
-    private static final Logger LOG = LoggerFactory.getLogger(HttpVerificationService.class);
+    private final Logger log = LoggerFactory.getLogger(HttpVerificationService.class);
 
     private final String publicKey;
 
@@ -55,29 +56,33 @@ public class HttpVerificationService {
         InputStream in = HttpVerificationService.class.getResourceAsStream(publicKeyPath);
         if (in == null) {
             // This is not an error until we are past the PING step.
-            LOG.info("no public key yet; will only accept PING lifecycle requests");
+            log.info("no public key yet; will only accept PING lifecycle requests");
             publicKey = null;
             return;
         }
 
-        LOG.debug("Looking for public key file: " + publicKeyPath);
+        if (log.isDebugEnabled()) {
+            log.debug("Looking for public key file: " + publicKeyPath);
+        }
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"))) {
             publicKey = reader.lines().collect(Collectors.joining("\n"));
         } catch (IOException ioException) {
-            LOG.error("failed to read " + publicKeyPath + " file");
+            if (log.isErrorEnabled()) {
+                log.error("failed to read " + publicKeyPath + " file");
+            }
             throw new RuntimeException("failed to read " + publicKeyPath + " file", ioException);
         }
     }
 
     public boolean verify(String method, String uri, Map<String, String> headers) {
         if (publicKey == null) {
-            LOG.error("Public key file not set up properly. Please see README (Configure Public Key) for"
+            log.error("Public key file not set up properly. Please see README (Configure Public Key) for"
                     + " directions and don't forget to restart this server.");
             return false;
         }
         boolean verified = verifyRequest(method, uri, headers);
         if (!verified) {
-            LOG.error("Request not verified!");
+            log.error("Request not verified!");
         }
         return verified;
     }
@@ -97,7 +102,7 @@ public class HttpVerificationService {
         Authorization authorization = Authorization.parse(authorizationHeader);
 
         if (authorization == null) {
-            LOG.error("Request contains no authorization header");
+            log.error("Request contains no authorization header");
             return false;
         }
 
@@ -108,13 +113,15 @@ public class HttpVerificationService {
             .map(String::toLowerCase)
             .collect(Collectors.toSet());
 
-        LOG.debug("requestURI: " + uri);
+        if (log.isDebugEnabled()) {
+            log.debug("requestURI: " + uri);
+        }
 
         RequestContent.Builder content = new RequestContent.Builder()
             .setRequestTarget(method, uri);
 
         headers.keySet().stream()
-            .filter(headerName -> signedHeaders.contains(headerName.toLowerCase()))
+            .filter(headerName -> signedHeaders.contains(headerName.toLowerCase(Locale.ENGLISH)))
             .forEach(headerName -> content.addHeader(headerName, headers.get(headerName)));
 
         return verifier.verify(challenge, content.build(), authorization);
@@ -132,14 +139,14 @@ public class HttpVerificationService {
             RSAPublicKeySpec spec = new RSAPublicKeySpec(param.getModulus(), param.getExponent());
             return KeyFactory.getInstance("RSA").generatePublic(spec);
         } catch (IOException e) {
-            LOG.error("create_public_key_failed", e);
-            throw new RuntimeException("Unable to create public key from PEM");
+            log.error("create_public_key_failed", e);
+            throw new RuntimeException("Unable to create public key from PEM", e);
         } catch (NoSuchAlgorithmException e) {
-            LOG.error("invalid_public_key_algorithm", e);
-            throw new RuntimeException("Unable to create public key from PEM");
+            log.error("invalid_public_key_algorithm", e);
+            throw new RuntimeException("Unable to create public key from PEM", e);
         } catch (InvalidKeySpecException e) {
-            LOG.error("invalid_key_spec", e);
-            throw new RuntimeException("Unable to create public key from PEM");
+            log.error("invalid_key_spec", e);
+            throw new RuntimeException("Unable to create public key from PEM", e);
         }
     }
 }

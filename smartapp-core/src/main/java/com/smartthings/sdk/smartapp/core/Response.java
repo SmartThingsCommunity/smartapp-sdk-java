@@ -2,6 +2,8 @@ package com.smartthings.sdk.smartapp.core;
 
 import com.smartthings.sdk.smartapp.core.models.*;
 
+
+@SuppressWarnings({"PMD.UseUtilityClass", "PMD.ClassNamingConventions"})
 public final class Response {
     public static ExecutionResponse ok() {
         return new ExecutionResponse()

@@ -15,6 +15,8 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+
+@SuppressWarnings("PMD.MissingStaticMethodInNonInstantiatableClass")
 public class DefaultEventHandler implements EventHandler {
     private static final Logger LOG = LoggerFactory.getLogger(DefaultEventHandler.class);
 
@@ -50,9 +52,9 @@ public class DefaultEventHandler implements EventHandler {
             if (handler != null) {
                 try {
                     handler.execute(event);
-                } catch (Throwable t) {
-                    if (failOnError.test(t)) {
-                        return onError.apply(request, t);
+                } catch (Exception e) {
+                    if (failOnError.test(e)) {
+                        return onError.apply(request, e);
                     }
                 }
             }
@@ -82,10 +84,6 @@ public class DefaultEventHandler implements EventHandler {
         private Function<ExecutionRequest, ExecutionResponse> onSuccess = request -> Response.ok(
             new EventResponseData()
         );
-
-        public EventSpecImpl() {
-
-        }
 
         @Override
         public EventSpec onMode(String modeId, Action<Event> action) {
