@@ -13,4 +13,5 @@ public interface SmartAppDefinition {
     ConfigurationHandler getConfigurationHandler();
     OAuthCallbackHandler getOauthCallbackHandler();
     List<PredicateHandler> getPredicateHandlers();
+    List<RequestPreprocessor> getRequestPreprocessors();
 }

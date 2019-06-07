@@ -6,6 +6,7 @@ import com.google.inject.Key;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.smartthings.sdk.smartapp.core.PredicateHandler;
+import com.smartthings.sdk.smartapp.core.RequestPreprocessor;
 import com.smartthings.sdk.smartapp.core.SmartAppDefinition;
 import com.smartthings.sdk.smartapp.core.extensions.*;
 
@@ -25,6 +26,7 @@ public class GuiceSmartAppDefinition implements SmartAppDefinition {
     private final ConfigurationHandler configurationHandler;
     private final OAuthCallbackHandler oAuthCallbackHandler;
     private final List<PredicateHandler> predicateHandlers;
+    private final List<RequestPreprocessor> requestPreprocessors;
 
     public GuiceSmartAppDefinition(Injector injector) {
         this.installHandler = findOne(injector, InstallHandler.class);
@@ -35,6 +37,7 @@ public class GuiceSmartAppDefinition implements SmartAppDefinition {
         this.configurationHandler = findOne(injector, ConfigurationHandler.class);
         this.oAuthCallbackHandler = findOne(injector, OAuthCallbackHandler.class);
         this.predicateHandlers = search(injector, PredicateHandler.class);
+        this.requestPreprocessors = search(injector, RequestPreprocessor.class);
     }
 
     @Override
@@ -75,6 +78,11 @@ public class GuiceSmartAppDefinition implements SmartAppDefinition {
     @Override
     public List<PredicateHandler> getPredicateHandlers() {
         return predicateHandlers;
+    }
+
+    @Override
+    public List<RequestPreprocessor> getRequestPreprocessors() {
+        return requestPreprocessors;
     }
 
     private static <O> O findOne(Injector injector, Class<O> type) {

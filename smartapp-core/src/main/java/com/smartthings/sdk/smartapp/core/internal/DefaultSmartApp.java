@@ -1,5 +1,11 @@
 package com.smartthings.sdk.smartapp.core.internal;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,11 +14,6 @@ import com.smartthings.sdk.smartapp.core.internal.handlers.DefaultPingHandler;
 import com.smartthings.sdk.smartapp.core.internal.handlers.NoopUninstallHandler;
 import com.smartthings.sdk.smartapp.core.models.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Consumer;
 
 public class DefaultSmartApp implements SmartApp {
 
@@ -30,13 +31,17 @@ public class DefaultSmartApp implements SmartApp {
     };
 
     private final List<PredicateHandler> handlers;
+    private final List<RequestPreprocessor> requestPreprocessors = new ArrayList<>();
 
     public DefaultSmartApp(Consumer<SmartAppDefinitionSpec> spec) {
-        this.handlers = createHandlerChain(DefaultSmartAppDefinition.build(spec));
+        this(DefaultSmartAppDefinition.build(spec));
     }
 
     public DefaultSmartApp(SmartAppDefinition definition) {
         this.handlers = createHandlerChain(definition);
+        if (definition.getRequestPreprocessors() != null) {
+            this.requestPreprocessors.addAll(definition.getRequestPreprocessors());
+        }
     }
 
     @Override
@@ -50,6 +55,9 @@ public class DefaultSmartApp implements SmartApp {
                 return Response.notFound();
             }
 
+            for (RequestPreprocessor requestPreprocessor : requestPreprocessors) {
+                requestPreprocessor.process(request);
+            }
             return maybeHandler.get().handle(request);
         } catch (Exception e) {
             LOG.error("Unexpected error in request handler", e);

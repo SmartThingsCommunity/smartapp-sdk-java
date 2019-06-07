@@ -14,4 +14,5 @@ public interface SmartAppDefinitionSpec {
     SmartAppDefinitionSpec configuration(ConfigurationHandler handler);
     SmartAppDefinitionSpec oauthCallback(OAuthCallbackHandler handler);
     SmartAppDefinitionSpec when(Predicate<ExecutionRequest> predicate, Handler handler);
+    SmartAppDefinitionSpec requestPreprocessor(RequestPreprocessor requestPreprocessor);
 }

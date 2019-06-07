@@ -1,17 +1,19 @@
 package com.smartthings.sdk.smartapp.core.internal;
 
-import com.smartthings.sdk.smartapp.core.Handler;
-import com.smartthings.sdk.smartapp.core.PredicateHandler;
-import com.smartthings.sdk.smartapp.core.SmartAppDefinition;
-import com.smartthings.sdk.smartapp.core.SmartAppDefinitionSpec;
-import com.smartthings.sdk.smartapp.core.extensions.*;
-import com.smartthings.sdk.smartapp.core.models.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+
+import com.smartthings.sdk.smartapp.core.Handler;
+import com.smartthings.sdk.smartapp.core.PredicateHandler;
+import com.smartthings.sdk.smartapp.core.RequestPreprocessor;
+import com.smartthings.sdk.smartapp.core.SmartAppDefinition;
+import com.smartthings.sdk.smartapp.core.SmartAppDefinitionSpec;
+import com.smartthings.sdk.smartapp.core.extensions.*;
+import com.smartthings.sdk.smartapp.core.models.*;
+
 
 public class DefaultSmartAppDefinition implements SmartAppDefinition {
 
@@ -23,6 +25,7 @@ public class DefaultSmartAppDefinition implements SmartAppDefinition {
     private final ConfigurationHandler configurationHandler;
     private final OAuthCallbackHandler oAuthCallbackHandler;
     private final List<PredicateHandler> predicateHandlers;
+    private final List<RequestPreprocessor> requestPreprocessors;
 
     private DefaultSmartAppDefinition(
         InstallHandler installHandler,
@@ -32,7 +35,8 @@ public class DefaultSmartAppDefinition implements SmartAppDefinition {
         PingHandler pingHandler,
         ConfigurationHandler configurationHandler,
         OAuthCallbackHandler oAuthCallbackHandler,
-        List<PredicateHandler> predicateHandlers
+        List<PredicateHandler> predicateHandlers,
+        List<RequestPreprocessor> requestPreprocessors
     ) {
         this.installHandler = installHandler;
         this.updateHandler = updateHandler;
@@ -42,6 +46,7 @@ public class DefaultSmartAppDefinition implements SmartAppDefinition {
         this.configurationHandler = configurationHandler;
         this.oAuthCallbackHandler = oAuthCallbackHandler;
         this.predicateHandlers = predicateHandlers;
+        this.requestPreprocessors = requestPreprocessors;
     }
 
     public static SmartAppDefinition build(Consumer<SmartAppDefinitionSpec> consumer) {
@@ -90,6 +95,11 @@ public class DefaultSmartAppDefinition implements SmartAppDefinition {
         return predicateHandlers;
     }
 
+    @Override
+    public List<RequestPreprocessor> getRequestPreprocessors() {
+        return requestPreprocessors;
+    }
+
     private static class SpecImpl implements SmartAppDefinitionSpec {
 
         private Supplier<InstallHandler> installHandler;
@@ -100,6 +110,7 @@ public class DefaultSmartAppDefinition implements SmartAppDefinition {
         private Supplier<ConfigurationHandler> configurationHandler;
         private Supplier<OAuthCallbackHandler> oAuthCallbackHandler;
         private List<PredicateHandler> predicateHandlers = new ArrayList<>();
+        private List<RequestPreprocessor> requestPreprocessors = new ArrayList<>();
 
         @Override
         public SmartAppDefinitionSpec install(InstallHandler handler) {
@@ -149,6 +160,12 @@ public class DefaultSmartAppDefinition implements SmartAppDefinition {
             return this;
         }
 
+        @Override
+        public SmartAppDefinitionSpec requestPreprocessor(RequestPreprocessor requestPreprocessor) {
+            requestPreprocessors.add(requestPreprocessor);
+            return this;
+        }
+
         private SmartAppDefinition build() {
             return new DefaultSmartAppDefinition(
                 installHandler != null ? installHandler.get() : null,
@@ -158,7 +175,8 @@ public class DefaultSmartAppDefinition implements SmartAppDefinition {
                 pingHandler != null ? pingHandler.get() : null,
                 configurationHandler != null ? configurationHandler.get() : null,
                 oAuthCallbackHandler != null ? oAuthCallbackHandler.get() : null,
-                predicateHandlers
+                predicateHandlers,
+                requestPreprocessors
             );
         }
     }

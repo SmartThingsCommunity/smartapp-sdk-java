@@ -126,6 +126,29 @@ Respond to configuration update requests.
 
 Response to request with an arbitrary HTTP status code.
 
+### Context Store
+
+Support has been included for managing installed application information via a
+"context store". Actual implementations of this are coming soon but if you want
+to use it right now, you need to create your own context store to manage this
+information.
+
+To use this you will need to:
+
+  1. Create a class which implements InstalledAppContextStore which is a DAO
+     for managing your context. Consider using DefaultInstalledAppContextStore
+     which also implements RequestPreprocessor, making it easy to hook into
+     the appropriate SmartApp lifecycle events. DefaultInstalledAppContextStore
+     also uses the DefaultAppContextStore which includes common data related
+     to the SmartApp.
+  2. Set up a RequestPreprocessor to call your DAO at the appropriate times.
+     The easiest way to do this is to implement DefaultAppContextStore as
+     mentioned above and pass that into your SmartApp instance on start-up
+     using `requestPreprocessor`. (If you're using Spring and our Spring
+     library, you can simply make the implementation available in the
+     `ApplicationContext`.)
+  3. Use the `get` method of your DAO to retrieve your context as needed.
+
 ## More about SmartThings
 
 If you are not familiar with SmartThings, we have

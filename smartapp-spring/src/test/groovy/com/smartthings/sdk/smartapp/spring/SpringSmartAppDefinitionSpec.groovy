@@ -1,7 +1,14 @@
 package com.smartthings.sdk.smartapp.spring
 
+import java.util.function.Predicate
+
+import org.springframework.beans.factory.NoSuchBeanDefinitionException
+import org.springframework.context.ApplicationContext
+import spock.lang.Specification
+
 import com.smartthings.sdk.smartapp.core.Handler
 import com.smartthings.sdk.smartapp.core.PredicateHandler
+import com.smartthings.sdk.smartapp.core.RequestPreprocessor
 import com.smartthings.sdk.smartapp.core.SmartAppDefinition
 import com.smartthings.sdk.smartapp.core.extensions.ConfigurationHandler
 import com.smartthings.sdk.smartapp.core.extensions.EventHandler
@@ -11,11 +18,6 @@ import com.smartthings.sdk.smartapp.core.extensions.PingHandler
 import com.smartthings.sdk.smartapp.core.extensions.UninstallHandler
 import com.smartthings.sdk.smartapp.core.extensions.UpdateHandler
 import com.smartthings.sdk.smartapp.core.models.ExecutionRequest
-import org.springframework.beans.factory.NoSuchBeanDefinitionException
-import org.springframework.context.ApplicationContext
-import spock.lang.Specification
-
-import java.util.function.Predicate
 
 
 class SpringSmartAppDefinitionSpec extends Specification {
@@ -29,6 +31,8 @@ class SpringSmartAppDefinitionSpec extends Specification {
     UninstallHandler uninstallHandler = Mock()
     PredicateHandler predicateHandler = PredicateHandler.of(Mock(Predicate.class), Mock(Handler.class))
     Map<String, PredicateHandler> predicateHandlers = ["ph": predicateHandler]
+    RequestPreprocessor requestPreprocessor = Mock(RequestPreprocessor.class);
+    Map<String, RequestPreprocessor> requestPreprocessors = ["rh": requestPreprocessor];
 
     void "handles all handlers"() {
         given:
@@ -40,6 +44,7 @@ class SpringSmartAppDefinitionSpec extends Specification {
         applicationContext.getBean(EventHandler.class) >> eventHandler
         applicationContext.getBean(UninstallHandler.class) >> uninstallHandler
         applicationContext.getBeansOfType(PredicateHandler.class) >> predicateHandlers
+        applicationContext.getBeansOfType(RequestPreprocessor.class) >> requestPreprocessors
 
         when:
         SmartAppDefinition smartAppDefinition = SpringSmartAppDefinition.of(applicationContext)
@@ -53,6 +58,7 @@ class SpringSmartAppDefinitionSpec extends Specification {
         smartAppDefinition.eventHandler.is(eventHandler)
         smartAppDefinition.uninstallHandler.is(uninstallHandler)
         smartAppDefinition.predicateHandlers == [predicateHandler]
+        smartAppDefinition.requestPreprocessors == [requestPreprocessor]
     }
 
     void "not require ping handler"() {
@@ -65,6 +71,7 @@ class SpringSmartAppDefinitionSpec extends Specification {
         applicationContext.getBean(EventHandler.class) >> eventHandler
         applicationContext.getBean(UninstallHandler.class) >> uninstallHandler
         applicationContext.getBeansOfType(PredicateHandler.class) >> predicateHandlers
+        applicationContext.getBeansOfType(RequestPreprocessor.class) >> requestPreprocessors
 
         when:
         SmartAppDefinition smartAppDefinition = SpringSmartAppDefinition.of(applicationContext)
@@ -78,6 +85,7 @@ class SpringSmartAppDefinitionSpec extends Specification {
         smartAppDefinition.eventHandler.is(eventHandler)
         smartAppDefinition.uninstallHandler.is(uninstallHandler)
         smartAppDefinition.predicateHandlers == [predicateHandler]
+        smartAppDefinition.requestPreprocessors == [requestPreprocessor]
     }
 
     void "require configuration handler"() {
@@ -129,6 +137,7 @@ class SpringSmartAppDefinitionSpec extends Specification {
         applicationContext.getBean(EventHandler.class) >> eventHandler
         applicationContext.getBean(UninstallHandler.class) >> uninstallHandler
         applicationContext.getBeansOfType(PredicateHandler.class) >> predicateHandlers
+        applicationContext.getBeansOfType(RequestPreprocessor.class) >> requestPreprocessors
 
         when:
         SmartAppDefinition smartAppDefinition = SpringSmartAppDefinition.of(applicationContext)
@@ -141,6 +150,6 @@ class SpringSmartAppDefinitionSpec extends Specification {
         smartAppDefinition.oauthCallbackHandler == null
         smartAppDefinition.eventHandler.is(eventHandler)
         smartAppDefinition.uninstallHandler.is(uninstallHandler)
-        smartAppDefinition.predicateHandlers == [predicateHandler]
+        smartAppDefinition.requestPreprocessors == [requestPreprocessor]
     }
 }

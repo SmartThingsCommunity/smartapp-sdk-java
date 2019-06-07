@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 import com.smartthings.sdk.smartapp.core.Response;
 import com.smartthings.sdk.smartapp.core.SmartAppDefinition;
 import com.smartthings.sdk.smartapp.core.extensions.HttpVerificationService;
@@ -78,8 +79,8 @@ public class AppConfiguration {
         // SpringSmartAppDefinition can find all of the necessary components in the given ApplicationContext.
         return SpringSmartAppDefinition.of(applicationContext);
 
-        // Alternatively, you can get all of the components yourself and build the definition.
+        // Alternatively, you could get all of the components yourself and build the definition.
 //        return new SpringSmartAppDefinition(pingHandler(), configurationHandler, installHandler(),
-//            updateHandler(), null, eventHandler, null, Collections.emptyList());
+//            updateHandler(), null, eventHandler, null, Collections.emptyList(), Collections.emptyList());
     }
 }

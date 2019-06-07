@@ -21,7 +21,7 @@ public class AppModule extends AbstractModule {
     protected void configure() {
         // Here are a couple of examples of using separate classes to implement lifecycle events.
         bind(EventHandler.class).to(AppEventHandler.class).in(Scopes.SINGLETON);
-        bind(ConfigurationHandler.class).to(AppConfigurationHandler.class).in(Scopes.SINGLETON);;
+        bind(ConfigurationHandler.class).to(AppConfigurationHandler.class).in(Scopes.SINGLETON);
     }
 
     // We don't need to include a PingHandler because the default is sufficient. This is included
