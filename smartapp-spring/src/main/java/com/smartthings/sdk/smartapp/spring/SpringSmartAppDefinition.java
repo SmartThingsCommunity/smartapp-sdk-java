@@ -1,16 +1,17 @@
 package com.smartthings.sdk.smartapp.spring;
 
-import com.smartthings.sdk.smartapp.core.Handler;
-import com.smartthings.sdk.smartapp.core.PredicateHandler;
-import com.smartthings.sdk.smartapp.core.SmartAppDefinition;
-import com.smartthings.sdk.smartapp.core.extensions.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.smartthings.sdk.smartapp.core.PredicateHandler;
+import com.smartthings.sdk.smartapp.core.RequestPreprocessor;
+import com.smartthings.sdk.smartapp.core.SmartAppDefinition;
+import com.smartthings.sdk.smartapp.core.extensions.*;
 
 
 public class SpringSmartAppDefinition implements SmartAppDefinition {
@@ -24,11 +25,13 @@ public class SpringSmartAppDefinition implements SmartAppDefinition {
     private final EventHandler eventHandler;
     private final UninstallHandler uninstallHandler;
     private final List<PredicateHandler> predicateHandlers;
+    private final List<RequestPreprocessor> requestPreprocessors;
 
     public SpringSmartAppDefinition(PingHandler pingHandler, ConfigurationHandler configurationHandler,
                                     InstallHandler installHandler, UpdateHandler updateHandler,
                                     OAuthCallbackHandler oAuthCallbackHandler, EventHandler eventHandler,
-                                    UninstallHandler uninstallHandler, List<PredicateHandler> predicateHandlers) {
+                                    UninstallHandler uninstallHandler, List<PredicateHandler> predicateHandlers,
+                                    List<RequestPreprocessor> requestPreprocessors) {
         this.pingHandler = pingHandler;
         this.configurationHandler = configurationHandler;
         this.installHandler = installHandler;
@@ -37,6 +40,7 @@ public class SpringSmartAppDefinition implements SmartAppDefinition {
         this.eventHandler = eventHandler;
         this.uninstallHandler = uninstallHandler;
         this.predicateHandlers = predicateHandlers;
+        this.requestPreprocessors = requestPreprocessors;
     }
 
     public static SpringSmartAppDefinition of(ApplicationContext applicationContext) {
@@ -49,12 +53,13 @@ public class SpringSmartAppDefinition implements SmartAppDefinition {
         UninstallHandler uninstallHandler = findHandler(applicationContext, UninstallHandler.class, false);
         List<PredicateHandler> predicateHandlers =
             new ArrayList<>(applicationContext.getBeansOfType(PredicateHandler.class).values());
+        List<RequestPreprocessor> requestPreprocessors =
+            new ArrayList<>(applicationContext.getBeansOfType(RequestPreprocessor.class).values());
         return new SpringSmartAppDefinition(pingHandler, configurationHandler, installHandler, updateHandler,
-            oAuthCallbackHandler, eventHandler, uninstallHandler, predicateHandlers);
+            oAuthCallbackHandler, eventHandler, uninstallHandler, predicateHandlers, requestPreprocessors);
     }
 
-    private static <T extends Handler> T findHandler(ApplicationContext applicationContext, Class<T> klass,
-                                                     boolean required) {
+    private static <T> T findHandler(ApplicationContext applicationContext, Class<T> klass, boolean required) {
         try {
             return applicationContext.getBean(klass);
         } catch (BeansException beansException) {
@@ -107,5 +112,10 @@ public class SpringSmartAppDefinition implements SmartAppDefinition {
     @Override
     public List<PredicateHandler> getPredicateHandlers() {
         return predicateHandlers;
+    }
+
+    @Override
+    public List<RequestPreprocessor> getRequestPreprocessors() {
+        return requestPreprocessors;
     }
 }
