@@ -57,31 +57,23 @@ class AppConfigurationHandlerSpec extends Specification {
             .version('0.1.0')
             .configurationData(configurationData)
             .settings([:])
-        ConfigurationResponseData configurationResponseData = new ConfigurationResponseData()
-            .page(new Page()
-                .name('This is the first configuration page')
-                .pageId('intro')
-                .nextPageId('finish')
-            .sections([new Section()
-                .settings([new DeviceSetting()
-                    .id("selectedSwitches")
-                    .name('Select a device')
-                    .description('Tap to select')
-                    .type(SettingType.DEVICE)
-                    .multiple(true)
-                    .preselect(true)
-                    .capabilities(['switch'])
-                    .permissions([DeviceSetting.PermissionsEnum.R, DeviceSetting.PermissionsEnum.X])])])
-        )
-        ExecutionResponse expectedResponse = new ExecutionResponse()
-            .statusCode(200)
-            .configurationData(configurationResponseData)
 
         when:
         ExecutionResponse executionResponse = configurationHandler.handle(executionRequest)
 
         then:
-        executionResponse == expectedResponse
+        executionResponse.statusCode == 200
+
+        ConfigurationResponseData config = executionResponse.getConfigurationData();
+        config.getInitialize() == null
+        Page page = config.getPage()
+        page.getName() == "This is the first configuration page"
+        page.pageId == 'intro'
+        page.nextPageId == 'finish'
+        page.previousPageId == null
+        page.complete == false
+        page.sections.size == 2
+        page.sections.name == ['Device Settings Section', 'Settings Test Section']
     }
 
     void 'properly responds to finish page request'() {
@@ -103,36 +95,26 @@ class AppConfigurationHandlerSpec extends Specification {
             .version('0.1.0')
             .configurationData(configurationData)
             .settings([:])
-        SectionSetting doneTextSetting = new SectionSetting()
-            .name('You are done!')
-            .description('Description text')
-            .type(SettingType.PARAGRAPH)
-        SectionSetting hideTipSetting = new SectionSetting()
-            .name("You can also hide/collapse the section by default with isHidden=true")
-            .type(SettingType.PARAGRAPH)
-        ConfigurationResponseData configurationResponseData = new ConfigurationResponseData()
-            .page(new Page()
-                .name('This is the last configuration page')
-                .complete(true)
-                .pageId('finish')
-                .previousPageId('intro')
-                .sections([
-                    new Section()
-                        .settings([hideTipSetting])
-                        .name('This section can be hidden by tapping here')
-                        .hideable(true),
-                    new Section().settings([doneTextSetting])
-            ])
-        )
-        ExecutionResponse expectedResponse = new ExecutionResponse()
-            .statusCode(200)
-            .configurationData(configurationResponseData)
 
         when:
         ExecutionResponse executionResponse = configurationHandler.handle(executionRequest)
 
         then:
-        executionResponse == expectedResponse
+        executionResponse.statusCode == 200
+
+        ConfigurationResponseData config = executionResponse.getConfigurationData();
+        config.getInitialize() == null
+        Page page = config.getPage()
+        page.getName() == "This is the last configuration page"
+        page.pageId == 'finish'
+        page.nextPageId == null
+        page.previousPageId == 'intro'
+        page.complete == true
+        page.sections.size == 4
+        page.sections.name == ['Another Fun Section',
+            null,
+            'This section can be hidden by tapping here',
+            null]
     }
 
     void 'returns NOT_FOUND when missing configurationData'() {
