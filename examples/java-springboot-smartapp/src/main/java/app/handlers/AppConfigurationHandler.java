@@ -1,14 +1,15 @@
 package app.handlers;
 
-import com.smartthings.sdk.smartapp.core.Response;
-import com.smartthings.sdk.smartapp.core.extensions.ConfigurationHandler;
-import com.smartthings.sdk.smartapp.core.models.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.smartthings.sdk.smartapp.core.Response;
+import com.smartthings.sdk.smartapp.core.extensions.ConfigurationHandler;
+import com.smartthings.sdk.smartapp.core.models.*;
 
 
 /**
@@ -23,63 +24,131 @@ import java.util.List;
  */
 @Component
 public class AppConfigurationHandler implements ConfigurationHandler {
-    private static final Logger LOG = LoggerFactory.getLogger(AppConfigurationHandler.class);
-
-    private static final SectionSetting doneText = new SectionSetting()
-        .type(SettingType.PARAGRAPH)
-        .name("You are done!")
-        .description("Description text");
-    private static final SectionSetting hideTipText = new SectionSetting()
-        .type(SettingType.PARAGRAPH)
-        .name("You can also hide/collapse the section by default with isHidden=true");
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     private enum PageType {
         INTRO {
             public ExecutionResponse buildResponse() {
-                Page page = new Page().pageId(INTRO.pageId);
-                ConfigurationResponseData response = new ConfigurationResponseData();
-                List<String> capabilities = new ArrayList<>();
-                capabilities.add("switch");
-                List<DeviceSetting.PermissionsEnum> devicePermissions = new ArrayList<>();
-                devicePermissions.add(DeviceSetting.PermissionsEnum.R);
-                devicePermissions.add(DeviceSetting.PermissionsEnum.X);
-                page.setNextPageId(FINISH.pageId);
-                page.setName("This is the first configuration page");
-                DeviceSetting deviceSetting = new DeviceSetting();
-                deviceSetting.setId("selectedSwitches");
-                deviceSetting.setName("Select a device");
-                deviceSetting.setDescription("Tap to select");
-                deviceSetting.setType(SettingType.DEVICE);
-                deviceSetting.setMultiple(true);
-                deviceSetting.setPreselect(true);
-                deviceSetting.setCapabilities(capabilities);
-                deviceSetting.setPermissions(devicePermissions);
-                Section deviceSection = new Section().addSettingsItem(deviceSetting);
-                page.addSectionsItem(deviceSection);
-                response.setPage(page);
-                return Response.ok(response);
+                SectionSetting deviceSetting = new DeviceSetting()
+                    .multiple(true)
+                    .preselect(true)
+                    .addPermissionsItem(DeviceSetting.PermissionsEnum.R)
+                    .addPermissionsItem(DeviceSetting.PermissionsEnum.X)
+                    .addCapabilitiesItem("switch")
+                    .id("selectedSwitches")
+                    .name("Select a device")
+                    .description("Tap to select")
+                    .type(SettingType.DEVICE);
+                Section deviceSection = new Section().name("Device Settings Section").addSettingsItem(deviceSetting);
+
+                SectionSetting textSetting = new TextSetting()
+                    .minLength(3)
+                    .postMessage("Post Message")
+                    .id("favoriteQuote")
+                    .name("Favorite Quote")
+                    .description("Enter something, anything you want")
+                    .type(SettingType.TEXT);
+                SectionSetting passwordSetting = new PasswordSetting()
+                    .id("passwordTest")
+                    .name("Do NOT enter real password")
+                    .description("Enter something random or fun")
+                    .type(SettingType.PASSWORD);
+                SectionSetting booleanSetting = new BooleanSetting()
+                    .id("booleanTest")
+                    .name("Yes or no, 1 or 0, true or false, set on not set")
+                    .description("To choose or not to choose, that is the question")
+                    .type(SettingType.BOOLEAN);
+                Section settingsTestSection = new Section()
+                    .name("Settings Test Section")
+                    .addSettingsItem(textSetting)
+                    .addSettingsItem(passwordSetting)
+                    .addSettingsItem(booleanSetting);
+
+                Page page = new Page()
+                    .pageId(INTRO.pageId)
+                    .nextPageId(FINISH.pageId)
+                    .name("This is the first configuration page")
+                    .addSectionsItem(deviceSection)
+                    .addSectionsItem(settingsTestSection);
+                return Response.ok(new ConfigurationResponseData().page(page));
             }
         },
         FINISH {
             @Override
             public ExecutionResponse buildResponse() {
-                Page page = new Page().pageId(FINISH.pageId);
-                ConfigurationResponseData response = new ConfigurationResponseData();
-                page.setPreviousPageId(INTRO.pageId);
-                page.setName("This is the last configuration page");
-                page.setComplete(true);
-                Section section = new Section().name("This section can be hidden by tapping here");
-                section.setHideable(true);
-                section.setHidden(false);
-                List<SectionSetting> settings = new ArrayList<>();
-                settings.add(hideTipText);
-                section.setSettings(settings);
-                page.addSectionsItem(section);
-                List<SectionSetting> doneTextSettings = new ArrayList<>();
-                doneTextSettings.add(doneText);
-                page.addSectionsItem(new Section().settings(doneTextSettings));
-                response.setPage(page);
-                return Response.ok(response);
+                SectionSetting enumSetting = new EnumSetting()
+                    .addOptionsItem(new Option().id("mk3s").name("Original Prusa i3 MK3S"))
+                    .addOptionsItem(new Option().id("taz6").name("LulzBot TAZ 6"))
+                    .addOptionsItem(new Option().id("m3").name("MakerGear M3"))
+                    .id("enumTest")
+                    .name("Favorite Printer")
+                    .description("Pick your favorite")
+                    .type(SettingType.ENUM);
+                SectionSetting complexEnumSetting = new EnumSetting()
+                    .addGroupedOptionsItem(new GroupedOption().name("Warm")
+                        .addOptionsItem(new Option().id("red").name("Red"))
+                        .addOptionsItem(new Option().id("orange").name("Orange"))
+                        .addOptionsItem(new Option().id("yellow").name("Yellow")))
+                    .addGroupedOptionsItem(new GroupedOption().name("Cool")
+                        .addOptionsItem(new Option().id("green").name("Green"))
+                        .addOptionsItem(new Option().id("blue").name("Blue"))
+                        .addOptionsItem(new Option().id("purple").name("Purple")))
+                    .addGroupedOptionsItem(new GroupedOption().name("Neutral")
+                        .addOptionsItem(new Option().id("black").name("Black"))
+                        .addOptionsItem(new Option().id("white").name("White"))
+                        .addOptionsItem(new Option().id("gray").name("Gray")))
+                    .id("complexEnumTest")
+                    .name("Favorite Color")
+                    .description("Pick your favorite")
+                    .type(SettingType.ENUM);
+                SectionSetting modeSetting = new ModeSetting()
+                    .style(StyleType.DEFAULT)
+                    .id("modeTest")
+                    .name("Select Mode")
+                    .description("This is a mode setting")
+                    .type(SettingType.MODE);
+                Section justForFunSection = new Section()
+                    .name("Another Fun Section")
+                    .addSettingsItem(enumSetting)
+                    .addSettingsItem(complexEnumSetting)
+                    .addSettingsItem(modeSetting);
+
+                SectionSetting numberSetting = new NumberSetting()
+                    .min(3).max(13)
+                    .postMessage("2 < n < 14")
+                    .id("numberTest")
+                    .name("A Number")
+                    .description("between 3 and 13, inclusive")
+                    .type(SettingType.NUMBER);
+                Section unnamedSection = new Section()
+                    .addSettingsItem(numberSetting);
+
+                SectionSetting hideTipText = new SectionSetting()
+                    .type(SettingType.PARAGRAPH)
+                    .name("You can also hide/collapse the section by default with isHidden=true");
+                Section collapsibleSection = new Section()
+                    .name("This section can be hidden by tapping here")
+                    .hideable(true)
+                    .hidden(false)
+                    .addSettingsItem(hideTipText);
+                SectionSetting doneText = new SectionSetting()
+                    .type(SettingType.PARAGRAPH)
+                    .name("You are done!")
+                    .description("Description text");
+
+                Section doneTextSection = new Section()
+                    .addSettingsItem(doneText);
+
+                Page page = new Page()
+                    .pageId(FINISH.pageId)
+                    .previousPageId(INTRO.pageId)
+                    .name("This is the last configuration page")
+                    .complete(true)
+                    .addSectionsItem(justForFunSection)
+                    .addSectionsItem(unnamedSection)
+                    .addSectionsItem(collapsibleSection)
+                    .addSectionsItem(doneTextSection);
+                return Response.ok(new ConfigurationResponseData().page(page));
             }
         };
 
@@ -98,11 +167,11 @@ public class AppConfigurationHandler implements ConfigurationHandler {
 
     @Override
     public ExecutionResponse handle(ExecutionRequest executionRequest) {
-        LOG.debug("CONFIGURATION: executionRequest = " + executionRequest);
+        log.debug("CONFIGURATION: executionRequest = " + executionRequest);
 
         ConfigurationData configData = executionRequest.getConfigurationData();
         if (configData == null) {
-            LOG.error("configurationData required in ExecutionRequest for ConfigurationHandler");
+            log.error("configurationData required in ExecutionRequest for ConfigurationHandler");
             return Response.notFound();
         }
 
@@ -122,41 +191,37 @@ public class AppConfigurationHandler implements ConfigurationHandler {
             // settings are available, please see the documentation:
             // https://smartthings.developer.samsung.com/develop/guides/smartapps/configuration.html
             if (configData.getPageId() == null) {
-                LOG.error("missing pageId in configurationData");
+                log.error("missing pageId in configurationData");
                 return Response.notFound();
             }
             try {
                 PageType pageType = PageType.fromPageId(configData.getPageId());
                 return pageType.buildResponse();
             } catch (IllegalArgumentException exception) {
-                LOG.error("invalid pageId " + configData.getPageId() + "in configurationData");
+                log.error("invalid pageId " + configData.getPageId() + "in configurationData");
                 return Response.notFound();
             }
         }
 
-        LOG.error("missing phase in configurationData");
+        log.error("missing phase in configurationData");
         return Response.notFound();
     }
 
     private ExecutionResponse buildInitializeResponse() {
-        ConfigurationResponseData response = new ConfigurationResponseData();
         // Although not required, we are invoking InitializeSetting and
         // using method-chaining to ultimately return the required type
         // of InitializeSetting. See the handle method and PageType for
         // an example of how you can mix chaining with setting property
         // accessors of a different type.
-        List<String> permissions = new ArrayList<>();
-        permissions.add("r:devices:*");
-        permissions.add("x:devices:*");
         InitializeSetting initialize = new InitializeSetting()
+            .id("init")
+            .name("Java Ratpack Guice SmartApp Example")
+            .description("Create a SmartApp using Java and Ratpack with Guice")
             .firstPageId("intro")
             .disableCustomDisplayName(false)
             .disableRemoveApp(false)
-            .permissions(permissions);
-        initialize.setId("init");
-        initialize.setName("Java Ratpack Guice SmartApp Example");
-        initialize.setDescription("Create a SmartApp using Java and Ratpack with Guice");
-        response.setInitialize(initialize);
-        return Response.ok(response);
+            .addPermissionsItem("r:devices:*")
+            .addPermissionsItem("x:devices:*");
+        return Response.ok(new ConfigurationResponseData().initialize(initialize));
     }
 }
