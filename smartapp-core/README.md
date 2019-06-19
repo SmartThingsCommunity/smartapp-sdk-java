@@ -53,7 +53,6 @@ public class AppController {
             .event(request -> Response.ok(EventResponseData.newInstance()))
             .uninstall(request -> Response.ok(UninstallResponseData.newInstance()))
     );
-
 }
 ```
 
@@ -126,14 +125,30 @@ Respond to configuration update requests.
 
 Response to request with an arbitrary HTTP status code.
 
+### Request Preprocessors
+
+If you need to have code called for all lifecycle events before they are
+handled normally, you can implement the `RequestPreprocessor` interface and add
+your implementation to the SmartApp using the `addRequestPreprocessor` method.
+
+```java
+    private final SmartApp smartApp = SmartApp.of(spec ->
+        spec
+            .install(request -> Response.ok())
+            ...
+            .addRequestPreprocessor(myPreprocessor)
+    );
+}
+```
+
 ### Context Store
 
 Support has been included for managing installed application information via a
-"context store". Actual implementations of this are coming soon but if you want
-to use it right now, you need to create your own context store to manage this
-information.
+"context store". The following implementations are currently available:
 
-To use this you will need to:
+  - [DynamoDB](../smartapp-contextstore-dynamodb/README.md)
+
+To create your own implementation, you will need to:
 
   1. Create a class which implements InstalledAppContextStore which is a DAO
      for managing your context. Consider using DefaultInstalledAppContextStore
@@ -141,13 +156,18 @@ To use this you will need to:
      the appropriate SmartApp lifecycle events. DefaultInstalledAppContextStore
      also uses the DefaultAppContextStore which includes common data related
      to the SmartApp.
-  2. Set up a RequestPreprocessor to call your DAO at the appropriate times.
-     The easiest way to do this is to implement DefaultAppContextStore as
-     mentioned above and pass that into your SmartApp instance on start-up
-     using `requestPreprocessor`. (If you're using Spring and our Spring
-     library, you can simply make the implementation available in the
-     `ApplicationContext`.)
+     1. If you're storing tokens, be sure your `get` method refreshes tokens
+        if necessary before returning the context.
+     2. Set up a RequestPreprocessor to call your DAO at the appropriate times.
+        The easiest way to do this is to implement DefaultAppContextStore as
+        mentioned above and pass that into your SmartApp instance on start-up
+        using `addRequestPreprocessor`. (If you're using Spring and our Spring
+        library, you can simply make the implementation available in the
+        `ApplicationContext`.)
   3. Use the `get` method of your DAO to retrieve your context as needed.
+  4. Since refresh tokens expire after 30 days, if you expect users to have
+     periods of over 30 days with no out-of-band activity, you will need to
+     refresh the tokens on a schedule.
 
 ## More about SmartThings
 

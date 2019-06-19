@@ -114,7 +114,7 @@ class SmartAppSpec extends Specification {
                             Response.ok(new EventResponseData())
                         })
                 })
-                .requestPreprocessor(requestPreprocessor)
+                .addRequestPreprocessor(requestPreprocessor)
         }
 
         when:
@@ -195,9 +195,9 @@ class SmartAppSpec extends Specification {
                             Response.ok(new EventResponseData())
                         })
                 })
-                .requestPreprocessor(requestPreprocessor1)
-                .requestPreprocessor(requestPreprocessor2)
-                .requestPreprocessor(requestPreprocessor3)
+                .addRequestPreprocessor(requestPreprocessor1)
+                .addRequestPreprocessor(requestPreprocessor2)
+                .addRequestPreprocessor(requestPreprocessor3)
         }
 
         ExecutionRequest request = new ExecutionRequest()

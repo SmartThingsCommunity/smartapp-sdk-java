@@ -41,8 +41,11 @@ repositories {
 dependencies {
     implementation deps.projects.smartappspring
     implementation deps.projects.smartthingsclient
+    implementation deps.projects.smartappcsdynamodb
     implementation deps.logging.logback
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.568')
+    implementation 'com.amazonaws:aws-java-sdk-dynamodb'
 
     testImplementation deps.groovy.all
     testImplementation deps.test.spockCore

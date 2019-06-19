@@ -25,6 +25,8 @@ Several artifacts are published to the Maven central repository under the `com.s
 * `smartapp-core` - Core SmartApp Framework
   * `smartapp-guice` - Extension library for use with Google Guice
   * `smartapp-spring` - Extension library for use with Spring Dependency Injection
+  * `smartapp-contextstore-dynamodb` - Extension library to use DynamoDB to
+    store installed application context data.
 * `smartthings-client` - Library for working with SmartThings APIs
 
 Import the library dependencies as needed:
@@ -49,12 +51,12 @@ Import the library dependencies as needed:
 ```groovy
 implementation 'com.smartthings.sdk:smartapp-core:0.0.1-PREVIEW'
 ```
-    
+
 </details>
 
 <details>
     <summary>Gradle Kotlin DSL</summary>
-    
+
 ```kotlin
 compile("com.smartthings.sdk:smartapp-core:0.0.1-PREVIEW")
 ```
@@ -63,7 +65,7 @@ compile("com.smartthings.sdk:smartapp-core:0.0.1-PREVIEW")
 
 <details>
     <summary>Scala SBT</summary>
-    
+
 ```scala
 libraryDependencies += "com.smartthings.sdk" % "smartapp-core" % "0.0.1-PREVIEW"
 ```
@@ -72,7 +74,7 @@ libraryDependencies += "com.smartthings.sdk" % "smartapp-core" % "0.0.1-PREVIEW"
 
 <details>
     <summary>Apache Ivy</summary>
-    
+
 ```xml
 <dependency org="com.smartthings.sdk" name="smartapp-core" rev="0.0.1-PREVIEW" />
 ```
@@ -81,7 +83,7 @@ libraryDependencies += "com.smartthings.sdk" % "smartapp-core" % "0.0.1-PREVIEW"
 
 <details>
     <summary>Groovy Grapes</summary>
-    
+
 ```groovy
 @Grapes(
   @Grab(group='com.smartthings.sdk', module='smartapp-core', version='0.0.1-PREVIEW')
@@ -261,6 +263,9 @@ An extension library that provides support for building a SmartApp with Guice de
 
 #### [smartapp-spring](/smartapp-spring) ([Documentation](smartapp-spring/README.md))
 An extension library that provides support for building a SmartApp with Spring dependency injection.
+
+#### [smartapp-contextstore-dynamodb](/smartapp-contextstore-dynamodb) ([Documentation](smartapp-contextstore-dynamodb/README.md))
+An extension library that implements a [context store](smartapp-core/README.md#context-store) using DynamoDB.
 
 ## More about SmartThings
 

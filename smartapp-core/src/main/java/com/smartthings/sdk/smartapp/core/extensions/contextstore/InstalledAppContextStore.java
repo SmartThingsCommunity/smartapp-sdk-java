@@ -1,12 +1,14 @@
 package com.smartthings.sdk.smartapp.core.extensions.contextstore;
 
+import java.util.stream.Stream;
+
 
 /**
  * Implementations of this interface handle storing and updating
  * InstalledAppContext instances, including keeping tokens up-to-date.
  *
- * IMPORTANT: Implementations of this class are responsible for keeping
- * the tokens up-to-date. Refresh tokens expire after 30 days.
+ * IMPORTANT: Implementations of this class are responsible for keeping the
+ * tokens up-to-date. Refresh tokens expire after 30 days.
  */
 public interface InstalledAppContextStore<T extends InstalledAppContext> {
     /**
@@ -30,9 +32,14 @@ public interface InstalledAppContextStore<T extends InstalledAppContext> {
     void remove(String installedAppId);
 
     /**
-     * Get the context for the given installedAppId. Tokens included are good
-     * for at least 3 minutes. (If there is less than 3 minutes left, they
-     * will be refreshed before being returned.)
+     * Get the context for the given installedAppId. If tokens are included,
+     * they should be good for at least an hour. (If there is less than that,
+     * they will be refreshed before being returned.)
      */
     T get(String installedAppId);
+
+    /**
+     * Get a list of active contexts as a stream.
+     */
+    Stream<T> get();
 }

@@ -161,7 +161,13 @@ public class DefaultSmartAppDefinition implements SmartAppDefinition {
         }
 
         @Override
-        public SmartAppDefinitionSpec requestPreprocessor(RequestPreprocessor requestPreprocessor) {
+        public SmartAppDefinitionSpec requestPreprocessors(List<RequestPreprocessor> requestPreprocessors) {
+            this.requestPreprocessors = requestPreprocessors;
+            return this;
+        }
+
+        @Override
+        public SmartAppDefinitionSpec addRequestPreprocessor(RequestPreprocessor requestPreprocessor) {
             requestPreprocessors.add(requestPreprocessor);
             return this;
         }

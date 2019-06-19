@@ -24,7 +24,8 @@ public class AppController {
     private final SmartApp smartApp;
     private final HttpVerificationService httpVerificationService;
 
-    public AppController(SmartAppDefinition smartAppDefinition, HttpVerificationService httpVerificationService) {
+    public AppController(SmartAppDefinition smartAppDefinition,
+            HttpVerificationService httpVerificationService) {
         smartApp = SmartApp.of(smartAppDefinition);
         this.httpVerificationService = httpVerificationService;
     }
