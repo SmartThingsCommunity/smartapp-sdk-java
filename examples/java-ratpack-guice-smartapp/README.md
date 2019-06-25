@@ -11,6 +11,8 @@ for dependency injection.
 
 ## Running the Example
 
+### Build and Run
+
 Execute the following command from the project root directory:
 
 ```
@@ -20,21 +22,24 @@ Execute the following command from the project root directory:
 
 ### Create SmartApp
 
-Note: it is necessary for the application to be running before you create the SmartApp
-in the developer console.
+Note: it is necessary for the application to be running before you create the
+SmartApp in the developer console. You will need to restart once configured.
 
-In the [developer workspace](https://devworkspace.developer.samsung.com/smartthingsconsole/iotweb/site/index.html),
-choose "Automations" on the left navigation bar and create a new WebHook endpoint automation using the following
-settings:
+Follow these steps using the
+[developer workspace](https://smartthings.developer.samsung.com/workspace/):
 
-| Option             | Value                               |
-|--------------------|-------------------------------------|
-| SmartApp Instances | Single                              |
-| Hosting Type       | WebHook endpoint                    |
-| Target URL         | Enter the URL of your endpoint here |
-| Scopes             | `r:devices:*` and `x:devices:*`     |
-
-Once created, self-publish the automation for testing and you will be ready to test it.
+  1. Create a new project and choose "Automation for the SmartThings App".
+  1. Give your project a unique name.
+  1. Choose "Automation Connector | SmartApp" under "Develop" in the left-hand menu.
+  1. Choose "WebHook Endpoint" and enter the URL of your endpoint and click "Next".
+  1. Select the `r:devices:*` and `x:devices:*` scopes and click "Next".
+  1. Give your application a name and hit "Save". Note that at this point, you
+     will need to have the application running. (See Build and Run above.)
+  1. Save the public key created to a file called `smartthings_rsa.pub` in the
+     `src/main/resources` directory.
+  1. Save the new project and click the "Deploy to Test" button.
+  1. Restart your server (see [Build and Run](#build-and-run) above). (This is
+     necessary because we added the configuration options above.)
 
 ### Install SmartApp
 

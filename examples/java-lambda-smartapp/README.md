@@ -89,19 +89,16 @@ First, you'll need to determine the target ARN for the function you just deploye
 function you just deployed in the AWS Console and you will find the ARN in the upper right
 corner.
 
-In the [developer workspace](https://devworkspace.developer.samsung.com/smartthingsconsole/iotweb/site/index.html),
-choose "Automations" on the left navigation bar and create a new WebHook endpoint automation using the following
-settings:
+Then, follow these steps using the
+[developer workspace](https://smartthings.developer.samsung.com/workspace/):
 
-| Option             | Value                               |
-|--------------------|-------------------------------------|
-| SmartApp Instances | Single                              |
-| Hosting Type       | AWS Lambda                          |
-| Target ARN         | The ARN you found above             |
-| Scopes             | `r:devices:*` and `x:devices:*`     |
-| App Settings       | leave blank                         |
-
-Once created, self-publish the automation for testing and you will be ready to test it.
+  1. Create a new project and choose "Automation for the SmartThings App".
+  1. Give your project a unique name.
+  1. Choose "Automation Connector | SmartApp" under "Develop" in the left-hand menu.
+  1. Choose "AWS Lambda" and enter the target ARN you found above.
+  1. Select the `r:devices:*` and `x:devices:*` scopes and click "Next".
+  1. Give your application a name and hit "Save".
+  1. Save the new project and click the "Deploy to Test" button.
 
 ### Install SmartApp
 
