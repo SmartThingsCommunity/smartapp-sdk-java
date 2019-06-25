@@ -31,10 +31,6 @@ allprojects {
     }
 }
 
-configure(subprojects.findAll {it.name != 'examples'}) {
-    apply from: rootProject.file('gradle/publish-jar.gradle')
-}
-
 task preCommit(type: GradleBuild) {
     // Not including spotbugsTest here because some Spock tests generate
     // SpotBugs errors that aren't currently ignored.
