@@ -1,8 +1,5 @@
 package app.handlers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -36,10 +33,11 @@ public class AppConfigurationHandler implements ConfigurationHandler {
                     .addPermissionsItem(DeviceSetting.PermissionsEnum.X)
                     .addCapabilitiesItem("switch")
                     .id("selectedSwitches")
-                    .name("Select a device")
+                    .name("Device(s) to turn on at 7 a.m.")
                     .description("Tap to select")
                     .type(SettingType.DEVICE);
-                Section deviceSection = new Section().name("Device Settings Section").addSettingsItem(deviceSetting);
+                Section deviceSection = new Section().name("Device Settings Section")
+                    .addSettingsItem(deviceSetting);
 
                 SectionSetting textSetting = new TextSetting()
                     .minLength(3)

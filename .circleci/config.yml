@@ -190,6 +190,7 @@ jobs:
                         smartapp-core:publishMavenJavaPublicationToMavenRepository \
                         smartapp-guice:publishMavenJavaPublicationToMavenRepository \
                         smartapp-spring:publishMavenJavaPublicationToMavenRepository \
+                        smartapp-contextstore-dynamodb:publishMavenJavaPublicationToMavenRepository \
                         smartthings-client:publishMavenJavaPublicationToMavenRepository
 
     'GitHub Release':

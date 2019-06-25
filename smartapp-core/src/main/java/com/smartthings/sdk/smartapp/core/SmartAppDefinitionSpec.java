@@ -1,9 +1,11 @@
 package com.smartthings.sdk.smartapp.core;
 
+import java.util.List;
+import java.util.function.Predicate;
+
 import com.smartthings.sdk.smartapp.core.extensions.*;
 import com.smartthings.sdk.smartapp.core.models.*;
 
-import java.util.function.Predicate;
 
 public interface SmartAppDefinitionSpec {
     SmartAppDefinitionSpec install(InstallHandler handler);
@@ -14,5 +16,6 @@ public interface SmartAppDefinitionSpec {
     SmartAppDefinitionSpec configuration(ConfigurationHandler handler);
     SmartAppDefinitionSpec oauthCallback(OAuthCallbackHandler handler);
     SmartAppDefinitionSpec when(Predicate<ExecutionRequest> predicate, Handler handler);
-    SmartAppDefinitionSpec requestPreprocessor(RequestPreprocessor requestPreprocessor);
+    SmartAppDefinitionSpec requestPreprocessors(List<RequestPreprocessor> requestPreprocessor);
+    SmartAppDefinitionSpec addRequestPreprocessor(RequestPreprocessor requestPreprocessor);
 }
