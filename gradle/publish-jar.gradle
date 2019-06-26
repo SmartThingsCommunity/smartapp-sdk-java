@@ -6,63 +6,60 @@ apply plugin: "java"
 apply plugin: "maven-publish"
 apply plugin: "signing"
 
-task sourceJar(type: Jar, dependsOn: classes) {
-    classifier = "sources"
-    from sourceSets.main.allSource
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    archiveClassifier = 'sources'
 }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = "javadoc"
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives jar
-    archives sourceJar
-    archives javadocJar
-}
-
-signing {
-    sign configurations.archives
+task javadocJar(type: Jar) {
+    from javadoc
+    archiveClassifier = 'javadoc'
 }
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            customizePom(pom)
-            groupId project.getGroup()
-            artifactId project.getName()
-            version project.getVersion()
+            artifactId = project.getName()
             from components.java
-
-            pom.withXml {
-                def pomFile = file("${project.buildDir}/generated-pom.xml")
-                writeTo(pomFile)
-                def pomAscFile = signing.sign(pomFile).signatureFiles[0]
-                artifact(pomAscFile) {
-                    classifier = null
-                    extension = 'pom.asc'
+            artifact sourcesJar
+            artifact javadocJar
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
                 }
             }
-
-            artifact sourceJar {
-                classifier "sources"
-            }
-
-            artifact javadocJar {
-                classifier "javadoc"
-            }
-
-            // create the signed artifacts
-            project.tasks.signArchives.signatureFiles.each {
-                artifact(it) {
-                    def matcher = it.file =~ /-(sources|javadoc)\.jar\.asc$/
-                    if (matcher.find()) {
-                        classifier = matcher.group(1)
-                    } else {
-                        classifier = null
+            pom {
+                name = 'SmartApp SDK'
+                description = 'SmartApp and Client SDK'
+                url = 'https://github.com/SmartThingsCommunity/smartapp-sdk-java'
+                organization {
+                    name = 'com.smartthings.sdk'
+                    url = 'https://github.com/SmartThingsCommunity'
+                }
+                issueManagement {
+                    system = 'GitHub'
+                    url = 'https://github.com/SmartThingsCommunity/smartapp-sdk-java/issues'
+                }
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'https://github.com/SmartThingsCommunity/smartapp-sdk-java/blob/master/LICENSE'
+                        distribution = 'repo'
                     }
-                    extension = "jar.asc"
+                }
+                scm {
+                    url = 'https://github.com/SmartThingsCommunity/smartapp-sdk-java'
+                    connection = 'scm:git:git://github.com/SmartThingsCommunity/smartapp-sdk-java.git'
+                    developerConnection = 'scm:git:ssh://git@github.com:SmartThingsCommunity/smartapp-sdk-java.git'
+                }
+                developers {
+                    developer {
+                        name = 'SmartThings, Inc.'
+                    }
                 }
             }
         }
@@ -70,72 +67,16 @@ publishing {
     repositories {
         maven {
             credentials {
-                username sonatypeUsername
-                password sonatypePassword
+                username = sonatypeUsername
+                password = sonatypePassword
             }
-            if (version.endsWith('SNAPSHOT')) {
-                url "https://oss.sonatype.org/content/repositories/snapshots"
-            } else {
-                url "https://oss.sonatype.org/service/local/staging/deploy/maven2"
-            }
+            def releasesRepoUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2'
+            def snapshotsRepoUrl = 'https://oss.sonatype.org/content/repositories/snapshots'
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
         }
     }
 }
 
-
-def customizePom(pom) {
-    pom.withXml {
-        def root = asNode()
-
-        // eliminate test-scoped dependencies (no need in maven central POMs)
-        root.dependencies.removeAll { dep ->
-            dep.scope == "test"
-        }
-
-        // add all items necessary for maven central publication
-        root.children().last() + {
-            resolveStrategy = Closure.DELEGATE_FIRST
-
-            description 'SmartApp and Client SDK'
-            name 'SmartApp SDK'
-            url 'https://github.com/SmartThingsCommunity/smartapp-sdk-java'
-            organization {
-                name 'com.smartthings.sdk'
-                url 'https://github.com/SmartThingsCommunity'
-            }
-            issueManagement {
-                system 'GitHub'
-                url 'https://github.com/SmartThingsCommunity/smartapp-sdk-java/issues'
-            }
-            licenses {
-                license {
-                    name 'Apache License 2.0'
-                    url 'https://github.com/SmartThingsCommunity/smartapp-sdk-java/blob/master/LICENSE'
-                    distribution 'repo'
-                }
-            }
-            scm {
-                url 'https://github.com/SmartThingsCommunity/smartapp-sdk-java'
-                connection 'scm:git:git://github.com/SmartThingsCommunity/smartapp-sdk-java.git'
-                developerConnection 'scm:git:ssh://git@github.com:SmartThingsCommunity/smartapp-sdk-java.git'
-            }
-            developers {
-                developer {
-                    name 'SmartThings, Inc.'
-                }
-            }
-        }
-    }
-}
-
-model {
-    tasks.generatePomFileForMavenJavaPublication {
-        destination = file("$buildDir/generated-pom.xml")
-    }
-    tasks.publishMavenJavaPublicationToMavenLocal {
-        dependsOn project.tasks.signArchives
-    }
-    tasks.publishMavenJavaPublicationToMavenRepository {
-        dependsOn project.tasks.signArchives
-    }
+signing {
+    sign publishing.publications.mavenJava
 }
