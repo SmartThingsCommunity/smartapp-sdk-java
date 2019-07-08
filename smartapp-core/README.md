@@ -169,6 +169,12 @@ To create your own implementation, you will need to:
      periods of over 30 days with no out-of-band activity, you will need to
      refresh the tokens on a schedule.
 
+### Reference Documentation
+
+Reference documentation can be found here:
+
+https://SmartThingsCommunity.github.io//smartapp-sdk-java/smartapp-core/javadoc/
+
 ## More about SmartThings
 
 If you are not familiar with SmartThings, we have

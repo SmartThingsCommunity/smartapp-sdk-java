@@ -22,6 +22,8 @@ We're always looking for more opinions on discussions in the issue tracker. It's
 
 ### [Submitting a pull request](../../compare)
 
+- Run `./gradlew preCommit` before committing changes to run various checks and
+  update documentation.
 - Non-trivial changes are often best discussed in an issue first, to prevent you from doing unnecessary work.
 - For ambitious tasks, you should try to get your work in front of the community for feedback as soon as possible. Open a pull request as soon as you have done the minimum needed to demonstrate your idea. At this early stage, don't worry about making things perfect, or 100% complete. Add a `[WIP]` prefix to the title, and describe what you still need to do. This lets reviewers know not to nit-pick small details or point out improvements you already know you need to make.
 - Don't include unrelated changes
@@ -34,7 +36,7 @@ We're always looking for more opinions on discussions in the issue tracker. It's
 
 ## Contributing to models and API methods
 
-Since much of the code is auto-generated from Swagger specification files, any pull requests regarding the generated files will not be accepted and will be immediately closed. 
+Since much of the code is auto-generated from Swagger specification files, any pull requests regarding the generated files will not be accepted and will be immediately closed.
 
 ## [Finding contributions to work on](../../labels/help%20wanted)
 

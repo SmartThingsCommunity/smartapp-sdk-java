@@ -11,7 +11,7 @@ import com.smartthings.sdk.smartapp.core.models.*;
 
 /**
  * This class extends ConfigurationHandler to handle incoming requests.
- * The Configuration page defines not only the look & feel of your
+ * The Configuration page defines not only the look and feel of your
  * app's presence within the SmartThings app, but it defines what
  * your app will have access to once installed.
  *
