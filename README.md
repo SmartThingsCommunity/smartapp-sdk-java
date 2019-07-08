@@ -246,6 +246,9 @@ This Java example implements the Java `smartapp-core` library with a Ratpack ser
 #### [java-springboot-smartapp](examples/java-springboot-smartapp) ([Documentation](examples/java-springboot-smartapp/README.md)) ![java-logo](docs/java-logo.png) ![spring-logo](docs/spring-logo.png)
 This Java example implements the Java `smartapp-core` library using Spring Boot.
 
+#### [java-lambda-smartapp](examples/java-lambda-smartapp) ([Documentation](examples/java-lambda-smartapp/README.md)) ![java-logo](docs/java-logo.png) ![aws-logo](docs/aws-logo.png)
+This Java example implements the Java `smartapp-core` library as an AWS Lambda.
+
 ## Documentation
 
 ### Modules

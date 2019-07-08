@@ -1,6 +1,6 @@
 # smartthings-client
 
-Interact with the SmartThings public REST API with this _Java & Android-compatible_ client library.
+Interact with the SmartThings public REST API with this _Java and Android-compatible_ client library.
 
 ## Prerequisites
 
@@ -116,6 +116,12 @@ devices?.forEach { switchesConfig ->
     }
 }
 ```
+
+### Reference Documentation
+
+Reference documentation can be found here:
+
+https://SmartThingsCommunity.github.io//smartapp-sdk-java/smartthings-client/javadoc/
 
 ## More about SmartThings
 

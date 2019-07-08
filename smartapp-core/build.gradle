@@ -98,3 +98,9 @@ compileJava.dependsOn swaggerSources.smartapp.code
 
 // Automatically generate models when IntelliJ loads the project
 ideaModule.dependsOn generateSwaggerCode
+
+task githubJavadoc(type: Javadoc, dependsOn: generateSwaggerCode) {
+    source = sourceSets.main.allJava
+    destinationDir = rootProject.file('docs/smartapp-core/javadoc')
+    options.addBooleanOption("notimestamp", true)
+}
