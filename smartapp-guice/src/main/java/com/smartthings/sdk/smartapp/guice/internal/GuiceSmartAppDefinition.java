@@ -23,6 +23,7 @@ public class GuiceSmartAppDefinition implements SmartAppDefinition {
     private final UninstallHandler uninstallHandler;
     private final EventHandler eventHandler;
     private final PingHandler pingHandler;
+    private final ConfirmationHandler confirmationHandler;
     private final ConfigurationHandler configurationHandler;
     private final OAuthCallbackHandler oAuthCallbackHandler;
     private final List<PredicateHandler> predicateHandlers;
@@ -34,6 +35,7 @@ public class GuiceSmartAppDefinition implements SmartAppDefinition {
         this.uninstallHandler = findOne(injector, UninstallHandler.class);
         this.eventHandler = findOne(injector, EventHandler.class);
         this.pingHandler = findOne(injector, PingHandler.class);
+        this.confirmationHandler = findOne(injector, ConfirmationHandler.class);
         this.configurationHandler = findOne(injector, ConfigurationHandler.class);
         this.oAuthCallbackHandler = findOne(injector, OAuthCallbackHandler.class);
         this.predicateHandlers = search(injector, PredicateHandler.class);
@@ -63,6 +65,11 @@ public class GuiceSmartAppDefinition implements SmartAppDefinition {
     @Override
     public PingHandler getPingHandler() {
         return pingHandler;
+    }
+
+    @Override
+    public ConfirmationHandler getConfirmationHandler() {
+        return confirmationHandler;
     }
 
     @Override

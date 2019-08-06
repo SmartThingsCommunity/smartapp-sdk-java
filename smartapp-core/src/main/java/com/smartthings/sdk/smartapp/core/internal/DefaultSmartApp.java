@@ -9,10 +9,19 @@ import java.util.function.Consumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.smartthings.sdk.smartapp.core.*;
+import com.smartthings.sdk.smartapp.core.Handler;
+import com.smartthings.sdk.smartapp.core.PredicateHandler;
+import com.smartthings.sdk.smartapp.core.RequestPreprocessor;
+import com.smartthings.sdk.smartapp.core.Response;
+import com.smartthings.sdk.smartapp.core.SmartApp;
+import com.smartthings.sdk.smartapp.core.SmartAppDefinition;
+import com.smartthings.sdk.smartapp.core.SmartAppDefinitionSpec;
+import com.smartthings.sdk.smartapp.core.internal.handlers.DefaultConfirmationHandler;
 import com.smartthings.sdk.smartapp.core.internal.handlers.DefaultPingHandler;
 import com.smartthings.sdk.smartapp.core.internal.handlers.NoopUninstallHandler;
-import com.smartthings.sdk.smartapp.core.models.*;
+import com.smartthings.sdk.smartapp.core.models.AppLifecycle;
+import com.smartthings.sdk.smartapp.core.models.ExecutionRequest;
+import com.smartthings.sdk.smartapp.core.models.ExecutionResponse;
 
 
 public class DefaultSmartApp implements SmartApp {
@@ -93,6 +102,10 @@ public class DefaultSmartApp implements SmartApp {
         );
         chain.add(
             handler(AppLifecycle.PING, getOrDefault(definition.getPingHandler(), new DefaultPingHandler()))
+        );
+        chain.add(
+            handler(AppLifecycle.CONFIRMATION, getOrDefault(definition.getConfirmationHandler(),
+                new DefaultConfirmationHandler()))
         );
         chain.add(
             handler(AppLifecycle.OAUTH_CALLBACK, getOrDefault(definition.getOauthCallbackHandler(), NOT_FOUND_HANDLER))

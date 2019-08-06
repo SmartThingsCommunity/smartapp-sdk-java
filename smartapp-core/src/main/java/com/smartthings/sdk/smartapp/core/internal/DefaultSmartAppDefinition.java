@@ -22,6 +22,7 @@ public class DefaultSmartAppDefinition implements SmartAppDefinition {
     private final UninstallHandler uninstallHandler;
     private final EventHandler eventHandler;
     private final PingHandler pingHandler;
+    private final ConfirmationHandler confirmationHandler;
     private final ConfigurationHandler configurationHandler;
     private final OAuthCallbackHandler oAuthCallbackHandler;
     private final List<PredicateHandler> predicateHandlers;
@@ -33,6 +34,7 @@ public class DefaultSmartAppDefinition implements SmartAppDefinition {
         UninstallHandler uninstallHandler,
         EventHandler eventHandler,
         PingHandler pingHandler,
+        ConfirmationHandler confirmationHandler,
         ConfigurationHandler configurationHandler,
         OAuthCallbackHandler oAuthCallbackHandler,
         List<PredicateHandler> predicateHandlers,
@@ -43,6 +45,7 @@ public class DefaultSmartAppDefinition implements SmartAppDefinition {
         this.uninstallHandler = uninstallHandler;
         this.eventHandler = eventHandler;
         this.pingHandler = pingHandler;
+        this.confirmationHandler = confirmationHandler;
         this.configurationHandler = configurationHandler;
         this.oAuthCallbackHandler = oAuthCallbackHandler;
         this.predicateHandlers = predicateHandlers;
@@ -81,6 +84,11 @@ public class DefaultSmartAppDefinition implements SmartAppDefinition {
     }
 
     @Override
+    public ConfirmationHandler getConfirmationHandler() {
+        return confirmationHandler;
+    }
+
+    @Override
     public ConfigurationHandler getConfigurationHandler() {
         return configurationHandler;
     }
@@ -107,6 +115,7 @@ public class DefaultSmartAppDefinition implements SmartAppDefinition {
         private Supplier<UninstallHandler> uninstallHandler;
         private Supplier<EventHandler> eventHandler;
         private Supplier<PingHandler> pingHandler;
+        private Supplier<ConfirmationHandler> confirmationHandler;
         private Supplier<ConfigurationHandler> configurationHandler;
         private Supplier<OAuthCallbackHandler> oAuthCallbackHandler;
         private List<PredicateHandler> predicateHandlers = new ArrayList<>();
@@ -139,6 +148,12 @@ public class DefaultSmartAppDefinition implements SmartAppDefinition {
         @Override
         public SmartAppDefinitionSpec ping(PingHandler handler) {
             pingHandler = () -> handler;
+            return this;
+        }
+
+        @Override
+        public SmartAppDefinitionSpec confirmation(ConfirmationHandler handler) {
+            confirmationHandler = () -> handler;
             return this;
         }
 
@@ -179,6 +194,7 @@ public class DefaultSmartAppDefinition implements SmartAppDefinition {
                 uninstallHandler != null ? uninstallHandler.get() : null,
                 eventHandler != null ? eventHandler.get() : null,
                 pingHandler != null ? pingHandler.get() : null,
+                confirmationHandler != null ? confirmationHandler.get() : null,
                 configurationHandler != null ? configurationHandler.get() : null,
                 oAuthCallbackHandler != null ? oAuthCallbackHandler.get() : null,
                 predicateHandlers,

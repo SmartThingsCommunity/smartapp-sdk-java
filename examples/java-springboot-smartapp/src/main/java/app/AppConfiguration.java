@@ -95,7 +95,7 @@ public class AppConfiguration {
 
     @Bean
     public HttpVerificationService httpVerificationService() {
-        return new HttpVerificationService();
+        return new HttpVerificationService(httpClient());
     }
 
     @Bean

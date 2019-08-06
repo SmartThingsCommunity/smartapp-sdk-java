@@ -121,7 +121,7 @@ devices?.forEach { switchesConfig ->
 
 Reference documentation can be found here:
 
-https://SmartThingsCommunity.github.io//smartapp-sdk-java/smartthings-client/javadoc/
+https://smartthingscommunity.github.io//smartapp-sdk-java/smartthings-client/javadoc/
 
 ## More about SmartThings
 
