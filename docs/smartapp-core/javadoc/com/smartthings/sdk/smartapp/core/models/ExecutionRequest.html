@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":10,"i29":10,"i30":10,"i31":10,"i32":10,"i33":10,"i34":10,"i35":10,"i36":10,"i37":10,"i38":10,"i39":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":10,"i29":10,"i30":10,"i31":10,"i32":10,"i33":10,"i34":10,"i35":10,"i36":10,"i37":10,"i38":10,"i39":10,"i40":10,"i41":10,"i42":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -108,7 +108,7 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>@Generated(value="io.swagger.codegen.languages.JavaClientCodegen",
-           date="2019-06-17T14:08:10.385-05:00")
+           date="2019-08-05T15:27:19.505-05:00")
 public class <span class="typeNameLabel">ExecutionRequest</span>
 extends java.lang.Object</pre>
 <div class="block">The root model for all executions.  An execution request is compositional in nature.  Client&#39;s can expect exactly one *Data field set depending on the type of execution.  For example, if execution is of type EVENT, the \&quot;eventData\&quot; field will be set.</div>
@@ -152,183 +152,197 @@ extends java.lang.Object</pre>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#configurationData-com.smartthings.sdk.smartapp.core.models.ConfigurationData-">configurationData</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ConfigurationData.html" title="class in com.smartthings.sdk.smartapp.core.models">ConfigurationData</a>&nbsp;configurationData)</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html" title="class in com.smartthings.sdk.smartapp.core.models">ExecutionRequest</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#confirmationData-com.smartthings.sdk.smartapp.core.models.ConfirmationData-">confirmationData</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ConfirmationData.html" title="class in com.smartthings.sdk.smartapp.core.models">ConfirmationData</a>&nbsp;confirmationData)</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#equals-java.lang.Object-">equals</a></span>(java.lang.Object&nbsp;o)</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html" title="class in com.smartthings.sdk.smartapp.core.models">ExecutionRequest</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#eventData-com.smartthings.sdk.smartapp.core.models.EventData-">eventData</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/EventData.html" title="class in com.smartthings.sdk.smartapp.core.models">EventData</a>&nbsp;eventData)</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html" title="class in com.smartthings.sdk.smartapp.core.models">ExecutionRequest</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#executionId-java.lang.String-">executionId</a></span>(java.lang.String&nbsp;executionId)</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ConfigurationData.html" title="class in com.smartthings.sdk.smartapp.core.models">ConfigurationData</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#getConfigurationData--">getConfigurationData</a></span>()</code>
 <div class="block">Get configurationData</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
+<td class="colFirst"><code><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ConfirmationData.html" title="class in com.smartthings.sdk.smartapp.core.models">ConfirmationData</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#getConfirmationData--">getConfirmationData</a></span>()</code>
+<div class="block">Get confirmationData</div>
+</td>
+</tr>
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/EventData.html" title="class in com.smartthings.sdk.smartapp.core.models">EventData</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#getEventData--">getEventData</a></span>()</code>
 <div class="block">Get eventData</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#getExecutionId--">getExecutionId</a></span>()</code>
 <div class="block">This is a correlation id that is assigned to the execution that is useful for support requests.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/InstallData.html" title="class in com.smartthings.sdk.smartapp.core.models">InstallData</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#getInstallData--">getInstallData</a></span>()</code>
 <div class="block">Get installData</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/AppLifecycle.html" title="enum in com.smartthings.sdk.smartapp.core.models">AppLifecycle</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#getLifecycle--">getLifecycle</a></span>()</code>
 <div class="block">Get lifecycle</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#getLocale--">getLocale</a></span>()</code>
 <div class="block">An IETF BCP 47 language tag representing the chosen locale for this account.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/OAuthCallbackData.html" title="class in com.smartthings.sdk.smartapp.core.models">OAuthCallbackData</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#getOauthCallbackData--">getOauthCallbackData</a></span>()</code>
 <div class="block">Get oauthCallbackData</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/PingData.html" title="class in com.smartthings.sdk.smartapp.core.models">PingData</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#getPingData--">getPingData</a></span>()</code>
 <div class="block">Get pingData</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>java.util.Map&lt;java.lang.String,java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#getSettings--">getSettings</a></span>()</code>
 <div class="block">Global settings as defined on the App.</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/UninstallData.html" title="class in com.smartthings.sdk.smartapp.core.models">UninstallData</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#getUninstallData--">getUninstallData</a></span>()</code>
 <div class="block">Get uninstallData</div>
 </td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/UpdateData.html" title="class in com.smartthings.sdk.smartapp.core.models">UpdateData</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#getUpdateData--">getUpdateData</a></span>()</code>
 <div class="block">Get updateData</div>
 </td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#getVersion--">getVersion</a></span>()</code>
 <div class="block">The version of the execution&#39;s request model.</div>
 </td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code>int</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#hashCode--">hashCode</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html" title="class in com.smartthings.sdk.smartapp.core.models">ExecutionRequest</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#installData-com.smartthings.sdk.smartapp.core.models.InstallData-">installData</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/InstallData.html" title="class in com.smartthings.sdk.smartapp.core.models">InstallData</a>&nbsp;installData)</code>&nbsp;</td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html" title="class in com.smartthings.sdk.smartapp.core.models">ExecutionRequest</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#lifecycle-com.smartthings.sdk.smartapp.core.models.AppLifecycle-">lifecycle</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/AppLifecycle.html" title="enum in com.smartthings.sdk.smartapp.core.models">AppLifecycle</a>&nbsp;lifecycle)</code>&nbsp;</td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html" title="class in com.smartthings.sdk.smartapp.core.models">ExecutionRequest</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#locale-java.lang.String-">locale</a></span>(java.lang.String&nbsp;locale)</code>&nbsp;</td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i22" class="altColor">
 <td class="colFirst"><code><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html" title="class in com.smartthings.sdk.smartapp.core.models">ExecutionRequest</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#oauthCallbackData-com.smartthings.sdk.smartapp.core.models.OAuthCallbackData-">oauthCallbackData</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/OAuthCallbackData.html" title="class in com.smartthings.sdk.smartapp.core.models">OAuthCallbackData</a>&nbsp;oauthCallbackData)</code>&nbsp;</td>
 </tr>
-<tr id="i21" class="rowColor">
+<tr id="i23" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html" title="class in com.smartthings.sdk.smartapp.core.models">ExecutionRequest</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#pingData-com.smartthings.sdk.smartapp.core.models.PingData-">pingData</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/PingData.html" title="class in com.smartthings.sdk.smartapp.core.models">PingData</a>&nbsp;pingData)</code>&nbsp;</td>
 </tr>
-<tr id="i22" class="altColor">
+<tr id="i24" class="altColor">
 <td class="colFirst"><code><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html" title="class in com.smartthings.sdk.smartapp.core.models">ExecutionRequest</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#putSettingsItem-java.lang.String-java.lang.String-">putSettingsItem</a></span>(java.lang.String&nbsp;key,
                java.lang.String&nbsp;settingsItem)</code>&nbsp;</td>
 </tr>
-<tr id="i23" class="rowColor">
+<tr id="i25" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#setConfigurationData-com.smartthings.sdk.smartapp.core.models.ConfigurationData-">setConfigurationData</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ConfigurationData.html" title="class in com.smartthings.sdk.smartapp.core.models">ConfigurationData</a>&nbsp;configurationData)</code>&nbsp;</td>
 </tr>
-<tr id="i24" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#setEventData-com.smartthings.sdk.smartapp.core.models.EventData-">setEventData</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/EventData.html" title="class in com.smartthings.sdk.smartapp.core.models">EventData</a>&nbsp;eventData)</code>&nbsp;</td>
-</tr>
-<tr id="i25" class="rowColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#setExecutionId-java.lang.String-">setExecutionId</a></span>(java.lang.String&nbsp;executionId)</code>&nbsp;</td>
-</tr>
 <tr id="i26" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#setInstallData-com.smartthings.sdk.smartapp.core.models.InstallData-">setInstallData</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/InstallData.html" title="class in com.smartthings.sdk.smartapp.core.models">InstallData</a>&nbsp;installData)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#setConfirmationData-com.smartthings.sdk.smartapp.core.models.ConfirmationData-">setConfirmationData</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ConfirmationData.html" title="class in com.smartthings.sdk.smartapp.core.models">ConfirmationData</a>&nbsp;confirmationData)</code>&nbsp;</td>
 </tr>
 <tr id="i27" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#setLifecycle-com.smartthings.sdk.smartapp.core.models.AppLifecycle-">setLifecycle</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/AppLifecycle.html" title="enum in com.smartthings.sdk.smartapp.core.models">AppLifecycle</a>&nbsp;lifecycle)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#setEventData-com.smartthings.sdk.smartapp.core.models.EventData-">setEventData</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/EventData.html" title="class in com.smartthings.sdk.smartapp.core.models">EventData</a>&nbsp;eventData)</code>&nbsp;</td>
 </tr>
 <tr id="i28" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#setLocale-java.lang.String-">setLocale</a></span>(java.lang.String&nbsp;locale)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#setExecutionId-java.lang.String-">setExecutionId</a></span>(java.lang.String&nbsp;executionId)</code>&nbsp;</td>
 </tr>
 <tr id="i29" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#setOauthCallbackData-com.smartthings.sdk.smartapp.core.models.OAuthCallbackData-">setOauthCallbackData</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/OAuthCallbackData.html" title="class in com.smartthings.sdk.smartapp.core.models">OAuthCallbackData</a>&nbsp;oauthCallbackData)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#setInstallData-com.smartthings.sdk.smartapp.core.models.InstallData-">setInstallData</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/InstallData.html" title="class in com.smartthings.sdk.smartapp.core.models">InstallData</a>&nbsp;installData)</code>&nbsp;</td>
 </tr>
 <tr id="i30" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#setPingData-com.smartthings.sdk.smartapp.core.models.PingData-">setPingData</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/PingData.html" title="class in com.smartthings.sdk.smartapp.core.models">PingData</a>&nbsp;pingData)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#setLifecycle-com.smartthings.sdk.smartapp.core.models.AppLifecycle-">setLifecycle</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/AppLifecycle.html" title="enum in com.smartthings.sdk.smartapp.core.models">AppLifecycle</a>&nbsp;lifecycle)</code>&nbsp;</td>
 </tr>
 <tr id="i31" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#setSettings-java.util.Map-">setSettings</a></span>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;settings)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#setLocale-java.lang.String-">setLocale</a></span>(java.lang.String&nbsp;locale)</code>&nbsp;</td>
 </tr>
 <tr id="i32" class="altColor">
-<td class="colFirst"><code><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html" title="class in com.smartthings.sdk.smartapp.core.models">ExecutionRequest</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#settings-java.util.Map-">settings</a></span>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;settings)</code>&nbsp;</td>
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#setOauthCallbackData-com.smartthings.sdk.smartapp.core.models.OAuthCallbackData-">setOauthCallbackData</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/OAuthCallbackData.html" title="class in com.smartthings.sdk.smartapp.core.models">OAuthCallbackData</a>&nbsp;oauthCallbackData)</code>&nbsp;</td>
 </tr>
 <tr id="i33" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#setUninstallData-com.smartthings.sdk.smartapp.core.models.UninstallData-">setUninstallData</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/UninstallData.html" title="class in com.smartthings.sdk.smartapp.core.models">UninstallData</a>&nbsp;uninstallData)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#setPingData-com.smartthings.sdk.smartapp.core.models.PingData-">setPingData</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/PingData.html" title="class in com.smartthings.sdk.smartapp.core.models">PingData</a>&nbsp;pingData)</code>&nbsp;</td>
 </tr>
 <tr id="i34" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#setUpdateData-com.smartthings.sdk.smartapp.core.models.UpdateData-">setUpdateData</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/UpdateData.html" title="class in com.smartthings.sdk.smartapp.core.models">UpdateData</a>&nbsp;updateData)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#setSettings-java.util.Map-">setSettings</a></span>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;settings)</code>&nbsp;</td>
 </tr>
 <tr id="i35" class="rowColor">
+<td class="colFirst"><code><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html" title="class in com.smartthings.sdk.smartapp.core.models">ExecutionRequest</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#settings-java.util.Map-">settings</a></span>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;settings)</code>&nbsp;</td>
+</tr>
+<tr id="i36" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#setUninstallData-com.smartthings.sdk.smartapp.core.models.UninstallData-">setUninstallData</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/UninstallData.html" title="class in com.smartthings.sdk.smartapp.core.models">UninstallData</a>&nbsp;uninstallData)</code>&nbsp;</td>
+</tr>
+<tr id="i37" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#setUpdateData-com.smartthings.sdk.smartapp.core.models.UpdateData-">setUpdateData</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/UpdateData.html" title="class in com.smartthings.sdk.smartapp.core.models">UpdateData</a>&nbsp;updateData)</code>&nbsp;</td>
+</tr>
+<tr id="i38" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#setVersion-java.lang.String-">setVersion</a></span>(java.lang.String&nbsp;version)</code>&nbsp;</td>
 </tr>
-<tr id="i36" class="altColor">
+<tr id="i39" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#toString--">toString</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i37" class="rowColor">
+<tr id="i40" class="altColor">
 <td class="colFirst"><code><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html" title="class in com.smartthings.sdk.smartapp.core.models">ExecutionRequest</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#uninstallData-com.smartthings.sdk.smartapp.core.models.UninstallData-">uninstallData</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/UninstallData.html" title="class in com.smartthings.sdk.smartapp.core.models">UninstallData</a>&nbsp;uninstallData)</code>&nbsp;</td>
 </tr>
-<tr id="i38" class="altColor">
+<tr id="i41" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html" title="class in com.smartthings.sdk.smartapp.core.models">ExecutionRequest</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#updateData-com.smartthings.sdk.smartapp.core.models.UpdateData-">updateData</a></span>(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/UpdateData.html" title="class in com.smartthings.sdk.smartapp.core.models">UpdateData</a>&nbsp;updateData)</code>&nbsp;</td>
 </tr>
-<tr id="i39" class="rowColor">
+<tr id="i42" class="altColor">
 <td class="colFirst"><code><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html" title="class in com.smartthings.sdk.smartapp.core.models">ExecutionRequest</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html#version-java.lang.String-">version</a></span>(java.lang.String&nbsp;version)</code>&nbsp;</td>
 </tr>
@@ -689,6 +703,38 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>setPingData</h4>
 <pre>public&nbsp;void&nbsp;setPingData(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/PingData.html" title="class in com.smartthings.sdk.smartapp.core.models">PingData</a>&nbsp;pingData)</pre>
+</li>
+</ul>
+<a name="confirmationData-com.smartthings.sdk.smartapp.core.models.ConfirmationData-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>confirmationData</h4>
+<pre>public&nbsp;<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ExecutionRequest.html" title="class in com.smartthings.sdk.smartapp.core.models">ExecutionRequest</a>&nbsp;confirmationData(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ConfirmationData.html" title="class in com.smartthings.sdk.smartapp.core.models">ConfirmationData</a>&nbsp;confirmationData)</pre>
+</li>
+</ul>
+<a name="getConfirmationData--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getConfirmationData</h4>
+<pre>public&nbsp;<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ConfirmationData.html" title="class in com.smartthings.sdk.smartapp.core.models">ConfirmationData</a>&nbsp;getConfirmationData()</pre>
+<div class="block">Get confirmationData</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>confirmationData</dd>
+</dl>
+</li>
+</ul>
+<a name="setConfirmationData-com.smartthings.sdk.smartapp.core.models.ConfirmationData-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setConfirmationData</h4>
+<pre>public&nbsp;void&nbsp;setConfirmationData(<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/ConfirmationData.html" title="class in com.smartthings.sdk.smartapp.core.models">ConfirmationData</a>&nbsp;confirmationData)</pre>
 </li>
 </ul>
 <a name="oauthCallbackData-com.smartthings.sdk.smartapp.core.models.OAuthCallbackData-">
