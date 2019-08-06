@@ -69,6 +69,10 @@ class SmartAppSpec extends Specification {
                             .challenge(UUID.randomUUID().toString())
                     ),
                 new ExecutionRequest()
+                    .lifecycle(AppLifecycle.CONFIRMATION)
+                    .confirmationData(new ConfirmationData().confirmationUrl("https://example.com/confirm"))
+                    .executionId(UUID.randomUUID().toString()),
+                new ExecutionRequest()
                     .lifecycle(AppLifecycle.OAUTH_CALLBACK)
                     .executionId(UUID.randomUUID().toString())
         ]
@@ -80,6 +84,7 @@ class SmartAppSpec extends Specification {
             200, // CONFIGURATION
             200, // EVENT
             200, // PING
+            200, // CONFIRMATION
             404  // OAUTH_CALLBACK
         ]
     }
@@ -149,6 +154,10 @@ class SmartAppSpec extends Specification {
                             .challenge(UUID.randomUUID().toString())
                     ),
                 new ExecutionRequest()
+                    .lifecycle(AppLifecycle.CONFIRMATION)
+                    .confirmationData(new ConfirmationData().confirmationUrl("https://example.com/confirm"))
+                    .executionId(UUID.randomUUID().toString()),
+                new ExecutionRequest()
                     .lifecycle(AppLifecycle.OAUTH_CALLBACK)
                     .executionId(UUID.randomUUID().toString())
         ]
@@ -160,6 +169,7 @@ class SmartAppSpec extends Specification {
             200, // CONFIGURATION
             200, // EVENT
             200, // PING
+            200, // CONFIRMATION
             404  // OAUTH_CALLBACK
         ]
     }

@@ -173,7 +173,7 @@ To create your own implementation, you will need to:
 
 Reference documentation can be found here:
 
-https://SmartThingsCommunity.github.io//smartapp-sdk-java/smartapp-core/javadoc/
+https://smartthingscommunity.github.io//smartapp-sdk-java/smartapp-core/javadoc/
 
 ## More about SmartThings
 

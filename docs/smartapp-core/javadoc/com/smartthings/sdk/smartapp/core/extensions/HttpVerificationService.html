@@ -109,10 +109,11 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">HttpVerificationService</span>
 extends java.lang.Object</pre>
-<div class="block">All requests should have their HTTP signature verified to ensure if request is actually from SmartThings.
- This class has the implementation of signature authentication and verification
- from https://github.com/adamcin/httpsig-java.
- The public key that is generated when registering a smartapp; is used to verify the request.</div>
+<div class="block">All requests should have their HTTP signature verified to ensure if request
+ is actually from SmartThings. This class has the implementation of signature
+ authentication and verification from https://github.com/adamcin/httpsig-java.
+ The public key that is generated when registering a smartapp; is used to
+ verify the request.</div>
 </li>
 </ul>
 </div>
@@ -131,10 +132,23 @@ extends java.lang.Object</pre>
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/extensions/HttpVerificationService.html#HttpVerificationService--">HttpVerificationService</a></span>()</code>&nbsp;</td>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/extensions/HttpVerificationService.html#HttpVerificationService--">HttpVerificationService</a></span>()</code>
+<div class="block">Create a basic instance that only supports local public key files.</div>
+</td>
 </tr>
 <tr class="rowColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/extensions/HttpVerificationService.html#HttpVerificationService-java.lang.String-">HttpVerificationService</a></span>(java.lang.String&nbsp;publicKeyPath)</code>&nbsp;</td>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/extensions/HttpVerificationService.html#HttpVerificationService-CloseableHttpClient-">HttpVerificationService</a></span>(CloseableHttpClient&nbsp;httpClient)</code>
+<div class="block">Create a basic instance that can get public key files remotely where
+ supported.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/extensions/HttpVerificationService.html#HttpVerificationService-CloseableHttpClient-java.lang.String-java.lang.String-java.time.Duration-">HttpVerificationService</a></span>(CloseableHttpClient&nbsp;httpClient,
+                       java.lang.String&nbsp;publicKeyPath,
+                       java.lang.String&nbsp;apiHost,
+                       java.time.Duration&nbsp;keyCacheTTL)</code>
+<div class="block">Build a verification service.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -186,15 +200,36 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>HttpVerificationService</h4>
 <pre>public&nbsp;HttpVerificationService()</pre>
+<div class="block">Create a basic instance that only supports local public key files.</div>
 </li>
 </ul>
-<a name="HttpVerificationService-java.lang.String-">
+<a name="HttpVerificationService-CloseableHttpClient-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>HttpVerificationService</h4>
+<pre>public&nbsp;HttpVerificationService(CloseableHttpClient&nbsp;httpClient)</pre>
+<div class="block">Create a basic instance that can get public key files remotely where
+ supported.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>httpClient</code> - An Apache CloseableHttpClient instance to use when
+ requesting remote keys.</dd>
+</dl>
+</li>
+</ul>
+<a name="HttpVerificationService-CloseableHttpClient-java.lang.String-java.lang.String-java.time.Duration-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>HttpVerificationService</h4>
-<pre>public&nbsp;HttpVerificationService(java.lang.String&nbsp;publicKeyPath)</pre>
+<pre>public&nbsp;HttpVerificationService(CloseableHttpClient&nbsp;httpClient,
+                               java.lang.String&nbsp;publicKeyPath,
+                               java.lang.String&nbsp;apiHost,
+                               java.time.Duration&nbsp;keyCacheTTL)</pre>
+<div class="block">Build a verification service. This constructor is primarily for testing.</div>
 </li>
 </ul>
 </li>

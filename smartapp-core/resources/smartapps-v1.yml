@@ -69,6 +69,8 @@ definitions:
         $ref: '#/definitions/ConfigurationData'
       pingData:
         $ref: '#/definitions/PingData'
+      confirmationData:
+        $ref: '#/definitions/ConfirmationData'
       oauthCallbackData:
         $ref: '#/definitions/OAuthCallbackData'
       settings:
@@ -325,6 +327,7 @@ definitions:
       * UNINSTALL - A clean up lifecycle invoked upon the deletion of an SmartApp from a user's account.
       * EVENT - Lifecycle event used when the SmartApp is invoked as the result of a subscription or schedule.
       * PING - Lifecycle used during App creation to verify connectivity, and ownership of a particular target.
+      * CONFIRMATION - Lifecycle used to send confirmation link to a SmartApp for ownership validation
       * CONFIGURATION - Lifecycle used to drive the UX during the installation process of a SmartApp into a user's account.
       * OAUTH_CALLBACK - Lifecycle used for integrations that implement a third-party OAuth out.
     type: string
@@ -334,6 +337,7 @@ definitions:
     - UNINSTALL
     - EVENT
     - PING
+    - CONFIRMATION
     - CONFIGURATION
     - OAUTH_CALLBACK
   EventData:
@@ -457,6 +461,21 @@ definitions:
         description: A challenge phrase that the SmartApp must echo back to validate
           itself.
         type: string
+  ConfirmationData:
+    description: |
+      A request to send a confirmation link to a SmartApp for ownership validation.
+      type: object
+    type: object
+    properties:
+      appId:
+        type: string
+        format: uuid
+        description: A globally unique identifier for an app.
+      confirmationUrl:
+        description: |
+          An HTTPS url that may be visited to confirm / activate an App registration.
+        type: string
+        format: url
   ConfigurationData:
     description: |
       A request for a pages flow to drive app installation.  This will only be available for executions of type "CONFIGURATION".

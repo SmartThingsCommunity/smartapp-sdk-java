@@ -118,7 +118,7 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public enum <span class="typeNameLabel">AppLifecycle</span>
 extends java.lang.Enum&lt;<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/AppLifecycle.html" title="enum in com.smartthings.sdk.smartapp.core.models">AppLifecycle</a>&gt;</pre>
-<div class="block">Every invocation of a SmartApp is associated to a specific lifecycle event.  These lifecycles include: * INSTALL - Lifecycle that will be invoked once at the time of installation of a SmartApp. * UPDATE - Invoked when a user modifies the configuration values assigned to the SmartApp. * UNINSTALL - A clean up lifecycle invoked upon the deletion of an SmartApp from a user&#39;s account. * EVENT - Lifecycle event used when the SmartApp is invoked as the result of a subscription or schedule. * PING - Lifecycle used during App creation to verify connectivity, and ownership of a particular target. * CONFIGURATION - Lifecycle used to drive the UX during the installation process of a SmartApp into a user&#39;s account. * OAUTH_CALLBACK - Lifecycle used for integrations that implement a third-party OAuth out.</div>
+<div class="block">Every invocation of a SmartApp is associated to a specific lifecycle event.  These lifecycles include: * INSTALL - Lifecycle that will be invoked once at the time of installation of a SmartApp. * UPDATE - Invoked when a user modifies the configuration values assigned to the SmartApp. * UNINSTALL - A clean up lifecycle invoked upon the deletion of an SmartApp from a user&#39;s account. * EVENT - Lifecycle event used when the SmartApp is invoked as the result of a subscription or schedule. * PING - Lifecycle used during App creation to verify connectivity, and ownership of a particular target. * CONFIRMATION - Lifecycle used to send confirmation link to a SmartApp for ownership validation * CONFIGURATION - Lifecycle used to drive the UX during the installation process of a SmartApp into a user&#39;s account. * OAUTH_CALLBACK - Lifecycle used for integrations that implement a third-party OAuth out.</div>
 </li>
 </ul>
 </div>
@@ -140,21 +140,24 @@ extends java.lang.Enum&lt;<a href="../../../../../../com/smartthings/sdk/smartap
 <td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/AppLifecycle.html#CONFIGURATION">CONFIGURATION</a></span></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/AppLifecycle.html#CONFIRMATION">CONFIRMATION</a></span></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/AppLifecycle.html#EVENT">EVENT</a></span></code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/AppLifecycle.html#INSTALL">INSTALL</a></span></code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/AppLifecycle.html#OAUTH_CALLBACK">OAUTH_CALLBACK</a></span></code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/AppLifecycle.html#PING">PING</a></span></code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/AppLifecycle.html#UNINSTALL">UNINSTALL</a></span></code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../com/smartthings/sdk/smartapp/core/models/AppLifecycle.html#UPDATE">UPDATE</a></span></code>&nbsp;</td>
 </tr>
 </table>
@@ -269,6 +272,15 @@ the order they are declared.</div>
 <li class="blockList">
 <h4>PING</h4>
 <pre>public static final&nbsp;<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/AppLifecycle.html" title="enum in com.smartthings.sdk.smartapp.core.models">AppLifecycle</a> PING</pre>
+</li>
+</ul>
+<a name="CONFIRMATION">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>CONFIRMATION</h4>
+<pre>public static final&nbsp;<a href="../../../../../../com/smartthings/sdk/smartapp/core/models/AppLifecycle.html" title="enum in com.smartthings.sdk.smartapp.core.models">AppLifecycle</a> CONFIRMATION</pre>
 </li>
 </ul>
 <a name="CONFIGURATION">

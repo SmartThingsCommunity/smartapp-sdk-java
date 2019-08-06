@@ -10,6 +10,7 @@ public interface SmartAppDefinition {
     UninstallHandler getUninstallHandler();
     EventHandler getEventHandler();
     PingHandler getPingHandler();
+    ConfirmationHandler getConfirmationHandler();
     ConfigurationHandler getConfigurationHandler();
     OAuthCallbackHandler getOauthCallbackHandler();
     List<PredicateHandler> getPredicateHandlers();

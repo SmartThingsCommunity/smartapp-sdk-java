@@ -13,6 +13,7 @@ public interface SmartAppDefinitionSpec {
     SmartAppDefinitionSpec uninstall(UninstallHandler handler);
     SmartAppDefinitionSpec event(EventHandler handler);
     SmartAppDefinitionSpec ping(PingHandler handler);
+    SmartAppDefinitionSpec confirmation(ConfirmationHandler handler);
     SmartAppDefinitionSpec configuration(ConfigurationHandler handler);
     SmartAppDefinitionSpec oauthCallback(OAuthCallbackHandler handler);
     SmartAppDefinitionSpec when(Predicate<ExecutionRequest> predicate, Handler handler);

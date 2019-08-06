@@ -18,6 +18,7 @@ public class SpringSmartAppDefinition implements SmartAppDefinition {
     private static final Logger LOG = LoggerFactory.getLogger(SpringSmartAppDefinition.class);
 
     private final PingHandler pingHandler;
+    private final ConfirmationHandler confirmationHandler;
     private final ConfigurationHandler configurationHandler;
     private final InstallHandler installHandler;
     private final UpdateHandler updateHandler;
@@ -27,12 +28,13 @@ public class SpringSmartAppDefinition implements SmartAppDefinition {
     private final List<PredicateHandler> predicateHandlers;
     private final List<RequestPreprocessor> requestPreprocessors;
 
-    public SpringSmartAppDefinition(PingHandler pingHandler, ConfigurationHandler configurationHandler,
-                                    InstallHandler installHandler, UpdateHandler updateHandler,
-                                    OAuthCallbackHandler oAuthCallbackHandler, EventHandler eventHandler,
-                                    UninstallHandler uninstallHandler, List<PredicateHandler> predicateHandlers,
-                                    List<RequestPreprocessor> requestPreprocessors) {
+    public SpringSmartAppDefinition(PingHandler pingHandler, ConfirmationHandler confirmationHandler,
+            ConfigurationHandler configurationHandler, InstallHandler installHandler,
+            UpdateHandler updateHandler, OAuthCallbackHandler oAuthCallbackHandler,
+            EventHandler eventHandler, UninstallHandler uninstallHandler,
+            List<PredicateHandler> predicateHandlers, List<RequestPreprocessor> requestPreprocessors) {
         this.pingHandler = pingHandler;
+        this.confirmationHandler = confirmationHandler;
         this.configurationHandler = configurationHandler;
         this.installHandler = installHandler;
         this.updateHandler = updateHandler;
@@ -45,6 +47,7 @@ public class SpringSmartAppDefinition implements SmartAppDefinition {
 
     public static SpringSmartAppDefinition of(ApplicationContext applicationContext) {
         PingHandler pingHandler = findHandler(applicationContext, PingHandler.class, false);
+        ConfirmationHandler confirmationHandler = findHandler(applicationContext, ConfirmationHandler.class, false);
         ConfigurationHandler configurationHandler = findHandler(applicationContext, ConfigurationHandler.class, true);
         InstallHandler installHandler = findHandler(applicationContext, InstallHandler.class, true);
         UpdateHandler updateHandler = findHandler(applicationContext, UpdateHandler.class, true);
@@ -55,8 +58,9 @@ public class SpringSmartAppDefinition implements SmartAppDefinition {
             new ArrayList<>(applicationContext.getBeansOfType(PredicateHandler.class).values());
         List<RequestPreprocessor> requestPreprocessors =
             new ArrayList<>(applicationContext.getBeansOfType(RequestPreprocessor.class).values());
-        return new SpringSmartAppDefinition(pingHandler, configurationHandler, installHandler, updateHandler,
-            oAuthCallbackHandler, eventHandler, uninstallHandler, predicateHandlers, requestPreprocessors);
+        return new SpringSmartAppDefinition(pingHandler, confirmationHandler, configurationHandler,
+            installHandler, updateHandler, oAuthCallbackHandler, eventHandler, uninstallHandler,
+            predicateHandlers, requestPreprocessors);
     }
 
     private static <T> T findHandler(ApplicationContext applicationContext, Class<T> klass, boolean required) {
@@ -77,6 +81,11 @@ public class SpringSmartAppDefinition implements SmartAppDefinition {
     @Override
     public PingHandler getPingHandler() {
         return pingHandler;
+    }
+
+    @Override
+    public ConfirmationHandler getConfirmationHandler() {
+        return confirmationHandler;
     }
 
     @Override

@@ -213,8 +213,8 @@ public class AppConfigurationHandler implements ConfigurationHandler {
         // accessors of a different type.
         InitializeSetting initialize = new InitializeSetting()
             .id("init")
-            .name("Java Ratpack Guice SmartApp Example")
-            .description("Create a SmartApp using Java and Ratpack with Guice")
+            .name("Java Spring Boot SmartApp Example")
+            .description("Create a SmartApp using Java and Spring Boot")
             .firstPageId("intro")
             .disableCustomDisplayName(false)
             .disableRemoveApp(false)

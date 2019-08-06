@@ -75,7 +75,8 @@ public class TokenRefreshServiceImplTest {
         verify(httpClient).execute(requestCaptor.capture());
         HttpUriRequest capturedRequest = requestCaptor.getValue();
 
-        assertEquals(capturedRequest.getURI().toString(), "http://example.com/tokenRefreshUrl");
+        assertEquals("http://example.com/tokenRefreshUrl",
+            capturedRequest.getURI().toString());
     }
 
     @Test(expected = TokenRefreshException.class)

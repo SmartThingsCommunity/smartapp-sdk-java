@@ -34,10 +34,11 @@ dependencies {
     compile deps.httpsig.api
     compile deps.httpsig.sshJce
     compile deps.httpsig.sshBc
+    compile deps.guava
     implementation deps.tools.httpclient
+    testCompile deps.test.guavaTestlib
     testImplementation deps.test.spockCore
     testImplementation deps.test.mockito
-    testImplementation deps.guava
     testRuntime deps.test.cglibNodep
     testRuntime deps.test.objenesis
 }
