@@ -17,7 +17,7 @@ Include the `smartapp-core` Maven dependency:
 <dependency>
     <groupId>com.smartthings.sdk</groupId>
     <artifactId>smartapp-guice</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.4-PREVIEW</version>
 </dependency>
 ```
 
@@ -25,7 +25,7 @@ If you're using Gradle:
 
 ```gradle
 dependencies {
-    compile 'com.smartthings.sdk:smartapp-guice:0.0.1'
+    compile 'com.smartthings.sdk:smartapp-guice:0.0.4-PREVIEW'
 }
 ```
 

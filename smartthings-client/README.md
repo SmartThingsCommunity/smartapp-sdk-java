@@ -15,7 +15,7 @@ Include the `smartthings-client` Maven dependency:
 <dependency>
     <groupId>com.smartthings.sdk</groupId>
     <artifactId>smartthings-client</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.4-PREVIEW</version>
 </dependency>
 ```
 
@@ -23,7 +23,7 @@ If you're using Gradle:
 
 ```gradle
 dependencies {
-    compile 'com.smartthings.sdk:smartthings-client:0.0.1'
+    compile 'com.smartthings.sdk:smartthings-client:0.0.4-PREVIEW'
 }
 ```
 

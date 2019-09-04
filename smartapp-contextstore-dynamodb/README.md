@@ -19,7 +19,7 @@ Include the `smartapp-core` Maven dependency:
 <dependency>
     <groupId>com.smartthings.sdk</groupId>
     <artifactId>smartapp-contextstore-dynamodb</artifactId>
-    <version>0.0.2-PREVIEW</version>
+    <version>0.0.4-PREVIEW</version>
 </dependency>
 ```
 
@@ -27,7 +27,7 @@ If you're using Gradle:
 
 ```gradle
 dependencies {
-    compile 'com.smartthings.sdk:smartapp-contextstore-dynamodb:0.0.2-PREVIEW'
+    compile 'com.smartthings.sdk:smartapp-contextstore-dynamodb:0.0.4-PREVIEW'
 }
 ```
 
