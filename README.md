@@ -38,7 +38,7 @@ Import the library dependencies as needed:
 <dependency>
   <groupId>com.smartthings.sdk</groupId>
   <artifactId>smartapp-core</artifactId>
-  <version>0.0.1-PREVIEW</version>
+  <version>0.0.4-PREVIEW</version>
   <type>pom</type>
 </dependency>
 ```
@@ -49,48 +49,11 @@ Import the library dependencies as needed:
     <summary>Gradle Groovy DSL</summary>
 
 ```groovy
-implementation 'com.smartthings.sdk:smartapp-core:0.0.1-PREVIEW'
+implementation 'com.smartthings.sdk:smartapp-core:0.0.4-PREVIEW'
 ```
 
 </details>
-
-<details>
-    <summary>Gradle Kotlin DSL</summary>
-
-```kotlin
-compile("com.smartthings.sdk:smartapp-core:0.0.1-PREVIEW")
-```
-
-</details>
-
-<details>
-    <summary>Scala SBT</summary>
-
-```scala
-libraryDependencies += "com.smartthings.sdk" % "smartapp-core" % "0.0.1-PREVIEW"
-```
-
-</details>
-
-<details>
-    <summary>Apache Ivy</summary>
-
-```xml
-<dependency org="com.smartthings.sdk" name="smartapp-core" rev="0.0.1-PREVIEW" />
-```
-
-</details>
-
-<details>
-    <summary>Groovy Grapes</summary>
-
-```groovy
-@Grapes(
-  @Grab(group='com.smartthings.sdk', module='smartapp-core', version='0.0.1-PREVIEW')
-)
-```
-
-</details><br>
+<br>
 
 If you prefer, the artifacts can be downloaded directly from [Maven Central](https://search.maven.org/search?q=g:com.smarrthings.sdk).
 

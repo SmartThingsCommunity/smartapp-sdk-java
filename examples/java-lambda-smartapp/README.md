@@ -30,7 +30,7 @@ Follow the steps below to install and run this sample SmartApp.
     | AWS Access Key ID     | id from above                       |
     | AWS Secret Access Key | secret from above                   |
     | Default region name   | choose an [AWS region](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html) geographically close to your end-user's location |
-    | AWS Access Key ID     | enter 'json' here                   |
+    | Default output format | enter 'json' here                   |
 
 3. Create a role for the lambda to use. You'll find "Roles" under "My Security Credentials".
    Create the role with the following options:
