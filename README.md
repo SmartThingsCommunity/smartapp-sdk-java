@@ -72,7 +72,7 @@ you to control and get status notifications from SmartThings devices using the
 **AWS Lambda** SmartApps are hosted in the Amazon Web Services cloud and are invoked by **ARN** instead of a
 public-DNS address.
 
-![automation smartapp](https://smartthings.developer.samsung.com/develop/getting-started/img/automation_smartapp.png)
+![automation smartapp](https://smartthings.developer.samsung.com/docs/smartapps/img/automation_smartapp.png)
 
 To learn more about what a SmartApp is and how you can create interesting automations, please visit the [developer portal documentation](https://smartthings.developer.samsung.com/develop/guides/smartapps/basics.html).
 
