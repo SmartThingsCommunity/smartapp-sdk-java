@@ -6,7 +6,7 @@ This sample demonstrates a simple [Java](https://www.oracle.com/java/) server us
 ## Requirements
 
 * Java 1.8
-* [SmartThings developer](https://devworkspace.developer.samsung.com) account
+* [SmartThings developer](https://smartthings.developer.samsung.com/workspace/) account
 * [Amazon Web Services](https://aws.amazon.com/) account
 
 ## Installing the Example

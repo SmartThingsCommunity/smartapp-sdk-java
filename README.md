@@ -16,7 +16,7 @@ the public SmartThings REST API.
 ## Prerequisites
 
 * Java 1.8+
-* SmartThings developer account
+* [SmartThings developer](https://smartthings.developer.samsung.com/workspace/) account
 
 ## Adding the SDK to your build
 
