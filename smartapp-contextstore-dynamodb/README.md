@@ -7,9 +7,9 @@ in a `DefaultInstalledAppContext` instance.
 ## Prerequisites
 
 * Java 1.8+
-* Amazon AWS account
+* [SmartThings developer](https://smartthings.developer.samsung.com/workspace/) account
+* [Amazon Web Services](https://aws.amazon.com/) account
 * [smartapp-core](../smartapp-core)
-* SmartThings developer account
 
 ## Adding the library to your build
 

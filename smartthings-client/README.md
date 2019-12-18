@@ -5,7 +5,7 @@ Interact with the SmartThings public REST API with this _Java and Android-compat
 ## Prerequisites
 
 * Java 1.8+
-* SmartThings developer account
+* [SmartThings developer](https://smartthings.developer.samsung.com/workspace/) account
 
 ## Adding the library to your build
 

@@ -7,7 +7,7 @@ for dependency injection.
 ## Requirements
 
 * Java 1.8+
-* SmartThings developer account
+* [SmartThings developer](https://smartthings.developer.samsung.com/workspace/) account
 
 ## Running the Example
 

@@ -53,7 +53,7 @@ public class AppConfigurationHandler implements ConfigurationHandler {
                     .type(SettingType.PASSWORD);
                 SectionSetting booleanSetting = new BooleanSetting()
                     .id("booleanTest")
-                    .name("Yes or no, 1 or 0, true or false, set on not set")
+                    .name("Yes or no, 1 or 0, true or false, set or not set")
                     .description("To choose or not to choose, that is the question")
                     .type(SettingType.BOOLEAN);
                 Section settingsTestSection = new Section()

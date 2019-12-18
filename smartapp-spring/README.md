@@ -7,7 +7,7 @@ This is a simple library to make declaring Smart App lifecycle handlers as Sprin
 * Java 1.8+
 * Spring 4+
 * [smartapp-core](../smartapp-core)
-* SmartThings developer account
+* [SmartThings developer](https://smartthings.developer.samsung.com/workspace/) account
 
 ## Adding the library to your build
 

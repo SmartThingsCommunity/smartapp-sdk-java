@@ -7,7 +7,7 @@ This library aims to make developing your own JVM-based SmartApps easy, intuitiv
 ## Prerequisites
 
 * Java 1.8+
-* SmartThings developer account
+* [SmartThings developer](https://smartthings.developer.samsung.com/workspace/) account
 
 ## Adding the library to your build
 

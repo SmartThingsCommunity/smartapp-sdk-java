@@ -3,7 +3,7 @@
 This sample demonstrates a simple [Kotlin](https://kotlinlang.org/)-based server using [Ktor](https://ktor.io) as a web server.
 
 * Java 1.8+
-* SmartThings developer account
+* [SmartThings developer](https://smartthings.developer.samsung.com/workspace/) account
 
 ## Running the Example
 
