@@ -1,15 +1,15 @@
 # smartapp-contextstore-dynamodb
 
-This library adds support for a context store using DynamoDB. This will help
-keep track of tokens, configuration and other application related data stored
+This library adds support for a context store using DynamoDB. This helps
+keep track of tokens, configurations and other application-related data stored
 in a `DefaultInstalledAppContext` instance.
 
 ## Prerequisites
 
 * Java 1.8+
-* [SmartThings developer](https://smartthings.developer.samsung.com/workspace/) account
-* [Amazon Web Services](https://aws.amazon.com/) account
+* An [Amazon Web Services](https://aws.amazon.com/) account
 * [smartapp-core](../smartapp-core)
+* A Samsung account
 
 ## Adding the library to your build
 
@@ -76,8 +76,7 @@ For a complete example, see [Java Spring Boot example SmartApp](/examples/java-s
 
 ## More about SmartThings
 
-If you are not familiar with SmartThings, we have
-[extensive on-line documentation](https://smartthings.developer.samsung.com/develop/index.html).
+Check out our complete developer documentation [here](https://developer-preview.smartthings.com).
 
 To create and manage your services and devices on SmartThings, create an account in the
 [developer workspace](https://devworkspace.developer.samsung.com/).

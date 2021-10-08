@@ -1,15 +1,15 @@
-# smartapp-core
+# SmartApp Core Module
 
-Create easily-readable SmartThings SmartApps with this DSL-like fluent Java library.
+Create SmartThings SmartApps with this DSL-like fluent Java library.
 
-This library aims to make developing your own JVM-based SmartApps easy, intuitive, and flexible. You can write and distribute your SmartApps in any way you'd like.
+This library makes developing your own JVM-based SmartApps easy, intuitive, and flexible. For more information on developing your SmartApp, visit the [SmartApp developer documentation](https://developer-preview.smartthings.com/docs/connected-services/smartapp-basics).
 
 ## Prerequisites
 
 * Java 1.8+
-* [SmartThings developer](https://smartthings.developer.samsung.com/workspace/) account
+* A Samsung account
 
-## Adding the library to your build
+## Adding the Module to Your Build
 
 Include the `smartapp-core` Maven dependency:
 
@@ -32,17 +32,14 @@ dependencies {
 If you do not use Maven or Gradle, jars can be downloaded from the
 [central Maven repository](https://search.maven.org/search?q=g:com.smartthings.sdk%20a:smartapp-core).
 
-## Getting Started
 
-> Note: Although you can easily use this library alongside any web framework of your choice, the example below uses Spring Boot.
+## Developing Your SmartApp
 
-1. Create a definition of your SmartApp (_fig. A_)
-2. Listen for incoming HTTP requests and execute the SmartApp (_fig. B_)
-3. Add your additional response logic.
+### Getting Started
 
-For more information on the SmartApp API reference (request/response expectations) please [view the API reference documentation](https://smartthings.developer.samsung.com/develop/api-ref/smartapps-v1.html), or for additional insight, the [SmartApp guide](https://smartthings.developer.samsung.com/develop/guides/smartapps/basics.html).
+> Although you can easily use this library alongside any web framework of your choice, the example below uses Spring Boot.
 
-_Fig. A_ Declare the SmartApp specification
+1. Create (declare) a definition of your SmartApp:
 ```java
 public class AppController {
     private final SmartApp smartApp = SmartApp.of(spec ->
@@ -55,8 +52,7 @@ public class AppController {
     );
 }
 ```
-
-_Fig. B_ Execute the SmartApp for an incoming response
+2. Listen for incoming HTTP requests and execute the SmartApp:
 ```java
 public class AppController {
     /* SmartApp declaration removed for brevity */
@@ -67,12 +63,13 @@ public class AppController {
     }
 }
 ```
+3. Add your additional response logic.
 
-## Documentation
+For more information on the SmartApp API reference (request/response expectations) please [visit the API reference documentation](https://developer-preview.smartthings.com/api/public), or for additional information on SmartApps, visit the [SmartThings developer documentation](https://developer-preview.smartthings.com/docs/connected-services/smartapp-basics).
 
 ### Required handlers
 
-By default, some lifecycle events are handled for you. If you wish, you may override them at any time by creating the definition.
+By default, some lifecycle events are handled for you. If desired, you may override them at any time by creating the lifecycle definition.
 
 | Lifecycle Handler             | Required | Has Default Implementation |
 |:------------------------------|:--------:|:--------------------------:|
@@ -84,52 +81,44 @@ By default, some lifecycle events are handled for you. If you wish, you may over
 | `AppLifecycle.OAUTH_CALLBACK` | 🚫       | 🚫                         |
 
 
-### Handling unsupported lifecycle events
+### Handling Unsupported Lifecycle Events
 
-With `SmartAppDefinitionSpec.when(Predicate<ExecutionRequest>, Handler)`, you can handle "custom" event lifecycles even if this library does not explicitly support it yet. For example, if the event `EXECUTE` is available in the API, but not in `smartapp-core`, you may use the predicate handler to check if the request matches `"EXECUTE"` and respond accordingly.
+With `SmartAppDefinitionSpec.when(Predicate<ExecutionRequest>, Handler)`, you can handle "custom" event lifecycles even if this library does not explicitly support them yet. For example, if the event `EXECUTE` is available in the API, but not in `smartapp-core`, you may use the predicate handler to check if the request matches `"EXECUTE"` and respond accordingly.
 
 ### Responses
 
-#### `notFound():ExecutionResponse`
-
+- `notFound():ExecutionResponse`:
 Signifies to the SmartThings platform that the app definition doesn't know about that specific lifecycle event.
 
-#### `ok():ExecutionResponse`
-Respond to request with an empty response object.
+- `ok():ExecutionResponse`:
+Respond to a request with an empty response object.
 
-#### `ok(ConfigurationResponseData):ExecutionResponse`
-
+- `ok(ConfigurationResponseData):ExecutionResponse`:
 Respond to initialization and page requests.
 
-#### `ok(EventResponseData):ExecutionResponse`
-
+- `ok(EventResponseData):ExecutionResponse`:
 Respond to event lifecycle requests.
 
-#### `ok(InstallResponseData):ExecutionResponse`
-
+- `ok(InstallResponseData):ExecutionResponse`:
 Respond to installation update requests.
 
-#### `ok(PingResponseData):ExecutionResponse`
-
+- `ok(PingResponseData):ExecutionResponse`:
 Respond to ping lifecycle requests which are sent by the platform to ensure your application is online.
 
-#### `ok(UninstallResponseDataok):ExecutionResponse`
-
+- `ok(UninstallResponseDataok):ExecutionResponse`:
 Respond to uninstallation requests.
 
-#### `ok(UpdateResponseData):ExecutionResponse`
-
+- `ok(UpdateResponseData):ExecutionResponse`:
 Respond to configuration update requests.
 
-#### `status(int):ExecutionResponse`
-
+- `status(int):ExecutionResponse`:
 Response to request with an arbitrary HTTP status code.
 
 ### Request Preprocessors
 
 If you need to have code called for all lifecycle events before they are
 handled normally, you can implement the `RequestPreprocessor` interface and add
-your implementation to the SmartApp using the `addRequestPreprocessor` method.
+your implementation to the SmartApp using the `addRequestPreprocessor` method:
 
 ```java
     private final SmartApp smartApp = SmartApp.of(spec ->
@@ -143,12 +132,12 @@ your implementation to the SmartApp using the `addRequestPreprocessor` method.
 
 ### Context Store
 
-Support has been included for managing installed application information via a
+Support is included for managing installed application information via a
 "context store". The following implementations are currently available:
 
   - [DynamoDB](../smartapp-contextstore-dynamodb/README.md)
 
-To create your own implementation, you will need to:
+To create your own implementation:
 
   1. Create a class which implements InstalledAppContextStore which is a DAO
      for managing your context. Consider using DefaultInstalledAppContextStore
@@ -171,14 +160,11 @@ To create your own implementation, you will need to:
 
 ### Reference Documentation
 
-Reference documentation can be found here:
-
-https://smartthingscommunity.github.io//smartapp-sdk-java/smartapp-core/javadoc/
+Find reference documentation for this module [here](https://smartthingscommunity.github.io//smartapp-sdk-java/smartapp-core/javadoc/).
 
 ## More about SmartThings
 
-If you are not familiar with SmartThings, we have
-[extensive on-line documentation](https://smartthings.developer.samsung.com/develop/index.html).
+Check out our complete developer documentation [here](https://developer-preview.smartthings.com).
 
 To create and manage your services and devices on SmartThings, create an account in the
 [developer workspace](https://devworkspace.developer.samsung.com/).

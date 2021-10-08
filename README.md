@@ -10,78 +10,39 @@
 
 > **Welcome!**  This SDK is currently in _**preview**_ and is not recommended for use in production applications at this time. We welcome your bug reports, feature requests, and contributions.
 
-This SDK includes a set of JVM libraries for building **webhook** and **AWS Lambda** SmartApps, and interacting with
-the public SmartThings REST API.
+## Getting Started
 
-## Prerequisites
+This SDK includes a set of JVM libraries for building Webhook and AWS Lambda SmartApps, and interacting with the public SmartThings API.
+
+### Prerequisites
 
 * Java 1.8+
-* [SmartThings developer](https://smartthings.developer.samsung.com/workspace/) account
-
-## Adding the SDK to your build
-
-Several artifacts are published to the Maven central repository under the `com.smartthings.sdk` group.
-
-* `smartapp-core` - Core SmartApp Framework
-  * `smartapp-guice` - Extension library for use with Google Guice
-  * `smartapp-spring` - Extension library for use with Spring Dependency Injection
-  * `smartapp-contextstore-dynamodb` - Extension library to use DynamoDB to
-    store installed application context data.
-* `smartthings-client` - Library for working with SmartThings APIs
-
-Import the library dependencies as needed:
-
-<details>
-    <summary>Apache Maven</summary>
-
-```xml
-<dependency>
-  <groupId>com.smartthings.sdk</groupId>
-  <artifactId>smartapp-core</artifactId>
-  <version>0.0.4-PREVIEW</version>
-  <type>pom</type>
-</dependency>
-```
-
-</details>
-
-<details>
-    <summary>Gradle Groovy DSL</summary>
-
-```groovy
-implementation 'com.smartthings.sdk:smartapp-core:0.0.4-PREVIEW'
-```
-
-</details>
-<br>
-
-If you prefer, the artifacts can be downloaded directly from [Maven Central](https://search.maven.org/search?q=g:com.smarrthings.sdk).
-
-## Getting Started
+* A Samsung account
 
 ### What is a SmartApp?
 
-SmartApps are an example of a
-[SmartThings Automation](https://smartthings.developer.samsung.com/develop/getting-started/automation.html).
-Automations allow users to control the SmartThings ecosystem without manual intervention. Creating a SmartApp allows
-you to control and get status notifications from SmartThings devices using the
-[SmartThings REST API](https://smartthings.developer.samsung.com/develop/api-ref/st-api.html).
+SmartApps are custom applications that execute outside of the SmartThings Platform. All of the SmartApp execution will happen on the server or Lambda that you control. The complexity of execution and the number of expected users will need to be examined to understand the hardware or execution requirements your app needs to handle. Your application will respond to lifecycle events sent from SmartThings to perform actions on behalf of your users and will execute any scheduled tasks that you have created in the SmartApp. Creating a SmartApp allows you to control and get status notifications from SmartThings devices using the [SmartThings API](https://developer-preview.smartthings.com/api/public#section/Overview).
+
+> Visit the [SmartThings developer documentation](https://developer-preview.smartthings.com/docs/connected-services/smartapp-basics) to earn more about SmartApps.
+
+### Hosting Your SmartApp
+
+There are two distinct options for hosting your SmartApp: AWS Lambda and Webhook.
 
 **Webhook** SmartApps are any publicly-accessible web server that will receive a POST request payload.
 
-**AWS Lambda** SmartApps are hosted in the Amazon Web Services cloud and are invoked by **ARN** instead of a
-public-DNS address.
+**AWS Lambda** SmartApps are hosted in the Amazon Web Services cloud and are invoked by **ARN** instead of a public-DNS address.
 
-![automation smartapp](https://smartthings.developer.samsung.com/docs/smartapps/img/automation_smartapp.png)
+The best hosting option for your Automation depends on a number of factors, both objective and subjective.
 
-To learn more about what a SmartApp is and how you can create interesting automations, please visit the [developer portal documentation](https://smartthings.developer.samsung.com/develop/guides/smartapps/basics.html).
+To learn more about SmartApps, including [choosing the best hosting option for your SmartApp](https://developer-preview.smartthings.com/docs/connected-services/hosting/choose-a-solution), visit the [SmartThings developer documentation](https://developer-preview.smartthings.comd).
 
-### Basics
+### Declaring Your SmartApp
 
 Take a quick look at how SmartApps are declared in various languages.
 
 <details>
-<summary>Kotlin (click to toggle)</summary>
+<summary>Kotlin</summary>
 
 ```kotlin
 package app
@@ -116,7 +77,7 @@ fun Application.main() {
 </details>
 
 <details>
-<summary>Groovy (click to toggle)</summary>
+<summary>Groovy</summary>
 
 ```groovy
     SmartApp smartApp = SmartApp.of { spec ->
@@ -158,7 +119,7 @@ fun Application.main() {
 </details>
 
 <details>
-<summary>Java (click to toggle)</summary>
+<summary>Java</summary>
 
 ```java
     private final SmartApp smartApp = SmartApp.of(spec ->
@@ -196,9 +157,64 @@ fun Application.main() {
 
 </details>
 
-### Runnable Examples
+## Modules and Extension Libraries
 
-Several simple examples of using the sdk are included in the examples directory.
+### Modules
+
+- The [smartapp-core](/smartapp-core) module provides the core SmartApp framework, enabling you to define a SmartApp that can be used in many different environments including AWS Lambda, Dropwizard, Ratpack, and more.
+
+- The [smartthings-client](/smartthings-client) module is an API library that provides useful utilities for working with the Subscription, Schedules, and Device APIs.
+
+### Extension Libraries
+
+- The [smartapp-guice](/smartapp-guice) extension library provides support for building a SmartApp with Guice dependency injection.
+
+- The [smartapp-spring](/smartapp-spring) extension library provides support for building a SmartApp with Spring dependency injection.
+
+- The [smartapp-contextstore-dynamodb](/smartapp-contextstore-dynamodb) extension library implements a [context store](smartapp-core/README.md#context-store) using DynamoDB.
+
+## Adding the SDK to your build
+
+Several artifacts are published to the Maven central repository under the `com.smartthings.sdk` group.
+
+* `smartapp-core` - Core SmartApp Framework
+  * `smartapp-guice` - Extension library for use with Google Guice
+  * `smartapp-spring` - Extension library for use with Spring Dependency Injection
+  * `smartapp-contextstore-dynamodb` - Extension library to use DynamoDB to
+    store installed application context data.
+* `smartthings-client` - Library for working with SmartThings APIs
+
+Import the library dependencies as needed:
+
+<details>
+    <summary>Apache Maven</summary>
+
+```xml
+<dependency>
+  <groupId>com.smartthings.sdk</groupId>
+  <artifactId>smartapp-core</artifactId>
+  <version>0.0.4-PREVIEW</version>
+  <type>pom</type>
+</dependency>
+```
+
+</details>
+
+<details>
+    <summary>Gradle Groovy DSL</summary>
+
+```groovy
+implementation 'com.smartthings.sdk:smartapp-core:0.0.4-PREVIEW'
+```
+
+</details>
+<br>
+
+If you prefer, the artifacts can be downloaded directly from [Maven Central](https://search.maven.org/search?q=g:com.smarrthings.sdk).
+
+## Examples
+
+Several simple, runnable examples of using the SDK are included in the examples directory.
 
 #### [kotlin-smartapp](examples/kotlin-smartapp) ([Documentation](examples/kotlin-smartapp/README.md)) ![kotlin-logo](docs/kotlin-logo.png) ![ktor-logo](docs/ktor-logo.png)
 This Kotlin example implements the Java `smartapp-core` library with a simple [Ktor](https://ktor.io/) server.
@@ -212,31 +228,9 @@ This Java example implements the Java `smartapp-core` library using Spring Boot.
 #### [java-lambda-smartapp](examples/java-lambda-smartapp) ([Documentation](examples/java-lambda-smartapp/README.md)) ![java-logo](docs/java-logo.png) ![aws-logo](docs/aws-logo.png)
 This Java example implements the Java `smartapp-core` library as an AWS Lambda.
 
-## Documentation
-
-### Modules
-
-#### [smartapp-core](/smartapp-core) ([Documentation](smartapp-core/README.md))
-Core SmartApp framework. Provides abilities for defining a SmartApp that could be used in many environments - AWS Lambda / Dropwizard / Ratpack / etc
-
-#### [smartthings-client](/smartthings-client) ([Documentation](smartthings-client/README.md))
-An API library that provides useful utilities for working with the Subscription / Schedules / Device APIs
-
-### Extension Libraries
-
-#### [smartapp-guice](/smartapp-guice) ([Documentation](smartapp-guice/README.md))
-An extension library that provides support for building a SmartApp with Guice dependency injection.
-
-#### [smartapp-spring](/smartapp-spring) ([Documentation](smartapp-spring/README.md))
-An extension library that provides support for building a SmartApp with Spring dependency injection.
-
-#### [smartapp-contextstore-dynamodb](/smartapp-contextstore-dynamodb) ([Documentation](smartapp-contextstore-dynamodb/README.md))
-An extension library that implements a [context store](smartapp-core/README.md#context-store) using DynamoDB.
-
 ## More about SmartThings
 
-If you are not familiar with SmartThings, we have
-[extensive on-line documentation](https://smartthings.developer.samsung.com/develop/index.html).
+Check out our complete developer documentation [here](https://developer-preview.smartthings.com).
 
 To create and manage your services and devices on SmartThings, create an account in the
 [developer workspace](https://devworkspace.developer.samsung.com/).
