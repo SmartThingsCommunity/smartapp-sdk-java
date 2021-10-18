@@ -1,13 +1,13 @@
-# smartthings-client
+# SmartThings Client Module
 
-Interact with the SmartThings public REST API with this _Java and Android-compatible_ client library.
+Interact with the SmartThings public REST API with this Java and Android-compatible client module.
 
 ## Prerequisites
 
 * Java 1.8+
-* [SmartThings developer](https://smartthings.developer.samsung.com/workspace/) account
+* A Samsung account
 
-## Adding the library to your build
+## Adding the Module to Your Build
 
 Include the `smartthings-client` Maven dependency:
 
@@ -34,22 +34,22 @@ If you do not use Maven or Gradle, jars can be downloaded from the
 
 ### Overview
 
-> NOTE: this project is in early stages of development and is feature-incomplete
+> NOTE: this project is in an early stage of development and is feature-incomplete
 
-This library aims to make interacting with the SmartThings API easy and intuitive by providing:
-* request/response models
-* convenience methods
+This library makes interacting with the SmartThings API easy and intuitive by:
+* providing request/response models
+* providing convenience methods
 * handling authorization tokens
 
-If you have feature requests, suggestions, comments, or questions, please feel free to open an issue and start a discussion!
+> Have a feature request, suggestions, comment, or question? Visit the [SmartThings Community](https://community.smartthings.com/) and start a discussion!
 
-Technologies used
+Technologies used include:
 
 * Code generation v2 by Swagger
 * Feign by Netflix OSS (API methods)
 * Jackson by FastXML (models)
 
-### Android Notes
+#### Android Notes
 
 This client library can be used in Android with SDK 25+
 
@@ -60,10 +60,11 @@ This client library can be used in Android with SDK 25+
 * `sourceCompatibility 1.8`
 * `targetCompatibility 1.8`
 
-### Basic Examples
+### Examples
 
 #### Finding Switches
 
+Using Kotlin:
 ```kotlin
 // Build API client
 val api = ApiClient()
@@ -79,8 +80,9 @@ println(devices)
 
 #### Subscriptions
 
-For more information on the SmartThings API reference (request/response expectations) please [view the API reference documentation](https://smartthings.developer.samsung.com/docs/api-ref/st-api.html).
+For more information on SmartApp subscriptions, visit the [SmartApp developer documentation](https://developer-preview.smartthings.com/docs/connected-services/subscriptions).
 
+Using Kotlin:
 ```kotlin
 // In the context of a SmartApp LIFECYCLE event (INSTALL or UPDATE)
 
@@ -119,14 +121,11 @@ devices?.forEach { switchesConfig ->
 
 ### Reference Documentation
 
-Reference documentation can be found here:
-
-https://smartthingscommunity.github.io//smartapp-sdk-java/smartthings-client/javadoc/
+Find reference documentation for this module [here](https://smartthingscommunity.github.io//smartapp-sdk-java/smartthings-client/javadoc/).
 
 ## More about SmartThings
 
-If you are not familiar with SmartThings, we have
-[extensive on-line documentation](https://smartthings.developer.samsung.com/develop/index.html).
+Check out our complete developer documentation [here](https://developer-preview.smartthings.com).
 
 To create and manage your services and devices on SmartThings, create an account in the
 [developer workspace](https://devworkspace.developer.samsung.com/).

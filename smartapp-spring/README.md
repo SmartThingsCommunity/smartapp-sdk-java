@@ -1,13 +1,13 @@
-# smartapp-spring
+# SmartApp Spring Library
 
-This is a simple library to make declaring Smart App lifecycle handlers as Spring components easy.
+This library makes declaring SmartApp lifecycle handlers as Spring components easy.
 
 ## Prerequisites
 
 * Java 1.8+
 * Spring 4+
 * [smartapp-core](../smartapp-core)
-* [SmartThings developer](https://smartthings.developer.samsung.com/workspace/) account
+* A Samsung account
 
 ## Adding the library to your build
 
@@ -34,9 +34,7 @@ If you do not use Maven or Gradle, jars can be downloaded from the
 
 ## Getting Started
 
-This simple library adds to smartapp-core by giving you the ability to create a `SmartAppDefinition`
-using handlers defined as components. To do this, you simply call `SpringSmartAppDefinition.of`
-and give it your `ApplicationContext`.
+This library adds to `smartapp-core` by giving you the ability to create a `SmartAppDefinition` using handlers defined as components. To do this, call `SpringSmartAppDefinition.of` and give it your `ApplicationContext`.
 
 ```java
 SmartAppDefinition smartAppDefinition = SpringSmartAppDefinition.of(applicationContext);
@@ -44,13 +42,11 @@ SmartAppDefinition smartAppDefinition = SpringSmartAppDefinition.of(applicationC
 
 For a complete example, see [Java Spring Boot example SmartApp](/examples/java-springboot-smartapp).
 
-## More about SmartThings
+## More About SmartThings
 
-If you are not familiar with SmartThings, we have
-[extensive on-line documentation](https://smartthings.developer.samsung.com/develop/index.html).
+Check out our complete developer documentation [here](https://developer-preview.smartthings.com).
 
-To create and manage your services and devices on SmartThings, create an account in the
-[developer workspace](https://devworkspace.developer.samsung.com/).
+To create and manage your services and devices on SmartThings, create an account in the [developer workspace](https://devworkspace.developer.samsung.com/).
 
 The [SmartThings Community](https://community.smartthings.com/c/developers/) is a good place share and
 ask questions.
