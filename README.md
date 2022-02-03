@@ -1,3 +1,7 @@
+# Archived
+
+> This SDK is no longer being maintained and should not be chosen for new projects.
+
 # SmartThings SmartApp SDK Java (Preview) ![SmartThings](docs/smartthings-logo.png) ![Java](docs/java-logo.png)
 
 <p align="center">

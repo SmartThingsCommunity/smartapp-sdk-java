@@ -50,7 +50,7 @@ ext.deps = [
     'logging'  : [
         'slf4j'        : "org.slf4j:slf4j-api:${versions.slf4j}",
         'okhttpLogging': "com.squareup.okhttp3:logging-interceptor:3.10.0",
-        'logback'      : "ch.qos.logback:logback-classic:1.2.3"
+        'logback'      : "ch.qos.logback:logback-classic:1.2.9"
     ],
     'di'       : [
         'guice': "com.google.inject:guice:${versions.guice}"
@@ -100,7 +100,7 @@ ext.deps = [
         'ktorServerNetty' : "io.ktor:ktor-server-netty:${versions.ktor}",
         'ktorJackson'     : "io.ktor:ktor-jackson:${versions.ktor}",
         'ktorClientOkhttp': "io.ktor:ktor-client-okhttp:${versions.ktor}",
-        'logback'         : "ch.qos.logback:logback-classic:1.2.3"
+        'logback'         : "ch.qos.logback:logback-classic:1.2.9"
     ],
     'groovy'   : [
         'all' : "org.codehaus.groovy:groovy-all:${versions.groovy}"
